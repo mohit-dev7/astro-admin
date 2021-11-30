@@ -7,24 +7,77 @@
       <span class="r"></span>
     </div>
     <div class="card">
+      <div class="loader" *ngIf="loading==true">
+        <img src="../../../../../assets/images/loading.gif" />
+      </div>
       <div class="card-body text-center">
         <div class="mb-4">
-          <i class="feather icon-user-plus auth-icon"></i>
+          <img style="width: 25%;" src="../../../../../assets/images/astro-logo.png"/>
         </div>
         <h3 class="mb-4">Sign up</h3>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Username">
-        </div>
-        <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
-        </div>
-        <div class="input-group mb-4">
-          <input type="password" class="form-control" placeholder="Password">
-        </div>
+        <form [formGroup]="signupForm">
+
+          <div *ngIf="message!='' && error==true" class="alert alert-danger" role="alert">
+            {{message}}
+          </div>
+
+          <div *ngIf="message!='' && error!=true" class="alert alert-success" role="alert">
+            {{message}}
+          </div>
+
+          <div class="col-12">
+            <div class="row">
+              <div class="col-sm-12 col-md-6 col-lg-6 pl-0">
+                <div class="input-group mb-3">
+                  <input type="text" formControlName="firstname" class="form-control" placeholder="First Name">
+                </div>
+               
+              </div>
+  
+              <div class="col-sm-12 col-md-6 col-lg-6 pr-0">
+               
+                <div class="input-group mb-3">
+                  <input type="text" formControlName="lastname" class="form-control" placeholder="Last Name">
+                </div>
+              </div>
+  
+              <div class="col-sm-12 col-md-12 col-lg-12 pr-0 pl-0">
+                <div class="input-group mb-3">
+                  <input type="email" formControlName="email" class="form-control" placeholder="Email">
+                </div>
+              </div>
+  
+              <div class="col-sm-12 col-md-12 col-lg-12 pl-0 pr-0">
+                <div class="input-group mb-3">
+                  <input type="text" formControlName="mobile" class="form-control" placeholder="Mobile">
+                </div>
+              </div>
+  
+              <div class="col-sm-12 col-md-6 col-lg-6 pl-0 ">
+                <div class="input-group mb-4">
+                  <input type="password" formControlName="password" class="form-control" placeholder="Password">
+                </div>
+               
+              </div>
+  
+              <div class="col-sm-12 col-md-6 col-lg-6 pr-0">
+               
+                <div class="input-group mb-4">
+                  <input type="password" formControlName="confirmPass" class="form-control" placeholder="Confirm Password">
+                </div>
+              </div>
+            </div>
+          </div>
+     
+       
+    
+      
+       
+      
         <div class="form-group text-left">
           <div class="checkbox checkbox-fill d-inline">
             <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-1" checked="">
-            <label for="checkbox-fill-1" class="cr"> Save Details</label>
+            <label for="checkbox-fill-1" class="cr"> Remember me</label>
           </div>
         </div>
         <div class="form-group text-left">
@@ -33,7 +86,9 @@
             <label for="checkbox-fill-2" class="cr">Send me the <a href="javascript:"> Newsletter</a> weekly.</label>
           </div>
         </div>
-        <button class="btn btn-primary shadow-2 mb-4">Sign up</button>
+
+      </form>
+        <button class="btn them_btn w-100 shadow-2 mb-4" (click)="createAccount()">Sign up</button>
         <p class="mb-0 text-muted">Already have an account? <a [routerLink]="['/auth/signin']"> Log in</a></p>
       </div>
     </div>
