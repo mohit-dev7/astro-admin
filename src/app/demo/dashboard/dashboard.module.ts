@@ -8,6 +8,8 @@ import { PendingAppoinmentsComponent } from './pending-appoinments/pending-appoi
 import { DataTablesModule } from 'angular-datatables';
 import { HttpClientModule} from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { CountryComponent } from './country/country.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
@@ -15,9 +17,9 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     AngularEditorModule,
     HttpClientModule,
     DashboardRoutingModule,
-    DataTablesModule.forRoot(),
+    DataTablesModule.forRoot()
   ],
-  declarations: [UsersComponent, AppoinmentsComponent, PendingAppoinmentsComponent],
+  declarations: [UsersComponent, AppoinmentsComponent, PendingAppoinmentsComponent, CountryComponent],
  
 })
 export class DashboardModule { }

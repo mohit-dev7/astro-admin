@@ -43,23 +43,23 @@ export class AuthService {
 
   // api functions==================//
 
-  loginToDashboard(data): Observable<UserData> {
-    return this.http.post<UserData>(this.loginApi + '/loginUser', JSON.stringify(data), this.httpOptions)
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
-  }  
+  // loginToDashboard(data): Observable<UserData> {
+  //   return this.http.post<UserData>(this.loginApi + '/loginUser', JSON.stringify(data), this.httpOptions)
+  //   .pipe(
+  //     retry(1),
+  //     catchError(this.handleError)
+  //   )
+  // }  
 
 
 
-  getUserDetails(id){
-    return this.http.get(this.loginApi+'/getUserData/'+id, this.httpOptions)
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
-  }
+  // getUserDetails(id){
+  //   return this.http.get(this.loginApi+'/getUserData/'+id, this.httpOptions)
+  //   .pipe(
+  //     retry(1),
+  //     catchError(this.handleError)
+  //   )
+  // }
 
 
 }

@@ -58,7 +58,7 @@ const NavigationItems = [
             id: 'country',
             title: 'Country',
             type: 'item',
-            url: '/basic/button'
+            url: '/dashboard/country'
           },
           {
             id: 'rate_list',

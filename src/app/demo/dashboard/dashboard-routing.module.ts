@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+
 
 const routes: Routes = [
   {
@@ -21,12 +23,17 @@ const routes: Routes = [
         path: 'pending-appointments',
         loadChildren: () => import('./pending-appoinments/pending-appoinments.module').then(m => m.PendingAppoinmentsModule)
       }
+      ,
+      {
+        path: 'country',
+        loadChildren: () => import('./country/country.module').then(m => m.CountryModule )
+      }
     ]
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule,FormsModule,ReactiveFormsModule]
 })
 export class DashboardRoutingModule { }
