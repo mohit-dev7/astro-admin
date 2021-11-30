@@ -65,28 +65,28 @@ export class NavRightComponent implements OnInit, DoCheck {
 
   getCurrentUserData(){
 
-    var userID = localStorage.getItem('userID');
+    // var userID = localStorage.getItem('userID');
 
-    if(userID!=''){
+    // if(userID!=''){
 
-      this.authservice.getUserDetails(userID).subscribe(response=>{
+    //   this.authservice.getUserDetails(userID).subscribe(response=>{
       
 
-          if(response){
+    //       if(response){
 
           
-        this.userData = JSON.parse(JSON.stringify(response));
-        console.log(this.userData);
+    //     this.userData = JSON.parse(JSON.stringify(response));
+    //     console.log(this.userData);
 
-          }
-          else{
-            localStorage.removeItem('userID');
-            location.reload();
-          }
+    //       }
+    //       else{
+    //         localStorage.removeItem('userID');
+    //         location.reload();
+    //       }
 
-      });
+    //   });
 
-    }
+    // }
 
 
   }

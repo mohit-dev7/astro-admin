@@ -11,7 +11,7 @@ export class AuthService {
 
   // all apis=============//
 
-  loginApi = 'http://localhost/picxin-api/api';
+  loginApi = 'http://18.219.65.148:8080';
 
   constructor(private http: HttpClient) { }
 
@@ -43,23 +43,21 @@ export class AuthService {
 
   // api functions==================//
 
-  loginToDashboard(data): Observable<UserData> {
-    return this.http.post<UserData>(this.loginApi + '/loginUser', JSON.stringify(data), this.httpOptions)
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
+  authPostMethod(data, apiCall): Observable<UserData> {
+    return this.http.post<UserData>(this.loginApi + apiCall, JSON.stringify(data), this.httpOptions);
   }  
 
 
 
-  getUserDetails(id){
-    return this.http.get(this.loginApi+'/getUserData/'+id, this.httpOptions)
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
-  }
+  
+
+  // getUserDetails(id){
+  //   return this.http.get(this.loginApi+'/getUserData/'+id, this.httpOptions)
+  //   .pipe(
+  //     retry(1),
+  //     catchError(this.handleError)
+  //   )
+  // }
 
 
 }

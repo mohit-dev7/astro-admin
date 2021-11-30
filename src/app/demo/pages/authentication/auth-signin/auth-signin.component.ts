@@ -20,76 +20,89 @@ import { Router } from '@angular/router';
 export class AuthSigninComponent implements OnInit {
 
 
-  loginForm:FormGroup;
-  error:boolean = false;
+  loginForm: FormGroup;
+  error: boolean = false;
 
-message:any = '';
+  message: any = '';
+  loading: boolean = false;
 
   email = new FormControl("", [Validators.required]);
   password = new FormControl("", [Validators.required]);
-  constructor(private authservice:AuthService, private router:Router) {     
-    
+  constructor(private authservice: AuthService, private router: Router) {
+
     this.loginForm = new FormGroup({
       email: new FormControl(''),
       password: new FormControl(''),
-    });}
+    });
+  }
 
   ngOnInit() {
   }
 
 
-  loginSubmit(){
+  loginSubmit() {
 
     var userEmail = this.loginForm.get('email').value;
     var userPassword = this.loginForm.get('password').value;
 
-    if(userEmail=='' || !this.validateEmail(userEmail)){
-      this.error = true; 
-this.message = 'Please enter your valid email address';
-return false;
+    if (userEmail == '' || !this.validateEmail(userEmail)) {
+      this.error = true;
+      this.message = 'Please enter your valid email address';
+      return false;
 
     }
 
-    else if(userPassword==''){
-      this.error = true; 
+    else if (userPassword == '') {
+      this.error = true;
       this.message = 'Please enter your password';
-    return false;
+      return false;
 
     }
-    else{
-   
+    else {
+      this.loading = true;
 
-      const data ={
-        "userEmail":userEmail,
-        "password":userPassword
+      const data = {
+        "username": userEmail,
+        "password": userPassword
       }
 
-   this.authservice.loginToDashboard(data).subscribe(response=>{
+      this.authservice.authPostMethod(data, '/login').subscribe(response => {
 
- if(response['message']=='login'){
 
-  localStorage.setItem('userID',response['userID']);
+        if (response['token'] != '') {
 
-  this.error = false; 
-    this.message = 'Authenticated!';
+          localStorage.setItem('userID', response['token']);
 
-    this.router.navigate(['/dashboard/default']);
+          this.error = false;
+          this.message = 'Authenticated!';
 
- }
- else{
-  this.error = true; 
-  this.message = 'Invalid email and password!';
-  return false;
- }
+         
+            this.loading = false;
+            this.router.navigate(['/dashboard/default']);
+       
 
-  
 
-   });
-   
+
+        }
+        else {
+          this.error = true;
+          this.message = 'Invalid username and password!';
+          return false;
+        }
+
+
+
+      },(error=>{
+
+        this.loading = false;
+        this.error = true;
+        this.message = 'Invalid username and password!';
+      }));
+
 
     }
 
-   
+
 
 
 
@@ -98,12 +111,12 @@ return false;
 
 
 
-  
+
 
 
   validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
-}
+  }
 
 }
