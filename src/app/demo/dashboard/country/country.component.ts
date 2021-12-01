@@ -118,7 +118,7 @@ export class CountryComponent implements OnInit {
 
   
  getAllCountry(){
-   this.master.countryGetData().subscribe(data=>{
+   this.master.getMethod('/AllCountries').subscribe(data=>{
 
     this.countryData = JSON.parse(JSON.stringify(data));
    

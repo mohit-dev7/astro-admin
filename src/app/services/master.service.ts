@@ -8,10 +8,10 @@ import { UserData } from '../shared/user-data';
   providedIn: 'root'
 })
 export class MasterService {
-
+  userToken=localStorage.getItem('userID');
   // all apis=============//
 
-  loginApi = 'http://18.219.65.148:8080';
+  apURL = 'http://18.219.65.148:8080';
 
   constructor(private http: HttpClient) { }
 
@@ -28,7 +28,7 @@ export class MasterService {
   authHttp = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization':'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbnVyYWdwdW5kaXI2MjFAZ21haWwuY29tIiwiZXhwIjoxNjM4MjkzMzIwLCJpYXQiOjE2MzgyNzUzMjB9.Uk3HTMA6zdIbrPbqFYKKtIK1uRQCUO8m-ywBSaZuAAOVGSGYHaU9-LiuB9rfE1xBdaK41Vdz_nauez89Ou91GA'
+      'Authorization':'Bearer '+this.userToken
     
     })
   }
@@ -51,8 +51,8 @@ export class MasterService {
 
   // api functions==================//
 
-  countryGetData(){
-    return this.http.get('http://18.219.65.148:8080/AllCountries', this.authHttp)
+  getMethod(dataApi){
+    return this.http.get(this.apURL+dataApi, this.authHttp)
     .pipe(
       retry(1),
       catchError(this.handleError)
