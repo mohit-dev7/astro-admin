@@ -1,23 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MasterService } from 'src/app/services/master.service';
 
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl,  Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 declare var $: any;
+
 @Component({
-  selector: 'app-country',
-  templateUrl:'./country.component.html',
-  styleUrls: ['./country.component.scss']
+  selector: 'app-rate-list',
+  templateUrl: './rate-list.component.html',
+  styleUrls: ['./rate-list.component.scss']
 })
-export class CountryComponent implements OnInit {
+export class RateListComponent implements OnInit {
  
 
-  countryForm:FormGroup;
-  countryData:any = [];
+  ratelistform:FormGroup;
+  rateList:any = [];
   country = new FormControl("", [Validators.required]);
-  code= new FormControl("", [Validators.required]);
+  ctype= new FormControl("", [Validators.required]);
+  rateofvalue= new FormControl("", [Validators.required]);
   data:any
   checkbox:any = 'DEACTIVATE';
   isCheck:boolean = false;
@@ -31,12 +33,13 @@ export class CountryComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.countryForm= new FormGroup({
+    this.ratelistform= new FormGroup({
       country: new FormControl(""),
-      code: new FormControl("")
+      ctype: new FormControl(""),
+      rateofvalue: new FormControl("")
     });
   
-    this.getAllCountry();
+    this.getRateList();
   }
   
   ngAfterViewInit(): void {
@@ -59,24 +62,30 @@ export class CountryComponent implements OnInit {
 
   }
 
-  addNewCountry(){
+  AddRateList(){
     debugger;
-    var Country=this.countryForm.get("country").value;
-    var Code=this.countryForm.get("code").value;
+    var Country=this.ratelistform.get("country").value;
+    var Ctype=this.ratelistform.get("ctype").value;
+    var Rate=this.ratelistform.get("rateofvalue").value;
     var action=this.checkbox;
    
 
     if(Country==''){
       this.error = true;
-      this.message = 'Please enter a country name!';
-   
+      this.message = 'Please select a country name!';
       return false;
 
     }
 
-    else if(Code==''){
+    else if(Ctype==''){
       this.error = true;
-      this.message = 'Please enter a country code!';
+      this.message = 'Please select consultation type!';
+      return false;
+
+    }
+    else if(Rate==''){
+      this.error = true;
+      this.message = 'Please enter rate';
       return false;
 
     }
@@ -84,11 +93,12 @@ export class CountryComponent implements OnInit {
 
          
     const data ={
-      "name":Country,
-      "code":Code,
+      "countryName":Country,
+      "consultationType":Ctype,
+      "rateOfValues":Rate,
       "status":action
     }
-    this.master.methodPost(data, '/AddCountry').subscribe(reponse=>{
+    this.master.methodPost(data,'/addRateList').subscribe(reponse=>{
 
       if(reponse['name']!='')
       {
@@ -100,7 +110,7 @@ export class CountryComponent implements OnInit {
 
       }else{
         this.error = true;
-        this.message = 'Failed to add new country polease check all details!';
+        this.message = 'Failed to add new country please check all details!';
         return false;
       }
 
@@ -117,10 +127,10 @@ export class CountryComponent implements OnInit {
 
 
   
- getAllCountry(){
-   this.master.getMethod('/AllCountries').subscribe(data=>{
+ getRateList(){
+   this.master.getMethod('/getAllRateList').subscribe(data=>{
 
-    this.countryData = JSON.parse(JSON.stringify(data));
+    this.rateList = JSON.parse(JSON.stringify(data));
    
    });
  }

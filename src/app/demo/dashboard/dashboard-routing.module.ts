@@ -27,7 +27,15 @@ const routes: Routes = [
       {
         path: 'country',
         loadChildren: () => import('./country/country.module').then(m => m.CountryModule )
-      }
+      },
+      {
+        path: 'users',
+        loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
+      },
+      {
+        path: 'ratelist',
+        loadChildren: () => import('./rate-list/rate-list.module').then(m => m.RateListModule)
+      },
     ]
   }
 ];
