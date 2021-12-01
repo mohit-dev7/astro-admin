@@ -62,7 +62,16 @@ export class MasterService {
   // kaushal
 
   countryDataPost(data): Observable<UserData> {
-    return this.http.post<UserData>('http://18.219.65.148:8080/AddCountry', JSON.stringify(data), this.authHttp)
+    return this.http.post<UserData>(this.apURL+'/AddCountry', JSON.stringify(data), this.authHttp)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }  
+
+  promoDataPost(data): Observable<UserData> {
+    console.log(this.authHttp)
+    return this.http.post<UserData>(this.apURL+'/addPromo', JSON.stringify(data), this.authHttp)
     .pipe(
       retry(1),
       catchError(this.handleError)

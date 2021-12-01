@@ -29,8 +29,8 @@ export class AppComponent implements OnInit {
 
   if(error){
 
-    localStorage.removeItem('userID');
-    location.reload();
+    // localStorage.removeItem('userID');
+    // location.reload();
 
   }
      

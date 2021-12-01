@@ -28,6 +28,11 @@ const routes: Routes = [
         path: 'country',
         loadChildren: () => import('./country/country.module').then(m => m.CountryModule )
       }
+      ,
+      {
+        path: 'promocode',
+        loadChildren: () => import('./promocode/promocode.module').then(m => m.PromocodeModule )
+      }
     ]
   }
 ];
