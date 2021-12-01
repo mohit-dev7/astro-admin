@@ -30,6 +30,14 @@ export class FeedbackComponent implements OnInit {
 
 
 
+  filterFeedbacks(){
+    var personName = <HTMLInputElement>document.getElementById('personName');
+
+    alert(personName.value);
+
+  }
+
+
   getFeedbackData(){
 
     this.master.getMethod('/getAllFeedback').subscribe(res=>{

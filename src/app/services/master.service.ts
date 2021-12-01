@@ -59,8 +59,10 @@ export class MasterService {
     )
   }
 
-  countryDataPost(data): Observable<UserData> {
-    return this.http.post<UserData>('http://18.219.65.148:8080/AddCountry', JSON.stringify(data), this.authHttp)
+  // kaushal
+
+  methodPost(data, dataApi): Observable<UserData> {
+    return this.http.post<UserData>(this.apURL+dataApi, JSON.stringify(data), this.authHttp)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -69,4 +71,3 @@ export class MasterService {
 
 
 }
-

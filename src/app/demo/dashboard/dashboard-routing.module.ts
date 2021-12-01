@@ -31,7 +31,17 @@ const routes: Routes = [
       {
         path: 'feedback',
         loadChildren: () => import('./feedback/feedback.module').then(m => m.FeedbackModule )
-      }
+      },
+      {
+
+
+        path: 'users',
+        loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
+      },
+      {
+        path: 'ratelist',
+        loadChildren: () => import('./rate-list/rate-list.module').then(m => m.RateListModule)
+      },
     ]
   }
 ];
