@@ -10,6 +10,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { CountryComponent } from './country/country.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { EnquireComponent } from './enquire/enquire.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { BrowserModule } from '@angular/platform-browser';
     DashboardRoutingModule,
     DataTablesModule.forRoot()
   ],
-  declarations: [UsersComponent, AppoinmentsComponent, PendingAppoinmentsComponent, CountryComponent],
+  declarations: [UsersComponent, AppoinmentsComponent, PendingAppoinmentsComponent, CountryComponent, EnquireComponent],
  
 })
 export class DashboardModule { }

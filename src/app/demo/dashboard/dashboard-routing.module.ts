@@ -36,6 +36,10 @@ const routes: Routes = [
         path: 'ratelist',
         loadChildren: () => import('./rate-list/rate-list.module').then(m => m.RateListModule)
       },
+      {
+        path: 'enquire',
+        loadChildren: () => import('./enquire/enquire.module').then(m => m.EnquireModule)
+      },
     ]
   }
 ];

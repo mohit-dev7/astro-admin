@@ -135,7 +135,7 @@ const NavigationItems = [
         id: 'enquire',
         title: 'Enquire',
         type: 'item',
-        url: '/dashboard/contact',
+        url: '/dashboard/enquire',
         icon: 'feather icon-home',
         classes: 'nav-item',
       },
