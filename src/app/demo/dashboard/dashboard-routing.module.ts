@@ -27,6 +27,10 @@ const routes: Routes = [
       {
         path: 'country',
         loadChildren: () => import('./country/country.module').then(m => m.CountryModule )
+      },
+      {
+        path: 'feedback',
+        loadChildren: () => import('./feedback/feedback.module').then(m => m.FeedbackModule )
       }
     ]
   }

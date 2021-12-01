@@ -88,7 +88,7 @@ export class CountryComponent implements OnInit {
       "code":Code,
       "status":action
     }
-    this.master.countryDataPost(data).subscribe(reponse=>{
+    this.master.methodPost(data,'/AddCountry').subscribe(reponse=>{
 
       if(reponse['name']!='')
       {
