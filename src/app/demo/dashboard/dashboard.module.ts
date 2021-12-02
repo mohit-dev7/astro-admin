@@ -11,6 +11,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { CountryComponent } from './country/country.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { EnquireComponent } from './enquire/enquire.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { FeedbackComponent } from './feedback/feedback.component';
     DashboardRoutingModule,
     DataTablesModule.forRoot()
   ],
-  declarations: [UsersComponent, AppoinmentsComponent, PendingAppoinmentsComponent, CountryComponent, FeedbackComponent],
+ 
+  declarations: [UsersComponent, AppoinmentsComponent, PendingAppoinmentsComponent, CountryComponent, EnquireComponent, FeedbackComponent],
  
 })
 export class DashboardModule { }
