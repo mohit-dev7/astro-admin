@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { HolidayComponent } from './holiday/holiday.component';
+import { TimeslotComponent } from './timeslot/timeslot.component';
 
 
 const routes: Routes = [
@@ -27,6 +29,15 @@ const routes: Routes = [
       {
         path: 'country',
         loadChildren: () => import('./country/country.module').then(m => m.CountryModule )
+      }
+      ,
+      {
+        path: 'timeslot',
+        component: TimeslotComponent
+      },
+      {
+        path: 'holiday',
+        component: HolidayComponent
       }
     ]
   }
