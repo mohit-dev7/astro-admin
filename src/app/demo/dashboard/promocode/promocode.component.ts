@@ -10,13 +10,7 @@ declare var $: any;
 })
 export class PromocodeComponent implements OnInit {
 
- select:any=[
-   {"name":"Select",
-   "id":"0"
-  },
-   {"name":"Amount","id":"1"},
-   {"name":"Percentage","id":"2"}
- ]
+
 
 
 
@@ -26,6 +20,7 @@ export class PromocodeComponent implements OnInit {
   percentAmount= new FormControl( "",[Validators.required]);
   effective= new FormControl( "",[Validators.required]);
   expiry= new FormControl( "",[Validators.required]);
+  option= new FormControl( "",[Validators.required]);
   optionValue:any
  
 
@@ -43,7 +38,8 @@ export class PromocodeComponent implements OnInit {
       promcode:new FormControl(""),
       percentAmount:new FormControl(""),
       effective:new FormControl(""),
-      expiry:new FormControl("")
+      expiry:new FormControl(""),
+       option:new FormControl("")
     });
 
     this.getAllPromocode();
@@ -66,7 +62,8 @@ export class PromocodeComponent implements OnInit {
     var percentAmount=this.promoForm.get('percentAmount').value;
     var effective=this.promoForm.get("effective").value;
     var expiry=this.promoForm.get("expiry").value;
-    console.log(procode,percentAmount,effective,expiry,this.optionValue)
+    var option=this.promoForm.get("option").value;
+    console.log(procode,percentAmount,effective,expiry,option)
     if(procode==''){
       this.error = true;
       this.message = 'Please enter a promocode!';
@@ -99,7 +96,7 @@ export class PromocodeComponent implements OnInit {
         "amount":percentAmount,
         "effectiveDate":effective,
         "expiryDate":expiry,
-        "type":this.optionValue,
+        "type":option,
         "status":"active"
 
       }}
@@ -131,17 +128,7 @@ export class PromocodeComponent implements OnInit {
   }
 
 
-  selectOption(id:any) {
-    //getted from event
-    for (let i = 0; i < this.select.length; i++) {
-      if(id==this.select[i].id){
-          this.optionValue=this.select[i].name;
-          
-      }
-    }
-    
-  
-  }
+
 
 
  
