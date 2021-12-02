@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './theme/shared/shared.module';
 import { AppComponent } from './app.component';
@@ -24,6 +24,8 @@ import { ConfigurationComponent } from './theme/layout/admin/configuration/confi
 import { DataTablesModule } from 'angular-datatables';
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { MasterService } from './services/master.service';
+import { MyInterceptor } from './services/myinterceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +58,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     NgbButtonsModule,
     NgbTabsetModule
   ],
-  providers: [NavigationItem],
+  providers: [NavigationItem, {provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

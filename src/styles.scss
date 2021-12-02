@@ -45,3 +45,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color:#fff !important;
     background: #e96901 !important;
 }
+
+table{
+    font-size: 12px !important;
+}
+table.dataTable tbody, table.dataTable tbody td {
+    padding: 8px 10px;
+    word-break: break-word !important;
+    max-width: 76px !important;
+    white-space: normal !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #d46c182b !important;
+}
+table.dataTable tbody td {
+    padding: 8px 17px !important;
+}

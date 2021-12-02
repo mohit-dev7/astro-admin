@@ -24,17 +24,6 @@ export class AppComponent implements OnInit {
     // this.expireToken();
   }
 
-  expireToken(){
-    this.master.getMethod('/AllCountries').subscribe(error=>{
-
-  if(error){
-
-    localStorage.removeItem('userID');
-    location.reload();
-
-  }
-     
-     });
-  }
+ 
 
 }

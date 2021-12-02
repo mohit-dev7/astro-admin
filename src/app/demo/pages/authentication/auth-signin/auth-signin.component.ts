@@ -37,6 +37,7 @@ export class AuthSigninComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.autoLogin("ps1089124@gmail.com", "123456");
   }
 
 
@@ -109,7 +110,46 @@ export class AuthSigninComponent implements OnInit {
   }
 
 
-  
+  autoLogin(email, password){
+      
+    const data = {
+      "username": email,
+      "password": password
+    }
+
+    this.authservice.authPostMethod(data, '/login').subscribe(response => {
+
+
+      if (response['token'] != '') {
+
+        localStorage.setItem('userID', response['token']);
+
+        this.error = false;
+        this.message = 'Authenticated!';
+
+       
+          this.loading = false;
+          this.router.navigate(['/dashboard/default']);
+     
+
+
+
+      }
+      else {
+        this.error = true;
+        this.message = 'Invalid username and password!';
+        return false;
+      }
+
+
+
+    },(error=>{
+
+      this.loading = false;
+      this.error = true;
+      this.message = 'Invalid username and password!';
+    }));
+  }
 
 
 

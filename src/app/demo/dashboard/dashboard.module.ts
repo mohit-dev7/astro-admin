@@ -10,6 +10,10 @@ import { HttpClientModule} from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { CountryComponent } from './country/country.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { EnquireComponent } from './enquire/enquire.component';
+import { PromocodeComponent } from './promocode/promocode.component';
+
 import { TimeslotComponent } from './timeslot/timeslot.component';
 import { HolidayComponent } from './holiday/holiday.component';
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
@@ -22,7 +26,10 @@ import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
     DataTablesModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot()
   ],
-  declarations: [UsersComponent, AppoinmentsComponent, PendingAppoinmentsComponent, CountryComponent, TimeslotComponent, HolidayComponent],
+ 
+
+ 
+  declarations: [UsersComponent, AppoinmentsComponent, PendingAppoinmentsComponent,  PromocodeComponent, EnquireComponent, FeedbackComponent, CountryComponent, TimeslotComponent, HolidayComponent],
  schemas:[NO_ERRORS_SCHEMA]
 })
 export class DashboardModule { }

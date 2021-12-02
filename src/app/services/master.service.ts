@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { HttpInterceptor, HttpEvent, HttpResponse, HttpRequest, HttpHandler, HttpClient, HttpHeaders,  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -12,7 +12,8 @@ export class MasterService {
   //  userToken="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbnVyYWdwdW5kaXI2MjFAZ21haWwuY29tIiwiZXhwIjoxNjM4NDQ1MTAzLCJpYXQiOjE2Mzg0MjcxMDN9.1La4ssoQtwGZ7ksz3H9ORrn0j47aOYkYti1Zbb6jx3eWJCAW_Jv0nPDqG-SYAcz2qLYyQhN0xqV7dw-hQC2ZVQ";
   // all apis=============//
 
-  apURL = 'http://18.219.65.148:8080/';
+
+  apURL = 'http://18.219.65.148:8080';
 
   constructor(private http: HttpClient) { }
 
@@ -54,17 +55,17 @@ export class MasterService {
   // api functions==================//
 
   getMethod(dataApi){
-    return this.http.get(this.apURL+dataApi, this.authHttp)
+    return this.http.get(this.apURL+dataApi, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
     )
   }
 
+  // kaushal
 
-
-  countryDataPost(data): Observable<UserData> {
-    return this.http.post<UserData>('http://18.219.65.148:8080/AddCountry', JSON.stringify(data), this.authHttp)
+  methodPost(data, dataApi): Observable<UserData> {
+    return this.http.post<UserData>(this.apURL+dataApi, JSON.stringify(data), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -130,8 +131,21 @@ export class MasterService {
     )
   }
 
+  
 
 
+
+
+
+
+  promoDataPost(data): Observable<UserData> {
+  
+    return this.http.post<UserData>(this.apURL+'/addPromo', JSON.stringify(data), this.httpOptions)
+
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }  
 
 }
-
