@@ -71,6 +71,7 @@ export class MasterService {
 
 
 
+
   promoDataPost(data): Observable<UserData> {
     console.log(this.authHttp)
     return this.http.post<UserData>(this.apURL+'/addPromo', JSON.stringify(data), this.authHttp)
