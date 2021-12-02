@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { HttpInterceptor, HttpEvent, HttpResponse, HttpRequest, HttpHandler, HttpClient, HttpHeaders,  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -10,6 +10,7 @@ import { UserData } from '../shared/user-data';
 export class MasterService {
   userToken=localStorage.getItem('userID');
   // all apis=============//
+
 
   apURL = 'http://18.219.65.148:8080';
 
@@ -25,13 +26,13 @@ export class MasterService {
   }  
 
 
-  authHttp = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization':'Bearer '+this.userToken
+  // authHttp = {
+  //   headers: new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     'Authorization':'Bearer '+this.userToken
     
-    })
-  }
+  //   })
+  // }
 
     // Error handling 
     handleError(error) {
@@ -52,7 +53,7 @@ export class MasterService {
   // api functions==================//
 
   getMethod(dataApi){
-    return this.http.get(this.apURL+dataApi, this.authHttp)
+    return this.http.get(this.apURL+dataApi, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -62,7 +63,7 @@ export class MasterService {
   // kaushal
 
   methodPost(data, dataApi): Observable<UserData> {
-    return this.http.post<UserData>(this.apURL+dataApi, JSON.stringify(data), this.authHttp)
+    return this.http.post<UserData>(this.apURL+dataApi, JSON.stringify(data), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -72,8 +73,8 @@ export class MasterService {
 
 
   promoDataPost(data): Observable<UserData> {
-    console.log(this.authHttp)
-    return this.http.post<UserData>(this.apURL+'/addPromo', JSON.stringify(data), this.authHttp)
+  
+    return this.http.post<UserData>(this.apURL+'/addPromo', JSON.stringify(data), this.httpOptions)
 
     .pipe(
       retry(1),
