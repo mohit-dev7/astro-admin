@@ -72,6 +72,7 @@ export class MasterService {
 
 
 
+
   promoDataPost(data): Observable<UserData> {
   
     return this.http.post<UserData>(this.apURL+'/addPromo', JSON.stringify(data), this.httpOptions)

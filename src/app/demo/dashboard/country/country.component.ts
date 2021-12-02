@@ -4,7 +4,7 @@ import { MasterService } from 'src/app/services/master.service';
 
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRouteSnapshot, Router } from '@angular/router';
 declare var $: any;
 @Component({
   selector: 'app-country',
@@ -23,8 +23,11 @@ export class CountryComponent implements OnInit {
   isCheck:boolean = false;
   message:any = '';
   error:boolean = false;
-
-  constructor( private master:MasterService ,private authservice:AuthService, private router:Router) {
+  loader:boolean=false;
+  formTitle:any="Add New Country";
+  ifUpdate:boolean=false;
+  singaleCountry:any = [];
+  constructor( private master:MasterService ,private authservice:AuthService, private router:Router ) {
 
 
     
@@ -37,6 +40,8 @@ export class CountryComponent implements OnInit {
     });
   
     this.getAllCountry();
+
+ 
   }
   
   ngAfterViewInit(): void {
@@ -127,7 +132,132 @@ export class CountryComponent implements OnInit {
 
 
  editCountry(id){
-   alert(id);
+
+  $(window).scrollTop(0);
+  this.loader =true;
+   this.master.getMethod("/getCountryDetail?id=" + id).subscribe((res)=>{
+    this.loader =false;
+    this.formTitle="Update Country";
+    this.ifUpdate=true;
+ 
+     this.singaleCountry=res;
+     console.log(this.singaleCountry.name);
+
+
+     this.countryForm= new FormGroup({
+      country: new FormControl(this.singaleCountry.name),
+      code: new FormControl(this.singaleCountry.code)
+    });
+
+    $('#contryid').val(this.singaleCountry.sno);
+  
+   })
  }
 
+ updateCountry(){
+
+  var id = $('#contryid').val();
+  var Country=this.countryForm.get("country").value;
+  var Code=this.countryForm.get("code").value;
+  var action=this.checkbox;
+ 
+
+  if(Country==''){
+    this.error = true;
+    this.message = 'Please enter a country name!';
+ 
+    return false;
+
+  }
+
+  else if(Code==''){
+    this.error = true;
+    this.message = 'Please enter a country code!';
+    return false;
+
+  }
+  else{
+
+       
+  const data ={
+    "name":Country,
+    "code":Code,
+    "status":action,
+    "sno":id,
+    "remarks":''
+
+  }
+  this.master.methodPost(data, '/UpdateCountry?id='+id).subscribe(reponse=>{
+
+    if(reponse['name']!='')
+    {  this.formTitle="Add";
+    this.ifUpdate=false;
+ 
+      this.error = false;
+      this.message = ' Country updated successfully!';
+      // setTimeout(()=>{location.reload()},1000);
+      this.ngOnInit();
+      return false;
+
+    }else{
+      this.error = true;
+      this.message = 'Failed to update country polease check all details!';
+      return false;
+    }
+
+   
+   },(error=>{
+    alert("failed to update country something went wrong");
+   }));
+
+  }
+
+  
+
+ }
+
+ OnDelete(id, name, code){
+   if(confirm("Are you sure want to delete this record?")){
+ 
+    var Country=this.countryForm.get("country").value;
+    var Code=this.countryForm.get("code").value;
+    var action=this.checkbox;
+
+    const data ={
+      "name":name,
+      "code":code,
+      "status":"DELETED",
+      "sno":id,
+      "remarks":''
+  
+    }
+    this.master.methodPost(data, '/UpdateCountry?id='+id).subscribe(reponse=>{
+  
+      if(reponse['name']!='')
+      { 
+        alert("Record deleted successfully.");
+        this.ngOnInit();
+  
+      }else{
+        this.error = true;
+        this.message = 'Failed to delete record!';
+        return false;
+      }
+  
+     
+     },(error=>{
+      alert("failed to delete country something went wrong");
+     }));
+  
+   }else{
+     return false;
+   }
+ }
+
+ cancelUpdate()
+{
+  this.loader =false;
+  this.formTitle="Add";
+  this.ifUpdate=false;
+}
 }
