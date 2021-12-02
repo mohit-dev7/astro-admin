@@ -125,4 +125,9 @@ export class CountryComponent implements OnInit {
    });
  }
 
+
+ editCountry(id){
+   alert(id);
+ }
+
 }

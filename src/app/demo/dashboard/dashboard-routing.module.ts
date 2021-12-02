@@ -29,6 +29,12 @@ const routes: Routes = [
         loadChildren: () => import('./country/country.module').then(m => m.CountryModule )
       },
       {
+        path: 'feedback',
+        loadChildren: () => import('./feedback/feedback.module').then(m => m.FeedbackModule )
+      },
+      {
+
+
         path: 'users',
         loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
       },
@@ -40,6 +46,12 @@ const routes: Routes = [
         path: 'enquire',
         loadChildren: () => import('./enquire/enquire.module').then(m => m.EnquireModule)
       },
+      
+      
+      {
+        path: 'promocode',
+        loadChildren: () => import('./promocode/promocode.module').then(m => m.PromocodeModule )
+      }
     ]
   }
 ];
