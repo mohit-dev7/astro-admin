@@ -2,7 +2,10 @@
 <div class="container-fluid p-0">
 
    
-    <div class="appointment_data card p-3">
+    <div class="appointment_data card p-3" style="position: relative;">
+        <div class="loader">
+            <img src="../../../../assets/images/loading.gif"/>
+        </div>
 <h5>Add New Country</h5>
 <hr>
     <form [formGroup]="countryForm"  >
@@ -87,7 +90,7 @@
                 <td>{{data.code}}</td>
                 <td><span class="badge badge-success" *ngIf="data.status=='ACTIVE'">{{data.status}}</span>
                     <span class="badge badge-danger" *ngIf="data.status=='INACTIVE' || data.status=='DEACTIVATE'">{{data.status}}</span></td>
-                <td> <button class="btn btn-success"><i class="ng-tns-c22-2 feather icon-edit"></i></button> <button class="btn btn-danger"><i class="ng-tns-c22-2 feather icon-trash"></i></button> </td>
+                <td> <button class="btn btn-success" (click)="editCountry(data.sno)"><i class="ng-tns-c22-2 feather icon-edit"></i></button> <button class="btn btn-danger"><i class="ng-tns-c22-2 feather icon-trash"></i></button> </td>
                
             </tr>
          
