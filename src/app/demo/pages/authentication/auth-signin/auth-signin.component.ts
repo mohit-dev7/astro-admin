@@ -37,7 +37,7 @@ export class AuthSigninComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.autoLogin("ps1089124@gmail.com", "123456");
+    // this.autoLogin("ps1089124@gmail.com", "123456");
   }
 
 

@@ -69,13 +69,13 @@ const NavigationItems = [
             id: 'time_slot',
             title: 'Time Slot',
             type: 'item',
-            url: '/basic/breadcrumb-paging'
+            url: '/dashboard/timeslot'
           },
           {
             id: 'holiday_list',
             title: 'Holiday List',
             type: 'item',
-            url: '/basic/collapse'
+            url: '/dashboard/holiday'
           },
           {
             id: 'promo_code',
