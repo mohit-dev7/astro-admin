@@ -32,7 +32,7 @@
 
                 </div>
 
-                <div class="col-md-3 ">
+                <div class="col-md-2 ">
                     <div class="form-group">
                         <label>Code</label>
                         <input class="form-control"  formControlName="code"  placeholder="Code" />
@@ -42,7 +42,7 @@
 
                 </div>
 
-                <div class="col-md-2 align-items-center" style="padding-top: 35px;">
+                <div class="col-md-1 align-items-center" style="padding-top: 35px;">
                     <div class="form-check" >
                         <input class="form-check-input" type="checkbox" value="" ngModel  id="flexCheckDefault" (change)="checkCheckBoxvalue($event)">
                         <label class="form-check-label" for="flexCheckDefault">
@@ -51,13 +51,17 @@
                       </div>
             </div>
 
-            <div class="col-md-3 ">
+            <div class="col-md-2 ">
               <button *ngIf="ifUpdate==false"class="btn btn-primary pull-left w-100" style="float: left; margin-top: 28px;"  (click)="addNewCountry()">Add</button>
+               
               <button *ngIf="ifUpdate==true"  class="btn btn-success pull-left w-100" (click)="updateCountry()" style="float: left; margin-top: 28px;" >Update</button> 
-              <button *ngIf="ifUpdate==true"class="btn btn-light pull-left w-100" style="float: left; margin-top: 28px;"  (click)="cancelUpdate()">Cancel</button> 
-        </div>
-
        
+            </div>
+
+       <div class="col-md-2">
+       <button *ngIf="ifUpdate==true"class="btn btn-light pull-left w-100" style="float: left; margin-top: 28px;"  (click)="cancelUpdate()">Cancel</button> 
+
+       </div>
         </div>
     </div> 
     </form>
@@ -90,7 +94,7 @@
         </tfoot>
         <tbody>
 
-            
+
           
             <tr *ngFor="let data of countryData" >
              

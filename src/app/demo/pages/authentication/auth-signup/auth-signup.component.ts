@@ -140,7 +140,7 @@ signupForm: FormGroup;
       (error=>{
         this.loading = false;
         this.error = true;
-        this.message = 'Failed to create account something went wrong!. ';
+        this.message = 'Failed to create account something went wrong! ';
         return false;
       }))
 
