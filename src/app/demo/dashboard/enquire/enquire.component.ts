@@ -127,4 +127,8 @@ export class EnquireComponent implements OnInit {
    });
  }
 
+ datefrom(){
+   this.master.
+ }
+
 }

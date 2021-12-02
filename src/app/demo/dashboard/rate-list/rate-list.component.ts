@@ -7,6 +7,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 declare var $: any;
 
+// piyush
+
 @Component({
   selector: 'app-rate-list',
   templateUrl: './rate-list.component.html',
@@ -40,6 +42,7 @@ export class RateListComponent implements OnInit {
     });
   
     this.getRateList();
+    
   }
   
   ngAfterViewInit(): void {
@@ -48,6 +51,8 @@ export class RateListComponent implements OnInit {
     
       $('#example').DataTable();
   } );
+
+
   }
 
   checkCheckBoxvalue(event){
@@ -134,5 +139,10 @@ export class RateListComponent implements OnInit {
    
    });
  }
+
+
+
+
+
 
 }

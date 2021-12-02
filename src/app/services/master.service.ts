@@ -8,6 +8,9 @@ import { UserData } from '../shared/user-data';
   providedIn: 'root'
 })
 export class MasterService {
+  push(value: any) {
+    throw new Error('Method not implemented.');
+  }
   userToken=localStorage.getItem('userID');
   // all apis=============//
 
