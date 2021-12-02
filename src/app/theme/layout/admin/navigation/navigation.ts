@@ -143,7 +143,7 @@ const NavigationItems = [
         id: 'feedback',
         title: 'Feedback',
         type: 'item',
-        url: '/dashboard/contact',
+        url: '/dashboard/feedback',
         icon: 'feather icon-home',
         classes: 'nav-item',
       }
