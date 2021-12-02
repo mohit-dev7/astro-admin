@@ -46,6 +46,12 @@ const routes: Routes = [
         path: 'enquire',
         loadChildren: () => import('./enquire/enquire.module').then(m => m.EnquireModule)
       },
+      
+      
+      {
+        path: 'promocode',
+        loadChildren: () => import('./promocode/promocode.module').then(m => m.PromocodeModule )
+      }
     ]
   }
 ];

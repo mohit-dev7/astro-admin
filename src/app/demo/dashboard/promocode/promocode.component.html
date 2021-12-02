@@ -1,0 +1,123 @@
+
+<div class="container-fluid p-0">
+
+    <div class="appointment_data card p-3">
+
+        <form action="" [formGroup]="promoForm" >
+            <div class="col-lg-12 pl-0">
+                <div class="row">
+
+                    <div class="col-lg-12">
+                        <div *ngIf="message!='' && error==true" class="alert alert-danger w-100" role="alert">
+                            {{message}}
+                          </div>
+                
+                          <div *ngIf="message!='' && error!=true" class="alert alert-success w-100"  role="alert">
+                            {{message}}
+                          </div>
+                
+                    </div>
+                    
+                    <div class="col-md-3 ">
+                        <div class="form-group">
+                            <label>Promo Code *</label>
+                            <input class="form-control " formControlName="promcode"  placeholder="Promo code"  />
+                        </div>
+    
+                    </div>
+    
+                 
+    
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Type *</label>
+                           <select class="form-control" formControlName="option" (change)="selectOption($event.target.value)"
+                           [(ngModel)]="select" >
+                           
+                            <option [value]="item.id" *ngFor="let item of select;" >
+                                {{item.name}}
+                            </option>
+                              
+                           </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2 ">
+                        <div class="form-group">
+                            <label>Percentage/Amount</label>
+                            <input class="form-control" placeholder="" formControlName="percentAmount"  />
+                        </div>
+    
+                      
+    
+                    </div>
+                    <div class="checkbox form-inline">
+                        <label class="label-1"><input type="checkbox" name="ch_name[] pr-3" value="ch01">Application for limited time *</label>
+                        <div class=" ch_for hide mr-2">
+                            <label for="">Effective Date*</label>
+                            <input type="date" name="ch_for[]" value="" placeholder="Channel details"  formControlName="effective"  class="form-control ">
+                        </div>
+                        <div class=" ch_for hide">
+                            <label for="">Expiry Date *</label>
+                            <input type="date" name="ch_for[]" value="" placeholder="Channel details"  formControlName="expiry"  class="form-control ">
+                        </div>
+                       
+                      </div>
+    
+                    <div class="col-md-2 ">
+                        <button class="btn btn-primary pull-left w-100" style="float: left; margin-top: 28px;" (click)="addNewPromoCode()">Add</button>
+                    </div>
+               </div>
+    
+            
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<div class="table_data card p-3">
+    <h5>All Records</h5>
+    
+	<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Promo Code</th>
+                <th>Type</th>
+                <th>Percentage/Amount</th>
+                <th>Available For Limited</th>
+                <th>Effective Date</th>
+                <th>Expiry Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>S.No</th>
+                <th>Promo Code</th>
+                <th>Type</th>
+                <th>Percentage/Amount</th>
+                <th>Available For Limited</th>
+                <th>Effective Date</th>
+                <th>Expiry Date</th>
+                <th>Action</th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr  *ngFor="let item of promocode;">
+                <td>{{item.sno}}</td>
+                <td>{{item.code}}</td>
+                <td>{{item.type}}</td>
+                <td>{{item.amount}}</td>
+                <td>null</td>
+                <td>{{item.effectiveDate}}</td>
+                <td>{{item.expiryDate}}</td>
+                <td> <button class="btn btn-sm btn-success pr-0 m-0 mr-1"><i class="ng-tns-c22-2 feather icon-edit"></i></button> <button class="btn  btn-sm btn-danger pr-0 m-0"><i class="ng-tns-c22-2 feather icon-trash"></i></button></td>
+            </tr>
+         
+        </tbody>
+    </table>
+    
+
+</div>
+

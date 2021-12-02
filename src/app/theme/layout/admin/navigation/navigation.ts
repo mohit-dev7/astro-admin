@@ -81,7 +81,7 @@ const NavigationItems = [
             id: 'promo_code',
             title: 'Promo Code',
             type: 'item',
-            url: '/basic/tabs-pills'
+            url: '/dashboard/promocode'
           }
         ]
       },
@@ -119,7 +119,7 @@ const NavigationItems = [
             id: 'refund',
             title: 'Refund Appointments List',
             type: 'item',
-            url: '/basic/tabs-pills'
+            url: '/dashboard/promocode'
           }
         ]
       },
