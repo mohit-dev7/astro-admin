@@ -7,6 +7,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 declare var $: any;
 
+// piyush
+
 @Component({
   selector: 'app-enquire',
   templateUrl: './enquire.component.html',
