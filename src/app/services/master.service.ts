@@ -113,6 +113,7 @@ export class MasterService {
     )
   }
 
+  
   holidayGetDetailData(id:any){
     return this.http.get('http://18.219.65.148:8080/getHolidayDetail?id='+id, this.authHttp)
     .pipe(
