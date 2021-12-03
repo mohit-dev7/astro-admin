@@ -4,7 +4,7 @@ import { MasterService } from 'src/app/services/master.service';
 
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { ActivatedRouteSnapshot, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 declare var $: any;
 @Component({
   selector: 'app-country',
@@ -44,13 +44,7 @@ export class CountryComponent implements OnInit {
  
   }
   
-  ngAfterViewInit(): void {
-
-    $(document).ready( function () {
-    
-      $('#example').DataTable();
-  } );
-  }
+ 
 
   checkCheckBoxvalue(event){
    
@@ -126,6 +120,9 @@ export class CountryComponent implements OnInit {
    this.master.getMethod('/AllCountries').subscribe(data=>{
 
     this.countryData = JSON.parse(JSON.stringify(data));
+    setTimeout(function(){
+      $('#example').DataTable();
+     }, 1000);
    
    });
  }
@@ -214,7 +211,7 @@ export class CountryComponent implements OnInit {
 
   
 
- }
+}
 
  OnDelete(id, name, code){
    if(confirm("Are you sure want to delete this record?")){
@@ -254,10 +251,14 @@ export class CountryComponent implements OnInit {
    }
  }
 
- cancelUpdate()
-{
-  this.loader =false;
-  this.formTitle="Add";
-  this.ifUpdate=false;
-}
+  cancelUpdate()
+  {
+    this.loader =false;
+    this.formTitle="Add";
+    this.ifUpdate=false;
+    this.countryForm= new FormGroup({
+      country: new FormControl(""),
+      code: new FormControl("")
+    });
+  }
 }

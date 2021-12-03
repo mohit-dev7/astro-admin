@@ -1,9 +1,13 @@
 
 <div class="container-fluid p-0">
 
-    <div class="appointment_data card p-3">
+    <div class="appointment_data card p-3" style="position: relative;">
+        <div class="loader"  *ngIf="loader">
+            <img src="../../../../assets/images/loading.gif"/>
+        </div>
 
         <form action="" [formGroup]="promoForm" >
+            <input type="hidden" id="promocodeid">
             <div class="col-lg-12 pl-0">
                 <div class="row">
 
@@ -34,7 +38,7 @@
                             <label>Type *</label>
                            <select class="form-control" formControlName="option"  >select
                            
-                            <option selected value="">select</option>
+                           
                             <option value="Amount">Amount</option>
                             <option value="Percentage">percentage</option>
                               
@@ -64,7 +68,9 @@
                       </div>
     
                     <div class="col-md-2 ">
-                        <button class="btn btn-primary pull-left w-100" style="float: left; margin-top: 33px;" (click)="addNewPromoCode()">Add</button>
+                        <button class="btn btn-primary pull-left w-100"   *ngIf="ifUpdate==false" style="float: left; margin-top: 33px;" (click)="addNewPromoCode()">Add</button>
+                        <button class="btn btn-primary pull-left w-100" *ngIf="ifUpdate==true"  style="float: left; margin-top: 33px;" (click)="updatePromocode()">Update</button>
+                        <button class="btn btn-primary pull-left w-100" *ngIf="ifUpdate==true" style="float: left; margin-top: 33px;" (click)="onCancel()">cancel</button>
                     </div>
                </div>
     
@@ -112,7 +118,9 @@
                 <td>null</td>
                 <td>{{item.effectiveDate}}</td>
                 <td >{{item.expiryDate}}</td>
-                <td style="display: flex;"> <button class="btn btn-sm btn-success pr-0 m-0 mr-1"><i class="ng-tns-c22-2 feather icon-edit"></i></button> <button class="btn  btn-sm btn-danger pr-0 m-0"><i class="ng-tns-c22-2 feather icon-trash"></i></button></td>
+                <td style="display: flex;"> 
+                    <button class="btn btn-sm btn-success pr-0 m-0 mr-1" (click)="editPromocode(item.sno)"><i class="ng-tns-c22-2 feather icon-edit"></i></button> 
+                    <button class="btn  btn-sm btn-danger pr-0 m-0"><i class="ng-tns-c22-2 feather icon-trash"></i></button></td>
             </tr>
          
         </tbody>
