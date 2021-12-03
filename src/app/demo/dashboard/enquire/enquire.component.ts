@@ -53,6 +53,17 @@ export class EnquireComponent implements OnInit {
   } );
   }
 
+
+  getSearch(){
+      var fromdate=this.enquireform.get("fromdate").value;
+      var todate=this.enquireform.get("todate").value;
+      var status=this.enquireform.get("status").value;
+      
+   
+      
+    
+  }
+
  
 
   // AddRateList(){
@@ -123,6 +134,7 @@ export class EnquireComponent implements OnInit {
    this.master.getMethod('/getAllEnquiries').subscribe(data=>{
 
     this.enquiredata = JSON.parse(JSON.stringify(data));
+   
    
    });
  }
