@@ -26,6 +26,10 @@ export class TimeslotComponent implements OnInit {
   selectedItems = [];
   dropdownSettings = {};
 
+  loader:boolean=false;
+  formTitle:any="Add New Timeslot";
+  ifUpdate:boolean=false;
+
   constructor(private master: MasterService, private authservice: AuthService, private router: Router) {
 
 
@@ -229,8 +233,13 @@ export class TimeslotComponent implements OnInit {
   }
 
   editTimeSlot(id: any) {
+    this.loader =true;
+   
     this.edit = true;
     this.master.timeSlotGetDetailData(id).subscribe(data => {
+      this.loader =false;
+      this.formTitle="Update";
+      this.ifUpdate=true;
       this.timeslotForm.patchValue(data);
       this.getAllDays(data);
       this.getAllTimeSlots();

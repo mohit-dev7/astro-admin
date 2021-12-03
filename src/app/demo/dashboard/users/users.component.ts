@@ -13,6 +13,7 @@ import { MasterService } from 'src/app/services/master.service';
 export class UsersComponent implements OnInit, AfterViewInit {
 
 userData:any = [];
+self=this;
 
   constructor(private http: HttpClient, private master:MasterService) { }
 
@@ -27,24 +28,37 @@ this.getAllUSerData();
    
 
 
-      $('#example').DataTable();
+     
   } );
   }
 
 
     
  getAllUSerData(){
+ var exampleArray = [];
   this.master.getMethod('/getUsers').subscribe(data=>{
 
+
    this.userData = JSON.parse(JSON.stringify(data));
-  
+
+
+   setTimeout(function(){
+    $('#example').DataTable();
+   }, 1000);
+
+ 
   });
+
+  
 }
 
 editCountry(sno : any)
 {
   
 }
+
+
+
 
 
 }

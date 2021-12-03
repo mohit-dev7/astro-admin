@@ -594,9 +594,22 @@
     }
 }
 
+.pcoded-navbar .header-logo{
+    background: #f66e1f !important;
+}
+
+.pcoded-inner-navbar > app-nav-group > app-nav-collapse > li.pcoded-trigger > a.active{
+    color:#151349 !important;
+}
+
+.pcoded-navbar .pcoded-inner-navbar li.active > a > .pcoded-micon, .pcoded-navbar .pcoded-inner-navbar li.active > a > .pcoded-micon + .pcoded-mtext{
+    color:#151349 !important;
+}
+
 .pcoded-navbar {
     display: block;
     z-index: 1029;
+    background: #151349 !important;
     position: fixed;
     transition: all 0.3s ease-in-out;
     box-shadow: 1px 0 20px 0 rgb(63, 77, 103);
@@ -1109,7 +1122,7 @@
             &:focus,
             &:hover {
                 > a {
-                    color: #1dc4e9;
+                    color: #f66e1f;
                 }
             }
 
@@ -1119,7 +1132,7 @@
                 &:hover {
                     > a {
                         &:before {
-                            background: #1dc4e9;
+                            background: #f66e1f;
                         }
                     }
                 }
@@ -1131,7 +1144,7 @@
             &.pcoded-trigger {
                 &:after {
                     content: "";
-                    background-color: #1dc4e9;
+                    background-color: #f66e1f;
                     z-index: 1027;
                     position: absolute;
                     left: 0;
@@ -1668,7 +1681,7 @@ app-nav-group {
   }
   &.menu-light {
     a {
-      color: #a9b7d0;
+      color: #fff;
     }
     .pcoded-menu-caption {
     color: #e8edf7;
@@ -1683,7 +1696,7 @@ app-nav-group {
 .pcoded-navbar .pcoded-inner-navbar app-nav-item>li.nav-item.active:after,
 .pcoded-navbar .pcoded-inner-navbar app-nav-item>li.nav-item.pcoded-trigger:after {
   content: "";
-  background-color: #1dc4e9;
+  background-color: #f66e1f;
   z-index: 1027;
   position: absolute;
   left: 0;
@@ -1692,6 +1705,6 @@ app-nav-group {
   height: calc(100% - 5px);
 }
 .pcoded-navbar .pcoded-inner-navbar>app-nav-group>app-nav-collapse>li.active>a, .pcoded-navbar .pcoded-inner-navbar>app-nav-group>app-nav-collapse>li.pcoded-trigger>a, .pcoded-navbar .pcoded-inner-navbar app-nav-item>li.nav-item.active>a, .pcoded-navbar .pcoded-inner-navbar app-nav-item>li.nav-item.pcoded-trigger>a {
-  background: #333f54;
+  background: #fff;
   color: #fff;
 }

@@ -105,7 +105,7 @@ export class DefaultComponent implements OnInit {
           'code': 'KE',
           'name': 'Kenya',
           'value': 41609728,
-          'color': '#1dc4e9'
+          'color': '#f66e1f'
         },
         {
           'code': 'ZA',
@@ -135,7 +135,7 @@ export class DefaultComponent implements OnInit {
           'code': 'AU',
           'name': 'Australia',
           'value': 22605732,
-          'color': '#1dc4e9'
+          'color': '#f66e1f'
         },
         {
           'code': 'TH',

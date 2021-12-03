@@ -45,7 +45,7 @@ export class CrtMorrisComponent implements OnInit {
       responsive: true,
       ykeys: ['a', 'b', 'c'],
       labels: ['Bar 1', 'Bar 2', 'Bar 3'],
-      barColors: ['0-#1de9b6-#1dc4e9', '0-#899FD4-#A389D4', '#04a9f5']
+      barColors: ['0-#1de9b6-#f66e1f', '0-#899FD4-#A389D4', '#04a9f5']
     };
 
     this.barStackedOption = {
@@ -57,7 +57,7 @@ export class CrtMorrisComponent implements OnInit {
       responsive: true,
       ykeys: ['a', 'b', 'c'],
       labels: ['Bar 1', 'Bar 2', 'Bar 3'],
-      barColors: ['0-#1de9b6-#1dc4e9', '0-#899FD4-#A389D4', '#04a9f5']
+      barColors: ['0-#1de9b6-#f66e1f', '0-#899FD4-#A389D4', '#04a9f5']
     };
 
     this.areaAngleMorrisData = [
@@ -164,7 +164,7 @@ export class CrtMorrisComponent implements OnInit {
         '#1de9b6',
         '#A389D4',
         '#04a9f5',
-        '#1dc4e9',
+        '#f66e1f',
       ],
       resize: true,
       formatter: function(x) {

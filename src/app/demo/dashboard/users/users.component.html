@@ -61,22 +61,7 @@
             </tr>
         </tfoot>
       <tbody>
-        <tr>
-            <td>50</td>
-            <td>Junior Javascript Developer</td>
-            <td>8767656543</td>
-            <td>xyz@gmail.com</td>
-            <td>True</td>
-            <td>$75,650</td>
-        </tr>
-        <tr>
-            <td>50</td>
-            <td>piyush Javascript Developer</td>
-            <td>8767656543</td>
-            <td>xyz@gmail.com</td>
-            <td>True</td>
-            <td>$75,650</td>
-        </tr>
+       
         <tr *ngFor="let data of userData">
             <td>{{data.id}}</td>
             <td>{{data.firstName}} {{data.lastName}}</td>
@@ -90,5 +75,6 @@
     </table>
     
 
+    
 </div>
 </div>
