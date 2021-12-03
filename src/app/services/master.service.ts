@@ -8,6 +8,9 @@ import { UserData } from '../shared/user-data';
   providedIn: 'root'
 })
 export class MasterService {
+  push(value: any) {
+    throw new Error('Method not implemented.');
+  }
   userToken=localStorage.getItem('userID');
   //  userToken="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbnVyYWdwdW5kaXI2MjFAZ21haWwuY29tIiwiZXhwIjoxNjM4NDQ1MTAzLCJpYXQiOjE2Mzg0MjcxMDN9.1La4ssoQtwGZ7ksz3H9ORrn0j47aOYkYti1Zbb6jx3eWJCAW_Jv0nPDqG-SYAcz2qLYyQhN0xqV7dw-hQC2ZVQ";
   // all apis=============//
@@ -114,6 +117,7 @@ export class MasterService {
     )
   }
 
+  
   holidayGetDetailData(id:any){
     return this.http.get('http://18.219.65.148:8080/getHolidayDetail?id='+id, this.httpOptions)
     .pipe(
