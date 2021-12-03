@@ -127,8 +127,10 @@ export class EnquireComponent implements OnInit {
    });
  }
 
- datefrom(){
-   this.master.
- }
+//  getfilter(){
+
+//   this.master.getMethod('/getAllEnquiries').subscribe(data=>{
+
+//  }
 
 }

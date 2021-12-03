@@ -30,14 +30,14 @@ export class MasterService {
   }  
 
 
-  authHttp = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization':'Bearer '+this.userToken
+  // authHttp = {
+  //   headers: new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     'Authorization':'Bearer '+this.userToken
 
     
-    })
-  }
+  //   })
+  // }
 
     // Error handling 
     handleError(error) {
@@ -76,7 +76,7 @@ export class MasterService {
   }  
 
   timeslotDataPost(data): Observable<UserData> {
-    return this.http.post<UserData>('http://18.219.65.148:8080/saveTimeSlot', JSON.stringify(data), this.authHttp)
+    return this.http.post<UserData>('http://18.219.65.148:8080/saveTimeSlot', JSON.stringify(data), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -86,7 +86,7 @@ export class MasterService {
  
 
   timeslotGetData(){
-    return this.http.get('http://18.219.65.148:8080/showSlots', this.authHttp)
+    return this.http.get('http://18.219.65.148:8080/showSlots', this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -94,7 +94,7 @@ export class MasterService {
   }
 
   daysData(){
-    return this.http.get('http://18.219.65.148:8080/getDays', this.authHttp)
+    return this.http.get('http://18.219.65.148:8080/getDays', this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -102,7 +102,7 @@ export class MasterService {
   }
 
   holidayDataPost(data): Observable<UserData> {
-    return this.http.post<UserData>('http://18.219.65.148:8080/saveHoliday', JSON.stringify(data), this.authHttp)
+    return this.http.post<UserData>('http://18.219.65.148:8080/saveHoliday', JSON.stringify(data), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -110,7 +110,7 @@ export class MasterService {
   }  
 
   holidayGetData(){
-    return this.http.get('http://18.219.65.148:8080/getHolidays', this.authHttp)
+    return this.http.get('http://18.219.65.148:8080/getHolidays', this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -119,7 +119,7 @@ export class MasterService {
 
   
   holidayGetDetailData(id:any){
-    return this.http.get('http://18.219.65.148:8080/getHolidayDetail?id='+id, this.authHttp)
+    return this.http.get('http://18.219.65.148:8080/getHolidayDetail?id='+id, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -127,7 +127,7 @@ export class MasterService {
   }
 
   timeSlotGetDetailData(id:any){
-    return this.http.get('http://18.219.65.148:8080/getTimeSlotDetail?id='+id, this.authHttp)
+    return this.http.get('http://18.219.65.148:8080/getTimeSlotDetail?id='+id, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
