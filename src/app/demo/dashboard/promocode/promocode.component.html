@@ -21,6 +21,10 @@
                           </div>
                 
                     </div>
+                </div>
+                <div class="row">
+
+                   
                     
                     <div class="col-md-3 ">
                         <div class="form-group">
@@ -65,13 +69,26 @@
                             <input type="date" name="ch_for[]" value="" placeholder="Channel details"  formControlName="expiry"  class="form-control ">
                         </div>
                        
-                      </div>
-    
-                    <div class="col-md-2 ">
-                        <button class="btn btn-primary pull-left w-100"   *ngIf="ifUpdate==false" style="float: left; margin-top: 33px;" (click)="addNewPromoCode()">Add</button>
-                        <button class="btn btn-primary pull-left w-100" *ngIf="ifUpdate==true"  style="float: left; margin-top: 33px;" (click)="updatePromocode()">Update</button>
-                        <button class="btn btn-primary pull-left w-100" *ngIf="ifUpdate==true" style="float: left; margin-top: 33px;" (click)="onCancel()">cancel</button>
                     </div>
+                </div> 
+                <div class="row ">
+
+                
+    
+                
+                        <div class="col-lg-2">
+                            <button class="btn add pull-left w-100"   *ngIf="ifUpdate==false" style="float: left; margin-top: 33px;" (click)="addNewPromoCode()">Add</button>
+                        </div>
+                        <div class="col-lg-2">
+                            <button class="btn update pull-left w-100" *ngIf="ifUpdate==true"  style="float: left; margin-top: 33px;" (click)="updatePromocode()">Update</button>
+                        </div>
+                        <div class="col-lg-2">
+                        
+                            <button class="btn cancel pull-left w-100" *ngIf="ifUpdate==true" style="float: left; margin-top: 33px;" (click)="onCancel()">cancel</button>
+                        </div>
+                      
+                       
+                   
                </div>
     
             
@@ -97,18 +114,8 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tfoot>
-            <tr>
-                <th>S.No</th>
-                <th>Promo Code</th>
-                <th>Type    </th>
-                <th>%/Amount</th>
-                <th>Available For Limited</th>
-                <th>Effective Date</th>
-                <th>Expiry Date</th>
-                <th>Action</th>
-            </tr>
-        </tfoot>
+        
+        
         <tbody>
             <tr  *ngFor="let item of promocode;">
                 <td>{{item.sno}}</td>

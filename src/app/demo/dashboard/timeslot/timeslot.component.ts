@@ -98,7 +98,7 @@ export class TimeslotComponent implements OnInit {
   }
 
   addNewTimeslot() {
-    debugger;
+    
     var id = this.timeslotForm.get("id").value;
     var startTime = this.timeslotForm.get("startTime").value;
     var endTime = this.timeslotForm.get("endTime").value;
@@ -206,7 +206,7 @@ export class TimeslotComponent implements OnInit {
   getAllDays(valueData?: any) {
     this.master.daysData().subscribe(data => {
       let dayArray = [];
-      debugger;
+      
       Object.keys(data).forEach(value => {
         let objData = data[value]
         let saveObj = {};

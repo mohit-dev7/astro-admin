@@ -17,6 +17,8 @@ import { PromocodeComponent } from './promocode/promocode.component';
 import { TimeslotComponent } from './timeslot/timeslot.component';
 import { HolidayComponent } from './holiday/holiday.component';
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
+
+import { ContactdComponent } from './contactd/contactd.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -29,7 +31,7 @@ import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
  
 
  
-  declarations: [UsersComponent, AppoinmentsComponent, PendingAppoinmentsComponent,  PromocodeComponent, EnquireComponent, FeedbackComponent, CountryComponent, TimeslotComponent, HolidayComponent],
+  declarations: [UsersComponent, AppoinmentsComponent, PendingAppoinmentsComponent,  PromocodeComponent, EnquireComponent, FeedbackComponent, CountryComponent, TimeslotComponent, HolidayComponent, ContactdComponent],
  schemas:[NO_ERRORS_SCHEMA]
 })
 export class DashboardModule { }
