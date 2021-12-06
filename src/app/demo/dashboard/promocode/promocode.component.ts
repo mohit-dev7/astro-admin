@@ -155,7 +155,7 @@ export class PromocodeComponent implements OnInit {
       option: new FormControl(this.singlePromocodeData.type)
     });
 
-   
+    $('#promocodeid').val(this.singlePromocodeData.sno);
   
   })
   }
@@ -168,7 +168,7 @@ export class PromocodeComponent implements OnInit {
     var effective=this.promoForm.get("effective").value;
     var expiry=this.promoForm.get("expiry").value;
     var option=this.promoForm.get("option").value;
-    console.log(id)
+ 
     if(procode==''){
       this.error = true;
       this.message = 'Please promocode a country name!';
@@ -188,17 +188,21 @@ export class PromocodeComponent implements OnInit {
       return false;
     }else{
       var data ={
-        "sno":id,
-        "code":procode,
-        "amount":percentAmount,
-        "effectiveDate":effective,
-        "expiryDate":expiry,
-        "type":option,
-        "status":"active"
+  
+        "sno": id,
+        "code": procode,
+        "type": option,
+        "amount": percentAmount,
+        "effectiveDate": effective,
+        "expiryDate": "2021-12-10",
+        "remarks": "test",
+        "status": "ACTIVE"
 
       }
+
+      console.log(data)
     }
-    this.master.methodPost(data,'/editPromo?id='+id).subscribe(resp=>{
+    this.master.methodPost(data,'/editPromo').subscribe(resp=>{
       if(resp['code']!='')
       { ;
       this.ifUpdate=false;

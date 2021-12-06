@@ -17,3 +17,25 @@
     margin-top: 0%;
 
 }
+
+::ng-deep table {
+    box-shadow: 0 0 20px 0 #0000002e !important;
+    width: 100%;
+    margin: 0 auto;
+    clear: both;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 20px !important;
+    border: none;
+}
+::ng-deep table th{
+    border-bottom: none !important;
+    border-left: 0 !important;
+   
+    border-top: 0 !important;
+}
+
+::ng-deep table th:last-child{
+    border: none !important;
+
+}
