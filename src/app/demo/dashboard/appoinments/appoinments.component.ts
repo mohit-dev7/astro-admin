@@ -3,6 +3,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular
 declare var $: any;
 import {Subject} from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
+import { MasterService } from 'src/app/services/master.service';
 
 
 @Component({
@@ -11,8 +12,8 @@ import { DataTableDirective } from 'angular-datatables';
   styleUrls: ['./appoinments.component.scss']
 })
 export class AppoinmentsComponent implements OnInit, AfterViewInit {
-
-  constructor(private http: HttpClient) { }
+  public allAppointment:any=[]
+  constructor(private http: HttpClient,private master:MasterService) { }
 
 
 
@@ -20,7 +21,7 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
 
 
-
+  this.getAllAppointment();
   }
 
   ngAfterViewInit(): void {
@@ -30,6 +31,14 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
       $('#example').DataTable();
   } );
   }
+
+  getAllAppointment(){
+    this.master.getMethod("/allAppointments").subscribe(data=>{
+      this.allAppointment=data;
+      console.log(this.allAppointment)
+    })
+  }
+
 
 
 
