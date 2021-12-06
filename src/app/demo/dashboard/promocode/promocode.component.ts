@@ -84,18 +84,6 @@ export class PromocodeComponent implements OnInit {
       return false;
 
     
-    }
-    else if(effective==''){
-      this.error = true;
-      this.message = 'Please enter a effective date!';
-      return false;
-
-    }
-    else if(expiry==''){
-      this.error = true;
-      this.message = 'Please enter a expiry date';
-      return false;
-
     }else{
       var data ={
         "code":procode,
@@ -177,16 +165,7 @@ export class PromocodeComponent implements OnInit {
   
     }
   
-    else if(effective==''){
-      this.error = true;
-      this.message = 'Please enter a effective date ';
-      return false;
-  
-    }else if(expiry==''){
-      this.error = true;
-      this.message = 'Please enter expiry date';
-      return false;
-    }else{
+     else{
       var data ={
   
         "sno": id,

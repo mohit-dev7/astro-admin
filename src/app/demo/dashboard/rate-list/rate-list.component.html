@@ -26,18 +26,11 @@
                             <div class="form-group">
                                 <label>Country:</label>
                                 <select class="form-control" formControlName="country" placeholder="Select Country">
-                                    <option value="India">
-                                    India
+                                  
+                                    <option  *ngFor="let country of countryData" value="{{country.name}}">
+                                    {{country.name}}
                                     </option>
-                                    <option value="Japan">
-                                        Japan
-                                    </option>
-                                    <option value="USA">
-                                        USA
-                                    </option>
-                                    <option value="UK">
-                                        UK
-                                    </option>
+                                 
                                     
                                 </select>
                             </div>

@@ -4,7 +4,7 @@ import { MasterService } from 'src/app/services/master.service';
 
 import { FormControl,  Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router';
+import { Data, Router } from '@angular/router';
 declare var $: any;
 
 // piyush
@@ -31,6 +31,7 @@ export class RateListComponent implements OnInit {
   formTitle:any="Add Rate List";
   ifUpdate:boolean=false;
   singaleCountry: any;
+  countryData:any=[]
 
   constructor( private master:MasterService ,private authservice:AuthService, private router:Router) {
 
@@ -46,18 +47,14 @@ export class RateListComponent implements OnInit {
     });
   
     this.getRateList();
+    this.getcountryList();
     
   }
   
-  ngAfterViewInit(): void {
-
-    $(document).ready( function () {
-    
-      $('#example').DataTable();
-  } );
 
 
-  }
+
+  
 
   checkCheckBoxvalue(event){
    
@@ -140,9 +137,35 @@ export class RateListComponent implements OnInit {
    this.master.getMethod('/getAllRateList').subscribe(data=>{
 
     this.rateList = JSON.parse(JSON.stringify(data));
+     setTimeout(function(){
+      $('#example').DataTable();
+     }, 1000);
+   
+  
+   
    
    });
  }
+  
+ getcountryList(){
+  this.master.getMethod('/AllCountries').subscribe(data=>{
+
+   this.rateList = JSON.parse(JSON.stringify(data));
+   var keys = Object.keys(data);
+   var len = keys.length;
+  
+   for(let i=0;i<len ;i++){
+    
+     if(data[i].status!="DELETED" && data[i].status!="DEACTIVATE"){
+        
+         this.countryData.push(data[i]);
+     }
+   } 
+   console.log(this.countryData)
+  
+  
+  });
+}
 
 
  editRateList(id){
