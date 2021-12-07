@@ -27,7 +27,7 @@ export class TimeslotComponent implements OnInit {
   dropdownSettings = {};
 
   loader:boolean=false;
-  formTitle:any="Add New Timeslot";
+  formTitle:any="Add Timeslot";
   ifUpdate:boolean=false;
 
   constructor(private master: MasterService, private authservice: AuthService, private router: Router) {

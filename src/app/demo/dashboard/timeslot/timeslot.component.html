@@ -64,10 +64,17 @@
             </div>
 
             <div class="col-md-2 " *ngIf="!edit">
-              <button class="btn btn-primary pull-left w-100" style="float: left; margin-top: 28px;"  (click)="addNewTimeslot()">{{formTitle}}</button>
+              <button class="btn add pull-left w-100" style="float: left; margin-top: 28px;"  (click)="addNewTimeslot()">{{formTitle}}</button>
         </div>
-        <div class="col-md-2 " *ngIf="edit">
-            <button class="btn btn-primary pull-left w-100" style="float: left; margin-top: 28px;"  (click)="addNewTimeslot()">Update</button>
+        <div class="col-md-6 " *ngIf="edit">
+            <div class="row">
+                <div class="col-lg-3">
+                    <button class="btn update pull-left w-100" style="float: left; margin-top: 28px;"  (click)="addNewTimeslot()">Update</button>
+                </div>
+                <div class="col-lg-3">
+                    <button class="btn cancel  pull-left w-100" style="float: left; margin-top: 28px;"  (click)="addNewTimeslot()">Cancel</button>
+                </div>
+            </div>
       </div>
 
        
@@ -112,7 +119,7 @@
                 <td><div *ngFor="let day of data.days">{{day.day}}</div></td>
                 <td><span class="badge badge-success" *ngIf="data.status=='ACTIVE'">{{data.status}}</span>
                     <span class="badge badge-danger" *ngIf="data.status=='INACTIVE' || data.status=='DEACTIVATE'">{{data.status}}</span></td>
-                <td> <button class="btn btn-success" (click)="editTimeSlot(data.id)"><i class="ng-tns-c22-2 feather icon-edit"></i></button> <button class="btn btn-danger"><i class="ng-tns-c22-2 feather icon-trash"></i></button> </td>
+                <td style="display: flex;"> <button class="btn btn-success" (click)="editTimeSlot(data.id)"><i class="ng-tns-c22-2 feather icon-edit"></i></button> <button class="btn btn-danger"><i class="ng-tns-c22-2 feather icon-trash"></i></button> </td>
                
             </tr>
          

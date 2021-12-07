@@ -29,6 +29,7 @@ export class PromocodeComponent implements OnInit {
   ifUpdate:boolean=false;
   loader:boolean=false;
   singlePromocodeData:any
+ 
 
   
 
@@ -142,6 +143,7 @@ export class PromocodeComponent implements OnInit {
       expiry: new FormControl(this.singlePromocodeData.expiryDate),
       option: new FormControl(this.singlePromocodeData.type)
     });
+  
 
     $('#promocodeid').val(this.singlePromocodeData.sno);
   
