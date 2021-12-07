@@ -152,7 +152,6 @@ const NavigationItems = [
         title: 'Feedback',
         type: 'item',
         url: '/dashboard/feedback',
-        icon: 'feather icon-inbox',
         classes: 'nav-item',
       }
     ]

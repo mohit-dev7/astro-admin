@@ -45,13 +45,13 @@ export class EnquireComponent implements OnInit {
     this.getEnquire();
   }
   
-  ngAfterViewInit(): void {
+  // ngAfterViewInit(): void {
 
-    $(document).ready( function () {
+  //   $(document).ready( function () {
     
-      $('#example').DataTable();
-  } );
-  }
+  //     $('#example').DataTable();
+  // } );
+  // }
 
 
   getSearch(){
@@ -147,6 +147,9 @@ export class EnquireComponent implements OnInit {
    this.master.getMethod('/getAllEnquiries').subscribe(data=>{
 
     this.enquiredata = JSON.parse(JSON.stringify(data));
+    setTimeout(function(){
+      $('#example').DataTable();
+     }, 1000);
    
    
    });

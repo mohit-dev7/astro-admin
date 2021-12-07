@@ -20,13 +20,13 @@ export class FeedbackComponent implements OnInit {
   }
 
 
-  ngAfterViewInit(): void {
+  // ngAfterViewInit(): void {
 
-    $(document).ready( function () {
+  //   $(document).ready( function () {
     
-      $('#example').DataTable();
-  } );
-  }
+  //     $('#example').DataTable();
+  // } );
+  // }
 
 
 
@@ -42,7 +42,13 @@ export class FeedbackComponent implements OnInit {
 
     this.master.getMethod('/getAllFeedback').subscribe(res=>{
 
-        this.feedData = res;
+        this.feedData = JSON.parse(JSON.stringify(res));
+        ;
+
+          
+    setTimeout(function(){
+      $('#example').DataTable();
+     }, 1000);
 
     })
 

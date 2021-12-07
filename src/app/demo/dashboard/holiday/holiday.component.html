@@ -3,6 +3,9 @@
 
    
     <div class="appointment_data card p-3">
+        <div class="loader" *ngIf="loader">
+            <img src="../../../../assets/images/loading.gif" />
+        </div>
 
     <form [formGroup]="holidayForm"  >
         <div class="col-lg-12 pl-0">
@@ -56,8 +59,17 @@
             <div class="col-md-2 " *ngIf="!edit">
               <button class="btn add pull-left w-100" style="float: left; margin-top: 28px;"  (click)="addNewHoliday()">Add</button>
         </div>
-        <div class="col-md-2 " *ngIf="edit">
-            <button class="btn update pull-left w-100" style="float: left; margin-top: 28px;"  (click)="addNewHoliday()">Update</button>
+        <div class="col-md-6 " *ngIf="edit">
+            <div class="row">
+                <div class="col-lg-3">
+                    <button class="btn update pull-left w-100" style="float: left; margin-top: 28px;"  (click)="onUpdate()">Update</button>
+                </div>
+                <div class="col-lg-3">
+                    <button class="btn cancel pull-left w-100" style="float: left; margin-top: 28px;"  (click)="OnCancel()">Cancel</button>
+                </div>
+            </div>
+          
+            
       </div>
 
        
