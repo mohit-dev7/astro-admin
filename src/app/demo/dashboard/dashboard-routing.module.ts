@@ -53,7 +53,14 @@ const routes: Routes = [
       {
         path: 'promocode',
         loadChildren: () => import('./promocode/promocode.module').then(m => m.PromocodeModule )
+      },
+      
+      
+      {
+        path: 'contactd',
+        loadChildren: () => import('./contactd/contactd.module').then(m => m.ContactdModule )
       }
+
       ,
       {
         path: 'timeslot',

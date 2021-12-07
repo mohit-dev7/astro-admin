@@ -13,19 +13,19 @@ import { AuthService } from 'src/app/services/auth.service';
     trigger('slideInOutLeft', [
       transition(':enter', [
         style({transform: 'translateX(100%)'}),
-        animate('300ms ease-in', style({transform: 'translateX(0%)'}))
+        animate('100ms ease-in', style({transform: 'translateX(0%)'}))
       ]),
       transition(':leave', [
-        animate('300ms ease-in', style({transform: 'translateX(100%)'}))
+        animate('100ms ease-in', style({transform: 'translateX(100%)'}))
       ])
     ]),
     trigger('slideInOutRight', [
       transition(':enter', [
         style({transform: 'translateX(-100%)'}),
-        animate('300ms ease-in', style({transform: 'translateX(0%)'}))
+        animate('100ms ease-in', style({transform: 'translateX(0%)'}))
       ]),
       transition(':leave', [
-        animate('300ms ease-in', style({transform: 'translateX(-100%)'}))
+        animate('100ms ease-in', style({transform: 'translateX(-100%)'}))
       ])
     ])
   ]

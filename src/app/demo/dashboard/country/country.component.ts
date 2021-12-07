@@ -5,6 +5,7 @@ import { MasterService } from 'src/app/services/master.service';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import {  Router } from '@angular/router';
+
 declare var $: any;
 @Component({
   selector: 'app-country',
@@ -15,7 +16,9 @@ export class CountryComponent implements OnInit {
  
 
   countryForm:FormGroup;
+  indexData = 1;
   countryData:any = [];
+  sortedData:any=[]
   country = new FormControl("", [Validators.required]);
   code= new FormControl("", [Validators.required]);
   data:any
@@ -34,6 +37,7 @@ export class CountryComponent implements OnInit {
    }
 
   ngOnInit(): void {
+ 
     this.countryForm= new FormGroup({
       country: new FormControl(""),
       code: new FormControl("")
@@ -117,12 +121,28 @@ export class CountryComponent implements OnInit {
 
   
  getAllCountry(){
+  this.sortedData = [];
    this.master.getMethod('/AllCountries').subscribe(data=>{
 
     this.countryData = JSON.parse(JSON.stringify(data));
+    var low=0;
+    var high=this.countryData.length -1;
+    while(low<=high){
+      if(this.countryData[low].sno<this.countryData[high].sno){
+        this.sortedData.push(this.countryData[high]);
+        high--
+      }else{
+        this.sortedData.push(this.countryData[low]); 
+        low++;
+      }
+    }
+
+    console.log(this.sortedData)
+    
     setTimeout(function(){
       $('#example').DataTable();
      }, 1000);
+     
    
    });
  }

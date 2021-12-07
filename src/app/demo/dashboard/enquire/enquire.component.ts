@@ -58,6 +58,19 @@ export class EnquireComponent implements OnInit {
       var fromdate=this.enquireform.get("fromdate").value;
       var todate=this.enquireform.get("todate").value;
       var status=this.enquireform.get("status").value;
+
+      this.master.getMethod('/getAllEnquiries').subscribe(data=>{
+        var size = Object.keys(data).length;
+        console.log(size);
+        console.log(data)
+        if (fromdate!="" && todate!="" && status!=""){
+          for (let i=0;i<size;i++){
+              if (data[i].date>=fromdate && data[i].data<todate && data[i].status=="done"){
+                this.enquiredata.push(data[i]);
+              }
+          }
+      }
+      })
       
    
       
