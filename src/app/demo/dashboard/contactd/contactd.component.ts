@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MasterService } from 'src/app/services/master.service';
 
 @Component({
   selector: 'app-contactd',
@@ -6,10 +7,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contactd.component.scss']
 })
 export class ContactdComponent implements OnInit {
-
-  constructor() { }
+  token=localStorage.getItem("userID")
+  constructor(private master:MasterService) { 
+    this.TokenExpired(this.token);
+  }
 
   ngOnInit(): void {
+  }
+
+  TokenExpired(token){
+    this.master.getMethod("/AllCountries").subscribe(data=>{
+      if (data!="" && token!=""){
+        return false
+      }else{
+        localStorage.removeItem('userID');
+        location.reload();
+      }
+    },(error=>{
+     alert('Session is expired please login again!');
+      localStorage.removeItem('userID');
+      location.reload();
+
+    }))
+
   }
 
 }

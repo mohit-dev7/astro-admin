@@ -19,10 +19,12 @@ import { HolidayComponent } from './holiday/holiday.component';
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 
 import { ContactdComponent } from './contactd/contactd.component';
+
 @NgModule({
   imports: [
     CommonModule,
     AngularEditorModule,
+
     HttpClientModule,
     DashboardRoutingModule,
     DataTablesModule.forRoot(),

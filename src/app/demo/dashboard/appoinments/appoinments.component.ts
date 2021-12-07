@@ -12,17 +12,46 @@ import { MasterService } from 'src/app/services/master.service';
   styleUrls: ['./appoinments.component.scss']
 })
 export class AppoinmentsComponent implements OnInit, AfterViewInit {
-  public allAppointment:any=[]
-  constructor(private http: HttpClient,private master:MasterService) { }
+  public allAppointment:any=[];
+
+  DiffAppointment:any
+  token=localStorage.getItem('userID');
+  constructor(private http: HttpClient,private master:MasterService) {
+    this.TokenExpired(this.token);
+
+   }
 
 
 
 
   ngOnInit(): void {
 
+  
 
   this.getAllAppointment();
   }
+
+  TokenExpired(token){
+    this.master.getMethod("/AllCountries").subscribe(data=>{
+      if (data!="" && token!=""){
+        return false
+      }else{
+        localStorage.removeItem('userID');
+        location.reload();
+      }
+    },(error=>{
+     alert('Session is expired please login again!');
+      localStorage.removeItem('userID');
+      location.reload();
+
+    }))
+
+  }
+
+
+  
+
+
 
   ngAfterViewInit(): void {
 
@@ -31,13 +60,29 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
       $('#example').DataTable();
   } );
   }
+  
 
   getAllAppointment(){
     this.master.getMethod("/allAppointments").subscribe(data=>{
-      this.allAppointment=data;
+      this.allAppointment=JSON.parse(JSON.stringify(data));
       console.log(this.allAppointment)
     })
   }
+
+
+ getAppointment(value){
+   if (value!=""){
+    this.DiffAppointment=value;
+   }
+}
+
+getDiffAppointment(){
+  this.master.getMethod("/getAppointment/"+this.DiffAppointment).subscribe(data=>{
+    this.allAppointment=JSON.parse(JSON.stringify(data));
+    
+  })
+
+}
 
 
 

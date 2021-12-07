@@ -152,6 +152,7 @@ const NavigationItems = [
         title: 'Feedback',
         type: 'item',
         url: '/dashboard/feedback',
+        icon: 'feather icon-square',
         classes: 'nav-item',
       }
     ]
