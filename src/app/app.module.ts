@@ -26,6 +26,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MasterService } from './services/master.service';
 import { MyInterceptor } from './services/myinterceptor.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +44,7 @@ import { MyInterceptor } from './services/myinterceptor.service';
     NavSearchComponent,
     NavRightComponent,
     ConfigurationComponent,
+    
 
   ],
   imports: [

@@ -23,8 +23,12 @@ import { MasterService } from 'src/app/services/master.service.js';
 export class DefaultComponent implements OnInit {
   appointment:any="Today"
   allAppointment:any=[]
+  title = 'datta-able';
+  token=localStorage.getItem('userID');
+  constructor(private master:MasterService) { 
 
-  constructor(private master:MasterService) { }
+    this.TokenExpired(this.token);
+  }
 
   ngOnInit() {
     this.getAllAppointment();
@@ -36,6 +40,23 @@ export class DefaultComponent implements OnInit {
     });
   }
 
+
+  TokenExpired(token){
+    this.master.getMethod("/AllCountries").subscribe(data=>{
+      if (data!="" && token!=""){
+        return false
+      }else{
+        localStorage.removeItem('userID');
+        location.reload();
+      }
+    },(error=>{
+     alert('Session is expired please login again!');
+      localStorage.removeItem('userID');
+      location.reload();
+
+    }))
+
+  }
 
   OnClick(value:any){
     this.appointment=value;
