@@ -55,34 +55,37 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
 
-    $(document).ready( function () {
+  //   $(document).ready( function () {
     
-      $('#example').DataTable();
-  } );
+  //     $('#example').DataTable();
+  // } );
   }
   
 
   getAllAppointment(){
     this.master.getMethod("/allAppointments").subscribe(data=>{
       this.allAppointment=JSON.parse(JSON.stringify(data));
-      console.log(this.allAppointment)
+      setTimeout(function(){
+        $('#example').DataTable();
+       }, 1000);
     })
   }
 
 
- getAppointment(value){
-   if (value!=""){
-    this.DiffAppointment=value;
-   }
-}
+  getAppointment(value){
+    if (value!=""){
+      this.DiffAppointment=value;
+    }
+  }
 
-getDiffAppointment(){
-  this.master.getMethod("/getAppointment/"+this.DiffAppointment).subscribe(data=>{
-    this.allAppointment=JSON.parse(JSON.stringify(data));
-    
-  })
+  getDiffAppointment(){
+    this.master.getMethod("/getAppointment/"+this.DiffAppointment).subscribe(data=>{
+      this.allAppointment=JSON.parse(JSON.stringify(data));
 
-}
+      
+    });
+
+  }
 
 
 

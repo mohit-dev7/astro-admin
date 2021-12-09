@@ -75,13 +75,7 @@ export class HolidayComponent implements OnInit {
     })
   }
 
-  ngAfterViewInit(): void {
 
-    $(document).ready(function () {
-
-      $('#example').DataTable();
-    });
-  }
 
   checkCheckBoxvalue(event) {
 
@@ -173,6 +167,9 @@ export class HolidayComponent implements OnInit {
     this.master.holidayGetData().subscribe(data => {
 
       this.holidayData = JSON.parse(JSON.stringify(data));
+      setTimeout(function(){
+        $('#example').DataTable();
+       }, 1000);
 
     });
   }

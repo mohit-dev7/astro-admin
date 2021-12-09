@@ -154,6 +154,14 @@ const NavigationItems = [
         url: '/dashboard/feedback',
         icon: 'feather icon-square',
         classes: 'nav-item',
+      },
+      {
+        id: 'blog',
+        title: 'blog',
+        type: 'item',
+        url: '/dashboard/blog',
+        icon: 'feather icon-square',
+        classes: 'nav-item',
       }
     ]
   },
