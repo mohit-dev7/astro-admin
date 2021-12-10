@@ -133,7 +133,7 @@ error:boolean = false;
         email:new FormControl(this.singleUser.email),
         phone:new FormControl(this.singleUser.phone)
       })
-      this.loader=false
+      this.loader=false;
       $('#userID').val(id);
       });
      

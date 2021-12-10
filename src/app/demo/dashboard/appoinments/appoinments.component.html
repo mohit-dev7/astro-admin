@@ -8,10 +8,48 @@
 
         <div class="col-lg-12 pl-0">
             <div class="row">
+                <div class="col-lg-12">
+                    <div *ngIf="message!='' && error==true" class="alert alert-danger w-100" role="alert">
+                        {{message}}
+                    </div>
+
+                    <div *ngIf="message!='' && error!=true" class="alert alert-success w-100" role="alert">
+                        {{message}}
+                    </div>
+
+                </div>
+            <form action="" [formGroup]="appointmentForm">
+
+             
+                <div class="row col-lg-12" *ngIf="onEdit">
+                    <form action="" [formGroup]="appointmentForm"></form>
+                  
+                        
+                        <div class="form-group col-lg-5">
+                            <label>Select Type:</label>
+                            <select class="form-control" formControlName="type">
+                                <option value="">select</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Canceled">Canceled</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 text-center">
+                            <button class="btn update" (click)="updateStatus()">Update</button>
+                          
+                        </div>
+                        <div class="col-lg-3">
+                            <button class="btn  cancel" (click)="onCancel()">Cancel</button>
+                          
+                        </div>
+                       
                 
+                  
+                </div>
+            </form>
               
 
-                <div class="col-md-3">
+                <div class="col-md-3" *ngIf="!onEdit">
                     <div class="form-group">
                         <label>Select Type:</label>
                        <select class="form-control" (change)="getAppointment($event.target.value)" >
@@ -35,11 +73,11 @@
                            </option>
                        </select>
                     </div>
-            </div>
+               </div>
 
-            <div class="col-md-2 ">
-              <button class="btn btn-primarry pull-left w-100" style="float: left; margin-top: 28px;" (click)="getDiffAppointment()">Search</button>
-        </div>
+            <div class="col-md-2 " *ngIf="!onEdit">
+              <button class="btn btn-primarry pull-left w-100" style="float: left; margin-top: 34px;" (click)="getDiffAppointment()">Search</button>
+             </div>
 
        
         </div>
@@ -85,10 +123,7 @@
                 <td>{{data.skypeId}}</td>
                 <td>{{data.status}}</td>
                 <td style="display: flex;">
-                  <button class="btn btn-success" ><i
-                    class="ng-tns-c22-2 feather icon-edit"></i></button> <button class="btn btn-danger">
-                      <i
-                    class="ng-tns-c22-2 feather icon-trash"></i></button> 
+                  <button class="btn btn-success" (click)="editAppointment(data.id)" ><i class="ng-tns-c22-2 feather icon-edit"></i></button> 
                 </td>
             </tr>
         </tbody>

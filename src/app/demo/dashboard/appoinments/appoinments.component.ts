@@ -4,6 +4,7 @@ declare var $: any;
 import {Subject} from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { MasterService } from 'src/app/services/master.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -12,12 +13,19 @@ import { MasterService } from 'src/app/services/master.service';
   styleUrls: ['./appoinments.component.scss']
 })
 export class AppoinmentsComponent implements OnInit, AfterViewInit {
+
+  appointmentForm:FormGroup;
+  type=new FormControl("")
   public allAppointment:any=[];
   loader:boolean=false;
 
   DiffAppointment:any
   appointmentlike:string="All";
   token=localStorage.getItem('userID');
+  onEdit:boolean=false;
+  id:any
+  message:any = '';
+  error:boolean = false;
   constructor(private http: HttpClient,private master:MasterService) {
     this.TokenExpired(this.token);
 
@@ -27,6 +35,9 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
+    this.appointmentForm= new FormGroup({
+      type:new FormControl("")
+    })
 
   
 
@@ -67,6 +78,7 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
   getAllAppointment(){
     this.master.getMethod("/allAppointments").subscribe(data=>{
       this.allAppointment=JSON.parse(JSON.stringify(data));
+      console.log(data)
       setTimeout(function(){
         $('#example').DataTable();
        }, 1000);
@@ -100,6 +112,48 @@ getDiffAppointment(){
     });
   }
 }
+
+editAppointment(id){
+
+  $(window).scrollTop(0);
+  this.onEdit=true;
+  this.id=id
+
+  
+}
+
+    updateStatus(){
+      this.loader=true
+    var type=this.appointmentForm.get("type").value;
+    this.master.getMethod("/changeAppointmentStatus?id="+this.id+"&status="+type).subscribe(reponse=>{
+        if(reponse['name']!='')
+        {  
+        
+
+          this.error = false;
+          this.message = ' status updated successfully!';
+          // setTimeout(()=>{location.reload()},1000);
+          this.loader=false
+          this.ngOnInit();
+          return false;
+        
+      } else{
+        this.error = true;
+        this.message = 'Failed to Update status please check all details!';
+        this.loader=false;
+        return false;
+      }
+    },(error=>{
+      alert("failed to Status update  something went wrong");
+     }))
+  }
+
+
+    onCancel(){
+      this.onEdit=false;
+      this.message="";
+  
+    }
 
 
 
