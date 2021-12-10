@@ -1,40 +1,74 @@
 
-<div class="container-fluid p-0">
+<div class="container-fluid p-0" style="position: relative;">
+    <div class="loader" *ngIf="loader">
+        <img src="../../../../assets/images/loading.gif" />
+    </div>
 
-    <!-- <div class="user_data card p-3">
+    <div class="user_data card p-3" *ngIf="isForm">
 
+        <form action="" [formGroup]="userForm">
+            <input type="hidden" id="userID">
         <div class="col-lg-12 pl-0">
             <div class="row">
+                <div class="col-lg-12">
+                    <div *ngIf="message!='' && error==true" class="alert alert-danger w-100" role="alert">
+                        {{message}}
+                    </div>
+
+                    <div *ngIf="message!='' && error!=true" class="alert alert-success w-100" role="alert">
+                        {{message}}
+                    </div>
+
+                </div>
                 
                 <div class="col-md-3 ">
                     <div class="form-group">
-                        <label>From Date:</label>
-                        <input class="form-control" placeholder="dd/mm/yyyy" />
+                        <label>First Name</label>
+                        <input class="form-control" formControlName="firstName" placeholder="First Name" />
+                    </div>
+
+                </div>
+                <div class="col-md-3 ">
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input class="form-control" formControlName="lastName" placeholder="Last Name" />
                     </div>
 
                 </div>
 
                 <div class="col-md-3 ">
                     <div class="form-group">
-                        <label>To Date:</label>
-                        <input class="form-control" placeholder="dd/mm/yyyy" />
+                        <label>Email ID</label>
+                        <input class="form-control" formControlName="email" placeholder="Email ID" />
                     </div>
 
-                  
+                </div>
+              
+                <div class="col-md-3 ">
+                    <div class="form-group">
+                        <label>Mobile No</label>
+                        <input class="form-control" formControlName="phone" placeholder="Mobile No" />
+                    </div>
 
                 </div>
 
-            <div class="col-md-2 ">
-              <button class="btn btn-primary pull-left w-100" style="float: left; margin-top: 28px;">Search</button>
-        </div>
+              
 
-        <div class="col-md-1 2">
-            <button class="btn btn-secondary pull-left " style="float: left; margin-top: 28px;">Reset</button>
-      </div>
-        </div>
-        </div>
+                <div class="col-md-2 ">
+                <button (click)="onUpdate()" class="btn update pull-left w-100" style="float: left; margin-top: 28px;">Update</button>
+                </div>
+                <div class="col-md-2 ">
+                    <button class="btn cancel pull-left w-100" style="float: left; margin-top: 28px;" (click)="onCancel()">Cancel</button>
+                </div>
 
-    </div> -->
+      
+
+            
+          </div>
+        </div>
+    </form>
+
+    </div>
 
 <div class="table_data card p-3">
     <h5>Users Details</h5>
@@ -55,11 +89,11 @@
        
         <tr *ngFor="let data of userData">
             
-            <td>{{data.firstName}} {{data.lastName}}</td>
-            <td>{{data.email}} </td>
-            <td>{{data.phoneNo}} </td>
+            <td>{{data.userProfile.firstName}} {{data.userProfile.lastName}}</td>
+            <td>{{data.userProfile.email}} </td>
+            <td>{{data.userProfile.phone}} </td>
             <td><span class="badge badge-danger" *ngIf="data.enabled==false">Unverified</span> <span class="badge badge-success" *ngIf="data.enabled==true">Verified</span> </td>
-            <td> <button class="btn btn-success btn-sm" (click)="editCountry(data.sno)"><i class="ng-tns-c22-2 feather icon-edit"></i></button> <button class="btn btn-danger btn-sm"><i class="ng-tns-c22-2 feather icon-trash"></i></button> </td>
+            <td> <button class="btn btn-success btn-sm" (click)=editUser(data.id) ><i class="ng-tns-c22-2 feather icon-edit"></i></button> <button class="btn btn-danger btn-sm"><i class="ng-tns-c22-2 feather icon-trash"></i></button> </td>
                
         </tr>
       </tbody>

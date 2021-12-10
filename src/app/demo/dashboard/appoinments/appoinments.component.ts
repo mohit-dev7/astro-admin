@@ -13,8 +13,10 @@ import { MasterService } from 'src/app/services/master.service';
 })
 export class AppoinmentsComponent implements OnInit, AfterViewInit {
   public allAppointment:any=[];
+  loader:boolean=false;
 
   DiffAppointment:any
+  appointmentlike:string="All";
   token=localStorage.getItem('userID');
   constructor(private http: HttpClient,private master:MasterService) {
     this.TokenExpired(this.token);
@@ -78,15 +80,26 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getDiffAppointment(){
+  
+getDiffAppointment(){
+ 
+  if(this.DiffAppointment=="All"){
+    this.appointmentlike=this.DiffAppointment;
+    this.loader=true;
+    this.master.getMethod("/allAppointments").subscribe(data=>{
+    this.allAppointment=JSON.parse(JSON.stringify(data));
+     this.loader=false;
+    })
+  }else if (this.DiffAppointment!="All"){
+    this.appointmentlike=this.DiffAppointment;
+    this.loader=true;
     this.master.getMethod("/getAppointment/"+this.DiffAppointment).subscribe(data=>{
-      this.allAppointment=JSON.parse(JSON.stringify(data));
+    this.allAppointment=JSON.parse(JSON.stringify(data));
 
-      
+      this.loader=false;
     });
-
   }
-
+}
 
 
 
