@@ -22,10 +22,18 @@
 
              
                 <div class="row col-lg-12" *ngIf="onEdit">
-                    <form action="" [formGroup]="appointmentForm"></form>
+                    <form  action="" [formGroup]="appointmentForm"></form>
+                    <div class="form-group col-lg-2">
+                        <label for="">Name:</label>
+                        <input class="form-control" type="text" formControlName="name" readonly >
+                    </div>
+                    <div class="form-group col-lg-3">
+                        <label for="">App Date:</label>
+                        <input class="form-control" type="text" formControlName="date" readonly>
+                    </div>
                   
                         
-                        <div class="form-group col-lg-5">
+                        <div class="form-group col-lg-3">
                             <label>Select Type:</label>
                             <select class="form-control" formControlName="type">
                                 <option value="">select</option>
@@ -34,11 +42,11 @@
                                 <option value="Completed">Completed</option>
                             </select>
                         </div>
-                        <div class="col-lg-3 text-center">
-                            <button class="btn update" (click)="updateStatus()">Update</button>
+                        <div class="col-lg-2 text-center">
+                            <button class="btn update mr-3" (click)="updateStatus()">Update</button>
                           
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-2">
                             <button class="btn  cancel" (click)="onCancel()">Cancel</button>
                           
                         </div>

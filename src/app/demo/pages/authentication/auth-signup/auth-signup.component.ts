@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
 import {
   FormsModule,
   ReactiveFormsModule,
@@ -17,7 +18,14 @@ import { Router } from '@angular/router';
 })
 export class AuthSignupComponent implements OnInit {
 
-
+	separateDialCode = false;
+	SearchCountryField = SearchCountryField;
+	CountryISO = CountryISO;
+  PhoneNumberFormat = PhoneNumberFormat;
+	preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
+	phoneForm = new FormGroup({
+		phone: new FormControl(undefined, [Validators.required])
+	});
 signupForm: FormGroup;
   error: boolean = false;
 
@@ -46,16 +54,20 @@ signupForm: FormGroup;
   ngOnInit() {
   }
 
-
+	changePreferredCountries() {
+		this.preferredCountries = [CountryISO.India, CountryISO.Canada];
+	}
 
   createAccount(){
 
     var userEmail = this.signupForm.get('email').value;
-    var mobile = this.signupForm.get('mobile').value;
+    var mobile = this.phoneForm.get('phone').value;
+  
     var password = this.signupForm.get('password').value;
     var fname = this.signupForm.get('firstname').value;
     var lname = this.signupForm.get('lastname').value;
     var cpass = this.signupForm.get('confirmPass').value;
+    console.log(mobile.nationalNumber,password,fname,lname,cpass)
 
 
     if(fname=='' ){
@@ -75,7 +87,7 @@ signupForm: FormGroup;
       this.message = 'Please enter your valid email address';
       return false;
     }
-    else if(mobile=='' || !this.validateMobile(mobile) || mobile.length < 10){
+    else if(mobile.nationalNumber='' || !this.validateMobile(mobile.nationalNumber) || mobile.nationalNumber.length <= 10){
       this.error = true;
       this.message = 'Please enter your valid mobile number';
       return false;
@@ -114,7 +126,7 @@ signupForm: FormGroup;
         "password":password,
         "matchingPassword":cpass,
         "email":userEmail,
-        "phoneNo":mobile,
+        "phoneNo":mobile.nationalNumber,
         "using2FA":false
       }
       this.loading = true;

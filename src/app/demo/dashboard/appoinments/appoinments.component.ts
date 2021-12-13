@@ -16,6 +16,8 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
 
   appointmentForm:FormGroup;
   type=new FormControl("")
+  name=new FormControl("");
+  date=new FormControl("");
   public allAppointment:any=[];
   loader:boolean=false;
 
@@ -26,6 +28,9 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
   id:any
   message:any = '';
   error:boolean = false;
+  singleUserDetail:any=[]
+  dateFormat:any
+  datepipe: any;
   constructor(private http: HttpClient,private master:MasterService) {
     this.TokenExpired(this.token);
 
@@ -36,7 +41,10 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.appointmentForm= new FormGroup({
-      type:new FormControl("")
+      type:new FormControl(""),
+      name:new FormControl(""),
+      date:new FormControl("")
+
     })
 
   
@@ -118,6 +126,18 @@ editAppointment(id){
   $(window).scrollTop(0);
   this.onEdit=true;
   this.id=id
+  this.master.getMethod("/getAppointmentDetail?id="+this.id).subscribe(data=>{
+    this.singleUserDetail=JSON.parse(JSON.stringify(data));
+    console.log(this.singleUserDetail)
+    this.dateFormat=this.datepipe.transform(this.singleUserDetail.appointDate, 'dd/MM/yyyy')
+    console.log(this.dateFormat)
+    this.appointmentForm=new FormGroup({
+      name:new FormControl(this.singleUserDetail.userProfile.firstName +" "+ this.singleUserDetail.userProfile.lastName),
+      date:new FormControl(this.singleUserDetail.appointDate )
+  
+    })
+  })
+ 
 
   
 }

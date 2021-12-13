@@ -26,6 +26,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MasterService } from './services/master.service';
 import { MyInterceptor } from './services/myinterceptor.service';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { MyInterceptor } from './services/myinterceptor.service';
     DataTablesModule.forRoot(),
     NgbTooltipModule,
     NgbButtonsModule,
-    NgbTabsetModule
+    NgbTabsetModule,
+    NgxIntlTelInputModule
   ],
   providers: [NavigationItem, {provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true}],
   bootstrap: [AppComponent]
