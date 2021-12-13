@@ -24,9 +24,9 @@
                     </div>
                 <div class="col-lg-3 ">
                     <label for="">User Name</label>
-                    <input type="text" class="form-control" formControlName="name">
+                    <input type="text" class="form-control" formControlName="name" readonly>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <label for="">Select Status</label>
                     <select class="form-control" formControlName="type">
                         <option value="">select</option>
@@ -36,10 +36,10 @@
                     </select>
                 </div>
                 <div class="col-lg-2 text-center btnn">
-                    <button class="btn btn-primary" (click)="onUpdate()">Update</button>
+                    <button class="btn  update " (click)="onUpdate()">Update</button>
                 </div>
                 <div class="col-lg-2 btnn">
-                    <button class="btn btn-primary" (click)="onDelete()">Cancel</button>
+                    <button class="btn cancel " (click)="onDelete()">Cancel</button>
                 </div>
                 </div>
             </div>
