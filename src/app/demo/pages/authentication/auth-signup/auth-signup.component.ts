@@ -52,6 +52,7 @@ signupForm: FormGroup;
 
 
   ngOnInit() {
+    console.log(this.SearchCountryField,this.preferredCountries)
   }
 
 	changePreferredCountries() {
