@@ -22,7 +22,7 @@
                             </div>
                     
                         </div>
-                        <div class="col-md-3 ">
+                        <div class="col-md-2 ">
                             <div class="form-group">
                                 <label>Country:</label>
                                 <select class="form-control" formControlName="country" placeholder="Select Country">
@@ -37,7 +37,7 @@
 
                         </div>
 
-                        <div class="col-md-3 ">
+                        <div class="col-md-2 ">
                             <div class="form-group">
                                 <label>Consultation Type:</label>
                                 <!-- <input formControlName="ctype" class="form-control" placeholder="dd/mm/yyyy" /> -->
@@ -45,6 +45,7 @@
                                     <option>Kundali/Birth Chart Consultation</option>
                                     <option>Gemstone Consultation</option>
                                     <option>Match Making Consultation</option>
+                                    <option>Vastu</option>
                                 </select>
                             </div>
 
@@ -59,19 +60,25 @@
                             </div>
                         </div>
 
-                    <div class="col-md-2 align-items-center" style="padding-top: 35px;">
-                        <div class="form-check" >
-                            <input class="form-check-input" type="checkbox" value="" ngModel  id="flexCheckDefault" (change)="checkCheckBoxvalue($event)">
-                            <label class="form-check-label" for="flexCheckDefault">
-                            Active
-                            </label>
+                        <div class="col-md-2 align-items-center" style="padding-top: 35px;">
+                            <div class="form-check" >
+                                <input class="form-check-input" type="checkbox" value="" ngModel  id="flexCheckDefault" (change)="checkCheckBoxvalue($event)">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                Active
+                                </label>
+                            </div>
                         </div>
-                    </div>
 
-                <div class="col-md-2">
-                    <button type="button " (click)="AddRateList()" class="btn  add pull-left " style="float: left; margin-top: 28px;">Add Ratelist</button>
-            </div>
-                </div>
+                        <div class="col-md-2"  *ngIf="ifUpdate==false">
+                            <button  type="button " (click)="AddRateList()" class="btn  add pull-left " style="float: left; margin-top: 28px;">Add Ratelist</button>
+                            
+                        </div>
+                        <div class="col-md-6 col-lg-6 " *ngIf="ifUpdate==true" style="display: flex;" >
+                            <button  type="button " (click)="updateRateList()" class="btn  add pull-left " style="float: left; margin-top: 28px;">Update</button>
+                            <button type="button " (click)="onCancel()" class="btn  add pull-left " style="float: left; margin-top: 28px;">Cancel</button>
+                        </div>
+                    </div>    
+            
             </div>
         </form>
     </div>
@@ -94,13 +101,16 @@
            
             <tbody>
             
-                <tr *ngFor="let data of rateList">
-                    <td>{{data.sno}}</td>
+                <tr *ngFor="let data of sortedRateList;let index=index">
+                    <td>{{index+1}}</td>
                     <td>{{data.countryName}}</td>
-                    <td>{{data.ctype}}</td>
-                    <td>{{data.rateoflist}}</td>
-                    <td>{{data.status}}</td>
-                    <td> <button (click)="editRateList(data.sno)" class="btn btn-success btn-sm"><i class="ng-tns-c22-2 feather icon-edit"></i></button> <button (click)="OnDelete(data.sno, data.name, data.ctype, data.rateoflist)" class="btn btn-danger btn-sm"><i class="ng-tns-c22-2 feather icon-trash"></i></button> </td>
+                    <td>{{data.consultationType}}</td>
+                    <td>{{data.rateOfValues}}</td>
+                    <td><span class="badge badge-success" *ngIf="data.status=='ACTIVE'">{{data.status}}</span>
+                        <span class="badge badge-warning"
+                            *ngIf="data.status=='INACTIVE' || data.status=='DEACTIVATE'">{{data.status}}</span>
+                        <span class="badge badge-danger" *ngIf="data.status=='DELETED'">{{data.status}}</span></td>
+                    <td> <button (click)="editRateList(data.sno)" class="btn btn-success btn-sm"><i class="ng-tns-c22-2 feather icon-edit"></i></button> <button (click)="OnDelete(data.sno, data.countryName, data.consultationType, data.rateOfValues)" class="btn btn-danger btn-sm"><i class="ng-tns-c22-2 feather icon-trash"></i></button> </td>
                 </tr>
             
             </tbody>

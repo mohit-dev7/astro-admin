@@ -19,15 +19,20 @@ export class EnquireComponent implements OnInit {
 
   enquireform:FormGroup;
   enquire:any = [];
-  fromdate = new FormControl("", [Validators.required]);
-  todate= new FormControl("", [Validators.required]);
-  status = new FormControl("", [Validators.required]);
+  type = new FormControl("", [Validators.required]);
+ 
   data:any
   // checkbox:any = 'DEACTIVATE';
   // isCheck:boolean = false;
   enquiredata:any = [];
   message:any = '';
   error:boolean = false;
+  edit:boolean=false;
+  id:any
+  name:string
+  email:string
+  phone:any
+  loader:boolean=false
 
   constructor( private master:MasterService ,private authservice:AuthService, private router:Router) {
 
@@ -37,9 +42,7 @@ export class EnquireComponent implements OnInit {
 
   ngOnInit(): void {
     this.enquireform= new FormGroup({
-      fromdate: new FormControl(""),
-      todate: new FormControl(""),
-      status: new FormControl("")
+      type: new FormControl("")
     });
   
     this.getEnquire();
@@ -155,10 +158,56 @@ export class EnquireComponent implements OnInit {
    });
  }
 
-//  getfilter(){
+ onUpdate(){
+   var type=this.enquireform.get("type").value;
+   const data={
+     "sno":this.id,
+     "name":this.name,
+     "mobile":this.phone,
+     "email":this.email,
+     "status":type
+   }
+   this.master.methodPost(data,"/editEnquiry").subscribe(reponse=>{
+    if(reponse['name']!='')
+    { 
+ 
+ 
+      this.error = false;
+      this.message = ' Status updated successfully!';
+      // setTimeout(()=>{location.reload()},1000);
+      this.ngOnInit();
+      return false;
 
-//   this.master.getMethod('/getAllEnquiries').subscribe(data=>{
+    }else{
+      this.error = true;
+      this.message = 'Failed to update Status please check all details!';
+      return false;
+    }
 
-//  }
+   
+   },(error=>{
+    alert("failed to update status something went wrong");
+   }));
+   
+
+ }
+
+
+OnEdit(id:any,name,email,phone){
+  $(window).scrollTop(0);
+  this.edit=true;
+  this.id=id
+  this.name=name;
+  this.email=email;
+  this.phone=phone
+ this.enquireform=new FormGroup({
+   name:new FormControl(this.name)
+ })
+}
+
+onDelete(){
+  this.edit=false;
+  
+}
 
 }

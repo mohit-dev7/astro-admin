@@ -125,7 +125,7 @@ const NavigationItems = [
       // },
       {
         id: 'appointment',
-        title: 'appointment',
+        title: 'Appointment',
         type: 'item',
         url: '/dashboard/appointments',
         icon: 'feather icon-calendar',
@@ -152,6 +152,14 @@ const NavigationItems = [
         title: 'Feedback',
         type: 'item',
         url: '/dashboard/feedback',
+        icon: 'feather icon-square',
+        classes: 'nav-item',
+      },
+      {
+        id: 'blog',
+        title: 'Blog',
+        type: 'item',
+        url: '/dashboard/blog',
         icon: 'feather icon-square',
         classes: 'nav-item',
       }

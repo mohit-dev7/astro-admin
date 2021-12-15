@@ -30,6 +30,7 @@ export class CountryComponent implements OnInit {
   formTitle:any="Add New Country";
   ifUpdate:boolean=false;
   singaleCountry:any = [];
+  filterDeletedData:any=[]
   constructor( private master:MasterService ,private authservice:AuthService, private router:Router ) {
 
 
@@ -125,14 +126,19 @@ export class CountryComponent implements OnInit {
    this.master.getMethod('/AllCountries').subscribe(data=>{
 
     this.countryData = JSON.parse(JSON.stringify(data));
+    for (let i=0;i<this.countryData.length ; i++){
+      if (this.countryData[i].status!="DELETED"){
+          this.filterDeletedData.push(this.countryData[i])
+      }
+    }
     var low=0;
-    var high=this.countryData.length -1;
+    var high=this.filterDeletedData.length -1;
     while(low<=high){
-      if(this.countryData[low].sno<this.countryData[high].sno){
-        this.sortedData.push(this.countryData[high]);
+      if(this.filterDeletedData[low].sno<this.filterDeletedData[high].sno){
+        this.sortedData.push(this.filterDeletedData[high]);
         high--
       }else{
-        this.sortedData.push(this.countryData[low]); 
+        this.sortedData.push(this.filterDeletedData[low]); 
         low++;
       }
     }

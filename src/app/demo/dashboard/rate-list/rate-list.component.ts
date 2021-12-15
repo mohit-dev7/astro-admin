@@ -32,6 +32,9 @@ export class RateListComponent implements OnInit {
   ifUpdate:boolean=false;
   singaleCountry: any;
   countryData:any=[]
+  rateListCountry:any=[]
+  sortedRateList:any=[]
+  filterDeletedData:any=[]
 
   constructor( private master:MasterService ,private authservice:AuthService, private router:Router) {
 
@@ -134,23 +137,43 @@ export class RateListComponent implements OnInit {
 
   
  getRateList(){
+   this.sortedRateList=[]
    this.master.getMethod('/getAllRateList').subscribe(data=>{
 
     this.rateList = JSON.parse(JSON.stringify(data));
-     setTimeout(function(){
-      $('#example').DataTable();
-     }, 1000);
+    for (let i=0;i<this.rateList.length ; i++){
+      if (this.rateList[i].status!="DELETED"){
+          this.filterDeletedData.push(this.rateList[i])
+      }
+    }
+    console.log(this.rateList)
+    var low=0;
+    var high=this.filterDeletedData.length -1;
+    while(low<=high){
+      if(this.filterDeletedData[low].sno<this.filterDeletedData[high].sno){
+        this.sortedRateList.push(this.filterDeletedData[high]);
+        high--
+      }else{
+        this.sortedRateList.push(this.filterDeletedData[low]); 
+        low++;
+      }
+    }
+
+  
    
   
    
    
    });
+   setTimeout(function(){
+    $('#example').DataTable();
+   }, 1000);
  }
   
  getcountryList(){
   this.master.getMethod('/AllCountries').subscribe(data=>{
 
-   this.rateList = JSON.parse(JSON.stringify(data));
+   this.rateListCountry = JSON.parse(JSON.stringify(data));
    var keys = Object.keys(data);
    var len = keys.length;
   
@@ -169,21 +192,25 @@ export class RateListComponent implements OnInit {
 
 
  editRateList(id){
+   console.log(id)
 
   $(window).scrollTop(0);
   this.loader =true;
-   this.master.getMethod("/getRateListDetail?id=" + id).subscribe((res)=>{
+   this.master.getMethod("/getRateListDetail/" + id).subscribe((res)=>{
+
     this.loader =false;
     this.formTitle="Edit Rate List";
     this.ifUpdate=true;
  
-     this.singaleCountry=res;
-     console.log(this.singaleCountry.countryName);
+     this.singaleCountry=JSON.parse(JSON.stringify(res));
+     console.log(this.singaleCountry)
+
+     
 
      this.ratelistform= new FormGroup({
       country: new FormControl(this.singaleCountry.countryName),
-      ctype: new FormControl(this.singaleCountry.ctype),
-      rateofvalue: new FormControl(this.singaleCountry.rateofvalue),
+      ctype: new FormControl(this.singaleCountry.consultationType),
+      rateofvalue: new FormControl(this.singaleCountry.rateOfValues),
       status: new FormControl(this.singaleCountry.status)
     });
 
@@ -200,6 +227,7 @@ export class RateListComponent implements OnInit {
   var ctype=this.ratelistform.get("ctype").value;
   var rateofvalue=this.ratelistform.get("rateofvalue").value;
   var action=this.checkbox;
+  console.log(id,Country,ctype,rateofvalue,action)
  
 
   if(Country==''){
@@ -226,15 +254,15 @@ export class RateListComponent implements OnInit {
 
        
   const data ={
-    "name":Country,
-    "ctype":ctype,
-    "rateofvalue": rateofvalue,
+    "countryName":Country,
+    "consultationType":ctype,
+    "rateOfValues": rateofvalue,
     "status":action,
     "sno":id,
     "remarks":''
 
   }
-  this.master.methodPost(data, '/EditRateList='+id).subscribe(reponse=>{
+  this.master.methodPost(data, '/EditRateList' ).subscribe(reponse=>{
 
     if(reponse['name']!='')
     {  this.formTitle="Add";
@@ -275,8 +303,8 @@ export class RateListComponent implements OnInit {
 
    const data ={
      "countryName":countryName,
-     "ctype":ctype,
-     "Rateoflist":rateoflist,
+     "consultationType":ctype,
+     "rateOfValues":rateoflist,
      "status":"DELETED",
      "sno":id,
      "remarks":''
@@ -302,6 +330,17 @@ export class RateListComponent implements OnInit {
   }else{
     return false;
   }
+}
+
+onCancel(){
+  this.loader =false;
+    this.formTitle="Add rateList";
+    this.ifUpdate=false;
+    this.ratelistform= new FormGroup({
+      country: new FormControl(""),
+      ctype: new FormControl(""),
+      rateofvalue: new FormControl("")
+    });
 }
 
 

@@ -34,11 +34,7 @@ export class DefaultComponent implements OnInit {
     this.getAllAppointment();
   }
 
-  ngAfterViewInit(): void {
-   $(document).ready( function () {
-      $('#example').DataTable();
-    });
-  }
+  
 
 
   TokenExpired(token){
@@ -61,11 +57,17 @@ export class DefaultComponent implements OnInit {
   OnClick(value:any){
     this.appointment=value;
   }
+
+
   getAllAppointment(){
      this.master.getMethod("/allAppointments").subscribe(data=>{
-       this.allAppointment=data
-       console.log(this.allAppointment)
-     })
+       this.allAppointment=JSON.parse(JSON.stringify(data));
+       
+       
+     });
+     setTimeout(function(){
+      $('#example').DataTable();
+     }, 1000);
   }
 
 }

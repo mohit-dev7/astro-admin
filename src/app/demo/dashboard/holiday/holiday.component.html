@@ -82,7 +82,7 @@
 <div class="table_data card p-3">
     <h5>All Records</h5>
     
-	<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+	<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%" >
         <thead>
             <tr>
                 <th>S.no</th>
@@ -102,8 +102,8 @@
             </tr>
         </tfoot> -->
         <tbody>
-            <tr *ngFor="let data of holidayData">
-                <td>{{data.id}}</td>
+            <tr *ngFor="let data of holidayData;let index=index">
+                <td>{{index+1}}</td>
                 <td>{{data.holidayDate}}</td>
                 <td><div *ngFor="let timeslotData of data.timeSlots">{{timeslotData.timeSlotName}}</div></td>
                 <td> <button class="btn btn-success" (click)="editHoliday(data.id)"><i class="ng-tns-c22-2 feather icon-edit"></i></button> <button class="btn btn-danger"><i class="ng-tns-c22-2 feather icon-trash"></i></button> </td>
