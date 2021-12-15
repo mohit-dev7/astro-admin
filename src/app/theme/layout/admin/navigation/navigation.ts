@@ -160,7 +160,7 @@ const NavigationItems = [
         title: 'Blog',
         type: 'item',
         url: '/dashboard/blog',
-        icon: 'feather icon-square',
+        icon: 'feather icon-bold',
         classes: 'nav-item',
       }
     ]
