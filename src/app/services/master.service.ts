@@ -109,6 +109,14 @@ export class MasterService {
     )
   }  
 
+  getAppointmentsByCriteria(data): Observable<any> {
+    return this.http.post('http://18.219.65.148:8080/getAppointmentsByCriteria', JSON.stringify(data), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }  
+
   holidayGetData(){
     return this.http.get('http://18.219.65.148:8080/getHolidays', this.httpOptions)
     .pipe(
