@@ -22,8 +22,8 @@ const routes: Routes = [
         loadChildren: () => import('./appoinments/appoinments.module').then(m => m.AppoinmentsModule)
       },
       {
-        path: 'pending-appointments',
-        loadChildren: () => import('./pending-appoinments/pending-appoinments.module').then(m => m.PendingAppoinmentsModule)
+        path: 'allblogs',
+        loadChildren: () => import('./all-blogs/all-blogs.module').then(m => m.AllBlogsModule)
       }
       ,
       {

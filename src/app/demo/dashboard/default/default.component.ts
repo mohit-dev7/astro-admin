@@ -67,7 +67,7 @@ export class DefaultComponent implements OnInit {
      });
      setTimeout(function(){
       $('#example').DataTable();
-     }, 1000);
+     }, 2000);
   }
 
 }

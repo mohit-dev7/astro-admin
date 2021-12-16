@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { UsersComponent } from './users/users.component';
 import { AppoinmentsComponent } from './appoinments/appoinments.component';
-import { PendingAppoinmentsComponent } from './pending-appoinments/pending-appoinments.component';
+import { AllBlogsComponent } from './all-blogs/all-blogs.component';
 import { DataTablesModule } from 'angular-datatables';
 import { HttpClientModule} from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
@@ -34,7 +34,7 @@ import { BlogComponent } from './blog/blog.component';
  
 
  
-  declarations: [UsersComponent, AppoinmentsComponent, PendingAppoinmentsComponent,  PromocodeComponent, EnquireComponent, FeedbackComponent, CountryComponent, TimeslotComponent, HolidayComponent, ContactdComponent, BlogComponent],
+  declarations: [UsersComponent, AppoinmentsComponent, AllBlogsComponent,  PromocodeComponent, EnquireComponent, FeedbackComponent, CountryComponent, TimeslotComponent, HolidayComponent, ContactdComponent, BlogComponent],
  schemas:[NO_ERRORS_SCHEMA]
 })
 export class DashboardModule { }

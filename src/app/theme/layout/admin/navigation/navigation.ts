@@ -152,17 +152,31 @@ const NavigationItems = [
         title: 'Feedback',
         type: 'item',
         url: '/dashboard/feedback',
-        icon: 'feather icon-square',
+        icon: 'feather icon-edit',
         classes: 'nav-item',
       },
-      {
-        id: 'blog',
-        title: 'Blog',
-        type: 'item',
-        url: '/dashboard/blog',
+     
+       {
+        id: 'blogs',
+        title: 'Blogs',
+        type: 'collapse',
         icon: 'feather icon-bold',
-        classes: 'nav-item',
-      }
+        children: [
+          {
+            id: 'allblog',
+            title: 'All Blogs',
+            type: 'item',
+            url: '/dashboard/allblogs'
+          },
+          {
+            id: 'addblog',
+            title: 'Add New Blog',
+            type: 'item',
+            url: '/dashboard/blog'
+          }
+        ]
+
+        }
     ]
   },
   
