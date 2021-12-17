@@ -60,10 +60,11 @@ signupForm: FormGroup;
 	}
 
   createAccount(){
-
+debugger;
     var userEmail = this.signupForm.get('email').value;
     var mobile = this.phoneForm.get('phone').value;
-  
+  // var mobile = tel['number'];
+  // var telcode =tel['dialCode'];
     var password = this.signupForm.get('password').value;
     var fname = this.signupForm.get('firstname').value;
     var lname = this.signupForm.get('lastname').value;
@@ -88,7 +89,7 @@ signupForm: FormGroup;
       this.message = 'Please enter your valid email address';
       return false;
     }
-    else if(mobile.nationalNumber='' || !this.validateMobile(mobile.nationalNumber) || mobile.nationalNumber.length <= 10){
+    else if(mobile.number='' || !this.validateMobile(mobile.number) || mobile.nationalNumber.length < 10 || mobile.number.length > 10){
       this.error = true;
       this.message = 'Please enter your valid mobile number';
       return false;
@@ -138,6 +139,10 @@ signupForm: FormGroup;
           this.loading = false;
           this.error = false;
           this.message = 'Your account is created now! ';
+          setTimeout(()=>{
+            this.router.navigate(['/auth/signin']);
+          },1000);
+      
           return false;
 
 

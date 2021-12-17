@@ -114,7 +114,7 @@ export class RateListComponent implements OnInit {
         this.error = false;
         this.message = 'New country added successfully!';
         // setTimeout(()=>{location.reload()},1000);
-        this.ngOnInit();
+        location.reload();
         return false;
 
       }else{
@@ -271,7 +271,7 @@ export class RateListComponent implements OnInit {
       this.error = false;
       this.message = ' Ratelist updated successfully!';
       // setTimeout(()=>{location.reload()},1000);
-      this.ngOnInit();
+      location.reload();
       return false;
 
     }else{
@@ -314,7 +314,7 @@ export class RateListComponent implements OnInit {
      if(reponse['name']!='')
      { 
        alert("Record deleted successfully.");
-       this.ngOnInit();
+       location.reload();
  
      }else{
        this.error = true;

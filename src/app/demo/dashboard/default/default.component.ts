@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 declare const AmCharts: any;
 declare var $: any;
+declare var require: any
 
 import '../../../../assets/charts/amchart/amcharts.js';
 import '../../../../assets/charts/amchart/gauge.js';
@@ -25,6 +26,7 @@ export class DefaultComponent implements OnInit {
   allAppointment: any = []
   title = 'datta-able';
   token = localStorage.getItem('userID');
+  
   constructor(private master: MasterService) {
 
     this.TokenExpired(this.token);
@@ -32,6 +34,10 @@ export class DefaultComponent implements OnInit {
 
   ngOnInit() {
     this.getAllTodaysAppointment();
+
+    var Filter = require('bad-words'),
+    filter = new Filter();
+    console.log(filter.clean("Don't be an xxx")); 
   }
 
 
@@ -42,8 +48,8 @@ export class DefaultComponent implements OnInit {
       if (data != "" && token != "") {
         return false
       } else {
-        localStorage.removeItem('userID');
-        location.reload();
+        // localStorage.removeItem('userID');
+        // location.reload();
       }
     }, (error => {
       alert('Session is expired please login again!');
@@ -66,6 +72,7 @@ export class DefaultComponent implements OnInit {
       };
       this.master.getAppointmentsByCriteria(data).subscribe(data => {
         this.allAppointment = JSON.parse(JSON.stringify(data));
+        console.log(this.allAppointment)
 
       });
       setTimeout(function () {

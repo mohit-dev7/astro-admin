@@ -105,7 +105,7 @@
                     <td>{{index+1}}</td>
                     <td>{{data.countryName}}</td>
                     <td>{{data.consultationType}}</td>
-                    <td>{{data.rateOfValues}}</td>
+                    <td><span *ngIf="data.countryName!='India'">$</span> <span *ngIf="data.countryName=='India'">&#8377; </span> {{data.rateOfValues}}</td>
                     <td><span class="badge badge-success" *ngIf="data.status=='ACTIVE'">{{data.status}}</span>
                         <span class="badge badge-warning"
                             *ngIf="data.status=='INACTIVE' || data.status=='DEACTIVATE'">{{data.status}}</span>

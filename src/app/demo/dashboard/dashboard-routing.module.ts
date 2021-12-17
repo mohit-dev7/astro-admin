@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { EditBlogComponent } from './edit-blog/edit-blog.component';
 import { HolidayComponent } from './holiday/holiday.component';
 import { TimeslotComponent } from './timeslot/timeslot.component';
 
@@ -22,8 +23,8 @@ const routes: Routes = [
         loadChildren: () => import('./appoinments/appoinments.module').then(m => m.AppoinmentsModule)
       },
       {
-        path: 'pending-appointments',
-        loadChildren: () => import('./pending-appoinments/pending-appoinments.module').then(m => m.PendingAppoinmentsModule)
+        path: 'allblogs',
+        loadChildren: () => import('./all-blogs/all-blogs.module').then(m => m.AllBlogsModule)
       }
       ,
       {
@@ -73,6 +74,10 @@ const routes: Routes = [
       {
         path: 'holiday',
         component: HolidayComponent
+      },
+      {
+        path: 'editBlog/:id',
+        component: EditBlogComponent
       }
     ]
   }

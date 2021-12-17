@@ -42,6 +42,14 @@
 
 }
 
+::ng-deep .iti.iti--allow-dropdown {
+    width: 100% !important;
+}
+::ng-deep input#phone, .iti{
+    width: 100% !important;
+
+}
+
 .auth-wrapper .auth-content{
 width:30%;
 }

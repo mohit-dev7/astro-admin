@@ -93,13 +93,13 @@ export class CountryComponent implements OnInit {
       "status":action
     }
     this.master.methodPost(data, '/AddCountry').subscribe(reponse=>{
-
+      this.sortedData = [];
       if(reponse['name']!='')
       {
         this.error = false;
         this.message = 'New country added successfully!';
         // setTimeout(()=>{location.reload()},1000);
-        this.ngOnInit();
+       location.reload();
         return false;
 
       }else{
@@ -211,7 +211,7 @@ export class CountryComponent implements OnInit {
 
   }
   this.master.methodPost(data, '/UpdateCountry?id='+id).subscribe(reponse=>{
-
+    this.sortedData = [];
     if(reponse['name']!='')
     {  this.formTitle="Add";
     this.ifUpdate=false;
@@ -219,7 +219,7 @@ export class CountryComponent implements OnInit {
       this.error = false;
       this.message = ' Country updated successfully!';
       // setTimeout(()=>{location.reload()},1000);
-      this.ngOnInit();
+      location.reload();
       return false;
 
     }else{
@@ -240,6 +240,7 @@ export class CountryComponent implements OnInit {
 }
 
  OnDelete(id, name, code){
+
    if(confirm("Are you sure want to delete this record?")){
  
     var Country=this.countryForm.get("country").value;
@@ -257,9 +258,9 @@ export class CountryComponent implements OnInit {
     this.master.methodPost(data, '/UpdateCountry?id='+id).subscribe(reponse=>{
   
       if(reponse['name']!='')
-      { 
+      {    this.sortedData = [];
         alert("Record deleted successfully.");
-        this.ngOnInit();
+        location.reload();
   
       }else{
         this.error = true;

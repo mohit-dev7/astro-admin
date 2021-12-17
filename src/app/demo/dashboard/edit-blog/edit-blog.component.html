@@ -1,5 +1,6 @@
-<div class="container-fluid">
-
+<div class="container-fluid mt-5">
+<h3 class="ml-2">Edit Blog</h3>
+<hr>
     <section class="blog_section">
         <form action="">
         <div class="col-md-12 col-lg-12">
@@ -14,7 +15,7 @@
                                     <div class="col-12">
                                         <div class="form-group mt-4">
                                             <label>Blog Title</label>
-                                          <input class="form-control" id="blog_title" placeholder="Enter Blog Title" />
+                                          <input class="form-control" value="{{singleData.title}}" id="blog_title" placeholder="Enter Blog Title" />
                                         </div>
                                      </div>
                              
@@ -22,7 +23,7 @@
                                  <div class="col-12">
                                     <div class="form-group mt-2">
                                         <label>Blog Subtitle</label>
-                                      <input class="form-control" id="blogSubtilte" placeholder="Enter Blog Subtitle" />
+                                      <input class="form-control" value="{{singleData.subtitle}}"  id="blogSubtilte" placeholder="Enter Blog Subtitle" />
                                 </div>
                         </div>
 
@@ -51,7 +52,7 @@
                             <img [src]="urlDt" height="200"> <br/>
                         </div>
 
-                        <button class="flBt btn w-100 mt-5 " style="border-radius: 0;" (click)="postNewBlog()">Publish Blog</button>
+                        <button class="flBt btn w-100 mt-5 " style="border-radius: 0;" (click)="postNewBlog()">Update Blog</button>
                     </div>
                 </div>
             </div>

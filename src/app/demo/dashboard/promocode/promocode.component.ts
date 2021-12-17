@@ -211,7 +211,7 @@ export class PromocodeComponent implements OnInit {
         this.error = false;
         this.message = ' Promocode updated successfully!';
         // setTimeout(()=>{location.reload()},1000);
-        this.ngOnInit();
+        location.reload();
         return false;
   
       }else{
@@ -252,7 +252,7 @@ export class PromocodeComponent implements OnInit {
         if(reponse['name']!='')
         { 
           alert("Record deleted successfully.");
-          this.ngOnInit();
+          location.reload();
     
         }else{
           this.error = true;
