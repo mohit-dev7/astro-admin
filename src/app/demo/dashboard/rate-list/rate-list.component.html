@@ -1,5 +1,6 @@
 
 <div class="container-fluid p-0">
+    <button (click)="getDataCheck()">check</button>
 
     <div class="appointment_data card p-3" style="position: relative;">
       
@@ -27,7 +28,7 @@
                                 <label>Country:</label>
                                 <select class="form-control" formControlName="country" placeholder="Select Country">
                                   
-                                    <option  *ngFor="let country of countryData" value="{{country.name}}">
+                                    <option  *ngFor="let country of countryData"  value="{{country.name}}">
                                     {{country.name}}
                                     </option>
                                  

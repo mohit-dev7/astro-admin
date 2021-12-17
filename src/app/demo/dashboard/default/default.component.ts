@@ -86,6 +86,7 @@ export class DefaultComponent implements OnInit {
       };
       this.master.getAppointmentsByCriteria(data).subscribe(data => {
         this.allAppointment = JSON.parse(JSON.stringify(data));
+        console.log(this.allAppointment)
 
 
       });
@@ -101,6 +102,7 @@ export class DefaultComponent implements OnInit {
       };
       this.master.getAppointmentsByCriteria(data).subscribe(data => {
         this.allAppointment = JSON.parse(JSON.stringify(data));
+        console.log(this.allAppointment)
 
 
       });
@@ -112,7 +114,7 @@ export class DefaultComponent implements OnInit {
 
 
   getAllTodaysAppointment() {
-    debugger;
+  
     const today = new Date();
     // today.setHours(0,0,0);
     

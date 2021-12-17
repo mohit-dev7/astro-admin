@@ -124,3 +124,11 @@ button{
 
 /* Importing Datepicker SCSS file. */
 @import "~ngx-bootstrap/datepicker/bs-datepicker";
+
+.pcoded-header .dropdown .dropdown-menu {
+    position: absolute;
+    border: none;
+    margin-top: -6px;
+    margin-left: -106px !important;
+    min-width: 221px !important;
+}
