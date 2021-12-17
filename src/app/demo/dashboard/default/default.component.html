@@ -102,12 +102,14 @@ scroll-collapse="false">
           <tr *ngFor="let data of allAppointment;let index=index;">
               <td>{{index+1}}</td>
               <td>{{data.appointDate | date:'d/M/y' }}</td>
-              <td>{{data.timeSlot.timeSlotName}}</td>
+              <td *ngIf="data.timeSlot!=null">{{data.timeSlot.timeSlotName}}</td>
+              <td *ngIf="data.timeSlot==null">null</td>
               <td>{{data.userProfile.firstName}} &nbsp; {{data.userProfile.lastName}}</td>
               <td>2011/01/25</td>
               <td>{{data.userProfile.timeOfBirth}}</td>
               <td>{{data.userProfile.placeOfBirth}}</td>
-              <td>{{data.consultationType}}</td>
+              <td *ngIf="data.consultationType==1">{{data.consultationType}}</td>
+              
               <td>{{data.meetingType}}</td>
               <td>{{data.skypeId}}</td>
               <td>{{data.status}}</td>

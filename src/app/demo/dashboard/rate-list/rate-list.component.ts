@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MasterService } from 'src/app/services/master.service';
 
@@ -14,7 +14,7 @@ declare var $: any;
   templateUrl: './rate-list.component.html',
   styleUrls: ['./rate-list.component.scss']
 })
-export class RateListComponent implements OnInit {
+export class RateListComponent implements OnInit, OnDestroy{
  
 
   ratelistform:FormGroup;
@@ -35,6 +35,7 @@ export class RateListComponent implements OnInit {
   rateListCountry:any=[]
   sortedRateList:any=[]
   filterDeletedData:any=[]
+  destroy: number = 0;
 
   constructor( private master:MasterService ,private authservice:AuthService, private router:Router) {
 
@@ -55,7 +56,9 @@ export class RateListComponent implements OnInit {
   }
   
 
-
+  ngOnDestroy(): void{
+    this.getDataCheck();
+  }
 
   
 
@@ -219,6 +222,19 @@ export class RateListComponent implements OnInit {
    })
  }
 
+
+
+ getDataCheck(){
+ if(this.destroy ==0){
+alert('sd');
+this.destroy =1;
+ }
+ else{
+   return false;
+
+ }
+   
+ }
 
  updateRateList(){
 
