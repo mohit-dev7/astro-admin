@@ -7,6 +7,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 declare var $: any;
 
+// piyush
+
 @Component({
   selector: 'app-enquire',
   templateUrl: './enquire.component.html',
@@ -17,15 +19,20 @@ export class EnquireComponent implements OnInit {
 
   enquireform:FormGroup;
   enquire:any = [];
-  fromdate = new FormControl("", [Validators.required]);
-  todate= new FormControl("", [Validators.required]);
-  status = new FormControl("", [Validators.required]);
+  type = new FormControl("", [Validators.required]);
+ 
   data:any
   // checkbox:any = 'DEACTIVATE';
   // isCheck:boolean = false;
   enquiredata:any = [];
   message:any = '';
   error:boolean = false;
+  edit:boolean=false;
+  id:any
+  name:string
+  email:string
+  phone:any
+  loader:boolean=false
 
   constructor( private master:MasterService ,private authservice:AuthService, private router:Router) {
 
@@ -35,20 +42,42 @@ export class EnquireComponent implements OnInit {
 
   ngOnInit(): void {
     this.enquireform= new FormGroup({
-      fromdate: new FormControl(""),
-      todate: new FormControl(""),
-      status: new FormControl("")
+      type: new FormControl("")
     });
   
     this.getEnquire();
   }
   
-  ngAfterViewInit(): void {
+  // ngAfterViewInit(): void {
 
-    $(document).ready( function () {
+  //   $(document).ready( function () {
     
-      $('#example').DataTable();
-  } );
+  //     $('#example').DataTable();
+  // } );
+  // }
+
+
+  getSearch(){
+      var fromdate=this.enquireform.get("fromdate").value;
+      var todate=this.enquireform.get("todate").value;
+      var status=this.enquireform.get("status").value;
+
+      this.master.getMethod('/getAllEnquiries').subscribe(data=>{
+        var size = Object.keys(data).length;
+        console.log(size);
+        console.log(data)
+        if (fromdate!="" && todate!="" && status!=""){
+          for (let i=0;i<size;i++){
+              if (data[i].date>=fromdate && data[i].data<todate && data[i].status=="done"){
+                this.enquiredata.push(data[i]);
+              }
+          }
+      }
+      })
+      
+   
+      
+    
   }
 
  
@@ -121,8 +150,64 @@ export class EnquireComponent implements OnInit {
    this.master.getMethod('/getAllEnquiries').subscribe(data=>{
 
     this.enquiredata = JSON.parse(JSON.stringify(data));
+    setTimeout(function(){
+      $('#example').DataTable();
+     }, 1000);
+   
    
    });
  }
+
+ onUpdate(){
+   var type=this.enquireform.get("type").value;
+   const data={
+     "sno":this.id,
+     "name":this.name,
+     "mobile":this.phone,
+     "email":this.email,
+     "status":type
+   }
+   this.master.methodPost(data,"/editEnquiry").subscribe(reponse=>{
+    if(reponse['name']!='')
+    { 
+ 
+ 
+      this.error = false;
+      this.message = ' Status updated successfully!';
+      // setTimeout(()=>{location.reload()},1000);
+      this.ngOnInit();
+      return false;
+
+    }else{
+      this.error = true;
+      this.message = 'Failed to update Status please check all details!';
+      return false;
+    }
+
+   
+   },(error=>{
+    alert("failed to update status something went wrong");
+   }));
+   
+
+ }
+
+
+OnEdit(id:any,name,email,phone){
+  $(window).scrollTop(0);
+  this.edit=true;
+  this.id=id
+  this.name=name;
+  this.email=email;
+  this.phone=phone
+ this.enquireform=new FormGroup({
+   name:new FormControl(this.name)
+ })
+}
+
+onDelete(){
+  this.edit=false;
+  
+}
 
 }

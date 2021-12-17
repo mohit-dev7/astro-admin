@@ -1,99 +1,52 @@
 
 <div class="container-fluid p-0">
-
-    <div class="appointment_data card p-3">
-<form [formGroup]="enquireform" >
-        <div class="col-lg-12 pl-0">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div *ngIf="message!='' && error==true" class="alert alert-danger w-100" role="alert">
-                        {{message}}
-                      </div>
-            
-                      <div *ngIf="message!='' && error!=true" class="alert alert-success w-100"  role="alert">
-                        {{message}}
-                      </div>
-            
-                </div>
-                <div class="col-md-3 ">
-                    <div class="form-group">
-                        <label>From Date:</label>
-                        <input formControlName="fromdate" class="form-control" type="date" placeholder="From Date" />
-                        <!-- <select class="form-control" formControlName="country" placeholder="Select Country">
-                            <option value="India">
-                             India
-                            </option>
-                            <option value="Japan">
-                                Japan
-                            </option>
-                            <option value="USA">
-                                USA
-                            </option>
-                            <option value="UK">
-                                UK
-                            </option>
-                            
-                        </select> -->
-                    </div>
-
-                </div>
-
-                <div class="col-md-3 ">
-                    <div class="form-group">
-                        <label>To Date:</label>
-                        <input formControlName="todate" class="form-control" type="date" placeholder="From Date" />
-                        <!-- <select class="form-control" formControlName="country" placeholder="Select Country">
-                            <option value="India">
-                             India
-                            </option>
-                            <option value="Japan">
-                                Japan
-                            </option>
-                            <option value="USA">
-                                USA
-                            </option>
-                            <option value="UK">
-                                UK
-                            </option>
-                            
-                        </select> -->
-                    </div>
-
-                </div>
-
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label>Status:</label>
-                       <!-- <input formControlName="status" class="form-control" placeholder="Select Status" /> -->
-                       <select class="form-control" formControlName="country" placeholder="Select Country">
-                        <option value="Pending">
-                            Pending
-                        </option>
-                        <option value="Done">
-                            Done
-                        </option>
-                       
-                    </select>
-                    </div>
-                </div>
-
-            <!-- <div class="col-md-2 align-items-center" style="padding-top: 35px;">
-                <div class="form-check" >
-                    <input class="form-check-input" type="checkbox" value="" ngModel  id="flexCheckDefault" (change)="checkCheckBoxvalue($event)">
-                    <label class="form-check-label" for="flexCheckDefault">
-                     Active
-                    </label>
-                </div>
-            </div> -->
-
-        <div class="col-md-2">
-            <button type="button" class="btn btn-secondary pull-left " style="float: left; margin-top: 28px;">Search</button>
-      </div>
+    
+    <div class="appointment_data card p-3" style="position: relative;"  *ngIf="edit" >
+        <div class="loader" *ngIf="loader">
+            <img src="../../../../assets/images/loading.gif" />
         </div>
+        <h5>Change Status</h5>
+        <hr>
+        <form [formGroup]="enquireform">
+           
+            <input type="hidden" id="contryid">
+            <div class="col-lg-12 pl-0">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div *ngIf="message!='' && error==true" class="alert alert-danger w-100" role="alert">
+                            {{message}}
+                        </div>
+
+                        <div *ngIf="message!='' && error!=true" class="alert alert-success w-100" role="alert">
+                            {{message}}
+                        </div>
+
+                    </div>
+                <div class="col-lg-3 ">
+                    <label for="">User Name</label>
+                    <input type="text" class="form-control" formControlName="name" readonly>
+                </div>
+                <div class="col-lg-3">
+                    <label for="">Select Status</label>
+                    <select class="form-control" formControlName="type">
+                        <option value="">select</option>
+                        <option value="Done">Done</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Pending">Pending</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 text-center btnn">
+                    <button class="btn  update " (click)="onUpdate()">Update</button>
+                </div>
+                <div class="col-lg-2 btnn">
+                    <button class="btn cancel " (click)="onDelete()">Cancel</button>
+                </div>
+                </div>
+            </div>
+        </form>
+
     </div>
-</form>
-    </div>
+   
 
 <div class="table_data card p-3">
     <h5>Users Details</h5>
@@ -109,16 +62,7 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tfoot>
-            <tr>
-                <th>S.no</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Mobile</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </tfoot>
+       
         <tbody>
         
             <tr *ngFor="let data of enquiredata">
@@ -128,7 +72,9 @@
                 <td>{{data.mobile}}</td>
                 <td>{{data.status}}</td>
                 <!-- <td>{{data.remarks}}</td> -->
-                 <td> <button class="btn btn-success btn-sm"><i class="ng-tns-c22-2 feather icon-edit"></i></button> <button class="btn btn-danger btn-sm"><i class="ng-tns-c22-2 feather icon-trash"></i></button> </td>
+                 <td>  <button class="btn btn-success btn-sm"(click)=OnEdit(data.sno,data.name,data.email,data.mobile)><i class="ng-tns-c22-2 feather icon-edit"></i></button>
+                    <button class="btn btn-danger btn-sm" ><i class="ng-tns-c22-2 feather icon-trash"></i></button>
+                 </td>
             </tr>
            
         </tbody>

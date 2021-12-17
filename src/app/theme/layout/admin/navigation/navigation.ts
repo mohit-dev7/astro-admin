@@ -85,49 +85,57 @@ const NavigationItems = [
           }
         ]
       },
+      // {
+      //   id: 'appointments',
+      //   title: 'Appointments',
+      //   type: 'collapse',
+      //   icon: 'feather icon-clock',
+      //   children: [
+      //     {
+      //       id: 'search_appointments',
+      //       title: 'Appointments',
+      //       type: 'item',
+      //       url: '/dashboard/appointments'
+      //     },
+      //     {
+      //       id: 'pending_appointments',
+      //       title: 'Pending Appointments',
+      //       type: 'item',
+      //       url: '/dashboard/pending-appointments'
+      //     },
+      //     {
+      //       id: 'cancelled_appointments',
+      //       title: 'Cancelled Appointments',
+      //       type: 'item',
+      //       url: '/basic/breadcrumb-paging'
+      //     },
+      //     {
+      //       id: 'completed_appointments',
+      //       title: 'Completed Appointments',
+      //       type: 'item',
+      //       url: '/basic/collapse'
+      //     },
+      //     {
+      //       id: '',
+      //       title: ' Appointments List',
+      //       type: 'item',
+      //       url: '/dashboard/promocode'
+      //     }
+      //   ]
+      // },
       {
-        id: 'appointments',
-        title: 'Appointments',
-        type: 'collapse',
-        icon: 'feather icon-clock',
-        children: [
-          {
-            id: 'search_appointments',
-            title: 'Appointments',
-            type: 'item',
-            url: '/dashboard/appointments'
-          },
-          {
-            id: 'pending_appointments',
-            title: 'Pending Appointments',
-            type: 'item',
-            url: '/dashboard/pending-appointments'
-          },
-          {
-            id: 'cancelled_appointments',
-            title: 'Cancelled Appointments',
-            type: 'item',
-            url: '/basic/breadcrumb-paging'
-          },
-          {
-            id: 'completed_appointments',
-            title: 'Completed Appointments',
-            type: 'item',
-            url: '/basic/collapse'
-          },
-          {
-            id: 'refund',
-            title: 'Refund Appointments List',
-            type: 'item',
-            url: '/dashboard/promocode'
-          }
-        ]
+        id: 'appointment',
+        title: 'Appointment',
+        type: 'item',
+        url: '/dashboard/appointments',
+        icon: 'feather icon-calendar',
+        classes: 'nav-item',
       },
       {
         id: 'contact',
         title: 'Contact',
         type: 'item',
-        url: '/dashboard/contact',
+        url: '/dashboard/contactd',
         icon: 'feather icon-phone',
         classes: 'nav-item',
       },
@@ -136,7 +144,7 @@ const NavigationItems = [
         title: 'Enquire',
         type: 'item',
         url: '/dashboard/enquire',
-        icon: 'feather icon-home',
+        icon: 'feather icon-message-square',
         classes: 'nav-item',
       },
       {
@@ -144,9 +152,31 @@ const NavigationItems = [
         title: 'Feedback',
         type: 'item',
         url: '/dashboard/feedback',
-        icon: 'feather icon-home',
+        icon: 'feather icon-edit',
         classes: 'nav-item',
-      }
+      },
+     
+       {
+        id: 'blogs',
+        title: 'Blogs',
+        type: 'collapse',
+        icon: 'feather icon-bold',
+        children: [
+          {
+            id: 'allblog',
+            title: 'All Blogs',
+            type: 'item',
+            url: '/dashboard/allblogs'
+          },
+          {
+            id: 'addblog',
+            title: 'Add New Blog',
+            type: 'item',
+            url: '/dashboard/blog'
+          }
+        ]
+
+        }
     ]
   },
   

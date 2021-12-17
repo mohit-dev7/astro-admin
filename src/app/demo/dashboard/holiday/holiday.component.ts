@@ -26,6 +26,7 @@ export class HolidayComponent implements OnInit {
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
+  loader:boolean=false;
 
 
 
@@ -74,13 +75,7 @@ export class HolidayComponent implements OnInit {
     })
   }
 
-  ngAfterViewInit(): void {
 
-    $(document).ready(function () {
-
-      $('#example').DataTable();
-    });
-  }
 
   checkCheckBoxvalue(event) {
 
@@ -172,6 +167,9 @@ export class HolidayComponent implements OnInit {
     this.master.holidayGetData().subscribe(data => {
 
       this.holidayData = JSON.parse(JSON.stringify(data));
+      setTimeout(function(){
+        $('#example').DataTable();
+       }, 1000);
 
     });
   }
@@ -179,7 +177,7 @@ export class HolidayComponent implements OnInit {
   getAllTimeSlots() {
     this.master.timeslotGetData().subscribe(data => {
       let dayArray = [];
-      debugger;
+   
       Object.keys(data).forEach(value => {
         let objData = data[value]
         let saveObj = {};
@@ -193,11 +191,27 @@ export class HolidayComponent implements OnInit {
 
   editHoliday(id: any) {
     this.edit = true;
+    this.loader=true;
     this.master.holidayGetDetailData(id).subscribe(data => {
       this.holidayForm.patchValue(data);
+      this.loader=false;
       this.getAllTimeSlots();
     });
 
+
+  }
+
+
+  onUpdate(){
+
+  }
+
+  OnCancel(){
+    this.edit=false;
+    this.holidayForm = new FormGroup({
+      id: new FormControl(""),
+      holidayDate: new FormControl("")
+    });
 
   }
 

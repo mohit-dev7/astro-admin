@@ -42,10 +42,29 @@
 
 }
 
+::ng-deep .iti.iti--allow-dropdown {
+    width: 100% !important;
+}
+::ng-deep input#phone, .iti{
+    width: 100% !important;
+
+}
+
 .auth-wrapper .auth-content{
 width:30%;
 }
 
 .card{
     width: 100%;
+}
+::ng-deep .custom{
+    padding-right: 85px !important;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+    border: 1px solid #ced4da!important;
+    border-radius: 3px ;
+}
+.wrapper{
+    margin-bottom: 10px;
 }

@@ -4,7 +4,8 @@ import { MasterService } from 'src/app/services/master.service';
 
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { ActivatedRouteSnapshot, Router } from '@angular/router';
+import {  Router } from '@angular/router';
+
 declare var $: any;
 @Component({
   selector: 'app-country',
@@ -15,7 +16,9 @@ export class CountryComponent implements OnInit {
  
 
   countryForm:FormGroup;
+  indexData = 1;
   countryData:any = [];
+  sortedData:any=[]
   country = new FormControl("", [Validators.required]);
   code= new FormControl("", [Validators.required]);
   data:any
@@ -27,6 +30,7 @@ export class CountryComponent implements OnInit {
   formTitle:any="Add New Country";
   ifUpdate:boolean=false;
   singaleCountry:any = [];
+  filterDeletedData:any=[]
   constructor( private master:MasterService ,private authservice:AuthService, private router:Router ) {
 
 
@@ -34,6 +38,7 @@ export class CountryComponent implements OnInit {
    }
 
   ngOnInit(): void {
+ 
     this.countryForm= new FormGroup({
       country: new FormControl(""),
       code: new FormControl("")
@@ -44,13 +49,7 @@ export class CountryComponent implements OnInit {
  
   }
   
-  ngAfterViewInit(): void {
-
-    $(document).ready( function () {
-    
-      $('#example').DataTable();
-  } );
-  }
+ 
 
   checkCheckBoxvalue(event){
    
@@ -94,13 +93,13 @@ export class CountryComponent implements OnInit {
       "status":action
     }
     this.master.methodPost(data, '/AddCountry').subscribe(reponse=>{
-
+      this.sortedData = [];
       if(reponse['name']!='')
       {
         this.error = false;
         this.message = 'New country added successfully!';
         // setTimeout(()=>{location.reload()},1000);
-        this.ngOnInit();
+       location.reload();
         return false;
 
       }else{
@@ -123,9 +122,33 @@ export class CountryComponent implements OnInit {
 
   
  getAllCountry(){
+  this.sortedData = [];
    this.master.getMethod('/AllCountries').subscribe(data=>{
 
     this.countryData = JSON.parse(JSON.stringify(data));
+    for (let i=0;i<this.countryData.length ; i++){
+      if (this.countryData[i].status!="DELETED"){
+          this.filterDeletedData.push(this.countryData[i])
+      }
+    }
+    var low=0;
+    var high=this.filterDeletedData.length -1;
+    while(low<=high){
+      if(this.filterDeletedData[low].sno<this.filterDeletedData[high].sno){
+        this.sortedData.push(this.filterDeletedData[high]);
+        high--
+      }else{
+        this.sortedData.push(this.filterDeletedData[low]); 
+        low++;
+      }
+    }
+
+    console.log(this.sortedData)
+    
+    setTimeout(function(){
+      $('#example').DataTable();
+     }, 1000);
+     
    
    });
  }
@@ -188,7 +211,7 @@ export class CountryComponent implements OnInit {
 
   }
   this.master.methodPost(data, '/UpdateCountry?id='+id).subscribe(reponse=>{
-
+    this.sortedData = [];
     if(reponse['name']!='')
     {  this.formTitle="Add";
     this.ifUpdate=false;
@@ -196,7 +219,7 @@ export class CountryComponent implements OnInit {
       this.error = false;
       this.message = ' Country updated successfully!';
       // setTimeout(()=>{location.reload()},1000);
-      this.ngOnInit();
+      location.reload();
       return false;
 
     }else{
@@ -214,9 +237,10 @@ export class CountryComponent implements OnInit {
 
   
 
- }
+}
 
  OnDelete(id, name, code){
+
    if(confirm("Are you sure want to delete this record?")){
  
     var Country=this.countryForm.get("country").value;
@@ -234,9 +258,9 @@ export class CountryComponent implements OnInit {
     this.master.methodPost(data, '/UpdateCountry?id='+id).subscribe(reponse=>{
   
       if(reponse['name']!='')
-      { 
+      {    this.sortedData = [];
         alert("Record deleted successfully.");
-        this.ngOnInit();
+        location.reload();
   
       }else{
         this.error = true;
@@ -254,10 +278,14 @@ export class CountryComponent implements OnInit {
    }
  }
 
- cancelUpdate()
-{
-  this.loader =false;
-  this.formTitle="Add";
-  this.ifUpdate=false;
-}
+  cancelUpdate()
+  {
+    this.loader =false;
+    this.formTitle="Add";
+    this.ifUpdate=false;
+    this.countryForm= new FormGroup({
+      country: new FormControl(""),
+      code: new FormControl("")
+    });
+  }
 }

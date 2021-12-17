@@ -26,6 +26,10 @@ export class TimeslotComponent implements OnInit {
   selectedItems = [];
   dropdownSettings = {};
 
+  loader:boolean=false;
+  formTitle:any="Add Timeslot";
+  ifUpdate:boolean=false;
+
   constructor(private master: MasterService, private authservice: AuthService, private router: Router) {
 
 
@@ -73,13 +77,7 @@ export class TimeslotComponent implements OnInit {
     })
   }
 
-  ngAfterViewInit(): void {
-
-    $(document).ready(function () {
-
-      $('#example').DataTable();
-    });
-  }
+ 
 
   checkCheckBoxvalue(event) {
 
@@ -94,7 +92,7 @@ export class TimeslotComponent implements OnInit {
   }
 
   addNewTimeslot() {
-    debugger;
+    
     var id = this.timeslotForm.get("id").value;
     var startTime = this.timeslotForm.get("startTime").value;
     var endTime = this.timeslotForm.get("endTime").value;
@@ -192,8 +190,11 @@ export class TimeslotComponent implements OnInit {
     this.master.timeslotGetData().subscribe(data => {
 
       this.timeslotData = JSON.parse(JSON.stringify(data));
-
+      setTimeout(function(){
+        $('#example').DataTable();
+       }, 1000);
     });
+    
 
     // this.getAllDays();
   }
@@ -202,7 +203,7 @@ export class TimeslotComponent implements OnInit {
   getAllDays(valueData?: any) {
     this.master.daysData().subscribe(data => {
       let dayArray = [];
-      debugger;
+      
       Object.keys(data).forEach(value => {
         let objData = data[value]
         let saveObj = {};
@@ -229,13 +230,49 @@ export class TimeslotComponent implements OnInit {
   }
 
   editTimeSlot(id: any) {
+    this.loader =true;
+   
     this.edit = true;
     this.master.timeSlotGetDetailData(id).subscribe(data => {
+      this.loader =false;
+      this.formTitle="Update";
+      this.ifUpdate=true;
       this.timeslotForm.patchValue(data);
       this.getAllDays(data);
       this.getAllTimeSlots();
+
+      var id = this.timeslotForm.get("id").value;
+      var startTime = this.timeslotForm.get("startTime").value;
+      var endTime = this.timeslotForm.get("endTime").value;
+      var action = this.checkbox;
+      let daysArray = [];
+
+      Object.keys(this.selectedItems).forEach(value => {
+        let objData = this.selectedItems[value]
+        let saveObj = {};
+        saveObj['id'] = objData['id'];
+        saveObj['day'] = objData['day'];
+        daysArray.push(saveObj);
+      })
+
+      const data1 = {
+        "id": id,
+        "startTime": startTime,
+        "endTime": endTime,
+        "timeSlotName": startTime + " - " + endTime,
+        "status": action,
+        "days": daysArray
+      }
+      
+
+
     });
 
+
+  }
+
+
+  onCancel(){
 
   }
 

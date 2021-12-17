@@ -1,0 +1,41 @@
+::ng-deep .angular-editor-button {
+    background-color: #ffffff;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    padding: 0.4rem;
+    min-width: 2rem;
+    color: #000 !important;
+    float: left;
+}
+
+::ng-deep .angular-editor-textarea{
+    min-height: 400px !important;
+}
+
+
+.image_bx{
+    padding:10px;
+    width: 100%;
+    height: auto;
+}
+
+
+.flBt1{
+    background:rgb(255, 115, 0);
+    color:#fff;
+    padding:10px 20px;
+    width: 100%;
+    border-radius: 5px;
+}
+.flBt{
+    background:darkblue;
+    color:#fff;
+    padding:10px 20px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.image_bx img{
+width: 100%;
+height: auto;
+}

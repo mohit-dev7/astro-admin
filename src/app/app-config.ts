@@ -26,7 +26,7 @@ export class DattaConfig {
 /* 1 - background color */
 /*
 #04a9f5,#ff5252, #9575CD, #23b7e5, #424448
-linear-gradient(to right, #1de9b6 0%, #1dc4e9 100%)
+linear-gradient(to right, #1de9b6 0%, #f66e1f 100%)
 linear-gradient(to right, #899FD4 0%, #A389D4 100%)
 linear-gradient(to right, #4facfe 0%, #00f2fe 100%)
 linear-gradient(to right, #667eea 0%, #764ba2 100%)

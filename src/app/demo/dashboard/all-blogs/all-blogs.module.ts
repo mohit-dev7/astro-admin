@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {SharedModule} from '../../../theme/shared/shared.module';
-import { PendingAppoinmentsRoutingModule } from './pending-appoinments-routing.module';
+
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { AllBlogsRoutingModule } from './all-blogs-routing.module';
+import { DataTablesModule } from 'angular-datatables';
 
 
 @NgModule({
@@ -14,9 +16,13 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     AngularEditorModule,
     HttpClientModule,
     FormsModule,
-PendingAppoinmentsRoutingModule,
-    SharedModule
-  ]
+AllBlogsRoutingModule,
+    SharedModule,
+    DataTablesModule
+  ],
+  exports:[
+    DataTablesModule
+    ]
 
 })
-export class PendingAppoinmentsModule { }
+export class AllBlogsModule { }

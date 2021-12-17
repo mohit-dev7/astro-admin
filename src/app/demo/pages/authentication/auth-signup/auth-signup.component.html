@@ -29,7 +29,7 @@
             <div class="row">
               <div class="col-sm-12 col-md-6 col-lg-6 pl-0">
                 <div class="input-group mb-3">
-                  <input type="text" formControlName="firstname" class="form-control" placeholder="First Name">
+                  <input type="text " formControlName="firstname" class="form-control first" placeholder="First Name">
                 </div>
                
               </div>
@@ -37,7 +37,7 @@
               <div class="col-sm-12 col-md-6 col-lg-6 pr-0">
                
                 <div class="input-group mb-3">
-                  <input type="text" formControlName="lastname" class="form-control" placeholder="Last Name">
+                  <input type="text" formControlName="lastname" class="form-control first" placeholder="Last Name">
                 </div>
               </div>
   
@@ -48,9 +48,19 @@
               </div>
   
               <div class="col-sm-12 col-md-12 col-lg-12 pl-0 pr-0">
-                <div class="input-group mb-3">
-                  <input type="text" formControlName="mobile" class="form-control" placeholder="Mobile">
-                </div>
+                <form #f="ngForm" [formGroup]="phoneForm">
+                  <div class="wrapper">
+                    <ngx-intl-tel-input [cssClass]="'custom'" #custom [preferredCountries]="preferredCountries"
+                      [enableAutoCountrySelect]="true" [enablePlaceholder]="true" [searchCountryFlag]="true"
+                      [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]" [selectFirstCountry]="false"
+                      [selectedCountryISO]="CountryISO.India" [maxLength]="15"
+                      [phoneValidation]="true" [separateDialCode]="separateDialCode"
+                      [numberFormat]="PhoneNumberFormat.National" name="phone" formControlName="phone">
+                    </ngx-intl-tel-input>
+                  </div>
+                  
+                </form>
+                
               </div>
   
               <div class="col-sm-12 col-md-6 col-lg-6 pl-0 ">

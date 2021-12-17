@@ -1,0 +1,61 @@
+<div class="container-fluid">
+
+    <section class="blog_section">
+        <form action="">
+        <div class="col-md-12 col-lg-12">
+            <div class="row">
+                <div class="col-md-8 col-sm-12">
+                    <div class="card">
+                     
+
+                            <div class="col-12">
+                                <div class="row">
+
+                                    <div class="col-12">
+                                        <div class="form-group mt-4">
+                                            <label>Blog Title</label>
+                                          <input class="form-control" id="blog_title" placeholder="Enter Blog Title" />
+                                        </div>
+                                     </div>
+                             
+
+                                 <div class="col-12">
+                                    <div class="form-group mt-2">
+                                        <label>Blog Subtitle</label>
+                                      <input class="form-control" id="blogSubtilte" placeholder="Enter Blog Subtitle" />
+                                </div>
+                        </div>
+
+                                    <div class="col-12">
+                                <div class="form-group mt-3">
+                                    <label>Write content here</label>
+                                    <angular-editor id="editor1" [config]="editorConfig"></angular-editor>
+                                </div>
+                                </div>
+
+                                </div>
+                            </div>
+
+                      
+                        </div>
+                </div>
+
+                <div class="col-md-4 col-sm-12">
+                     <div class="card">
+                        <div class="image_bx">
+                            <h4>Select Feature Image</h4>
+                            <hr>
+                            <label for="blog_ftr" class="btn flBt1"><i class="fa fa-image"></i> Select Feature Image </label>
+                           <input type='file' style="display: none;" id="blog_ftr" (change)="onSelectFile($event)">
+                            <hr>
+                            <img [src]="urlDt" height="200"> <br/>
+                        </div>
+
+                        <button class="flBt btn w-100 mt-5 " style="border-radius: 0;" (click)="postNewBlog()">Publish Blog</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+    </section>
+</div>
