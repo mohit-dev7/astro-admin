@@ -17,6 +17,13 @@ background: linear-gradient(90deg, rgba(38,0,255,1) 0%, rgba(0,255,248,1) 100%) 
 .today{
     background: #151349;
 }
+.change{
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 6px;
+    border-radius: 33px;
+}
 
 ::ng-deep table {
     box-shadow: 0 0 20px 0 #0000002e !important;

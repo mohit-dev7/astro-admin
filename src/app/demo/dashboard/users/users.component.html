@@ -76,9 +76,10 @@
 	<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
             <tr>
-              
+                <th>S.No</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Country Code</th>
                 <th>Mobile No</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -87,10 +88,11 @@
        
       <tbody>
        
-        <tr *ngFor="let data of userData">
-            
+        <tr *ngFor="let data of userData;let index=index">
+            <td>{{index+1}}</td>
             <td>{{data.userProfile.firstName}} {{data.userProfile.lastName}}</td>
             <td>{{data.userProfile.email}} </td>
+            <td style="width: 44px;">{{data.countryCode}} </td>
             <td>{{data.userProfile.phone}} </td>
             <td><span class="badge badge-danger" *ngIf="data.enabled==false ">Unverified</span> <span class="badge badge-success" *ngIf="data.enabled==true">Verified</span> </td>
             <td> <button class="btn btn-success btn-sm" (click)=editUser(data.id) ><i class="ng-tns-c22-2 feather icon-edit"></i></button> <button class="btn btn-danger btn-sm"><i class="ng-tns-c22-2 feather icon-trash"></i></button> </td>

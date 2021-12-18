@@ -52,7 +52,7 @@ signupForm: FormGroup;
 
 
   ngOnInit() {
-    console.log(this.SearchCountryField,this.preferredCountries)
+    console.log(this.SearchCountryField,this.preferredCountries,this.CountryISO)
   }
 
 	changePreferredCountries() {
@@ -62,9 +62,9 @@ signupForm: FormGroup;
   createAccount(){
 debugger;
     var userEmail = this.signupForm.get('email').value;
-    var mobile = this.phoneForm.get('phone').value;
-  // var mobile = tel['number'];
-  // var telcode =tel['dialCode'];
+    var tel = this.phoneForm.get('phone').value;
+  var mobile = tel['number'];
+  var telcode =tel['dialCode'];
     var password = this.signupForm.get('password').value;
     var fname = this.signupForm.get('firstname').value;
     var lname = this.signupForm.get('lastname').value;
@@ -89,7 +89,7 @@ debugger;
       this.message = 'Please enter your valid email address';
       return false;
     }
-    else if(mobile.number='' || !this.validateMobile(mobile.number) || mobile.nationalNumber.length < 10 || mobile.number.length > 10){
+    else if(mobile='' || !this.validateMobile(mobile) || mobile.length < 10 || mobile.length > 10){
       this.error = true;
       this.message = 'Please enter your valid mobile number';
       return false;
@@ -128,10 +128,11 @@ debugger;
         "password":password,
         "matchingPassword":cpass,
         "email":userEmail,
-        "phoneNo":mobile.nationalNumber,
-        "using2FA":false
+        "phoneNo":mobile,
+        "using2FA":false,
+        "countryCode":telcode
       }
-      this.loading = true;
+      this.loading = false;
 
       this.authservice.authPostMethod(data, '/user/registration').subscribe(response=>{
 

@@ -14,7 +14,7 @@ declare var $: any;
   templateUrl: './rate-list.component.html',
   styleUrls: ['./rate-list.component.scss']
 })
-export class RateListComponent implements OnInit, OnDestroy{
+export class RateListComponent implements OnInit{
  
 
   ratelistform:FormGroup;
@@ -56,9 +56,7 @@ export class RateListComponent implements OnInit, OnDestroy{
   }
   
 
-  ngOnDestroy(): void{
-    this.getDataCheck();
-  }
+
 
   
 
@@ -224,17 +222,6 @@ export class RateListComponent implements OnInit, OnDestroy{
 
 
 
- getDataCheck(){
- if(this.destroy ==0){
-alert('sd');
-this.destroy =1;
- }
- else{
-   return false;
-
- }
-   
- }
 
  updateRateList(){
 
