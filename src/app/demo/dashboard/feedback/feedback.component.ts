@@ -63,7 +63,10 @@ export class FeedbackComponent implements OnInit {
           //console.log(feed);
           let cleanWord = filter.clean(feed);
           console.log(cleanWord);
+
+          console.log(  feed.replace(/(?:https?|ftp):\/\/[\n\S]+/g, ''));
           this.feedData[element]['message'] = cleanWord;
+
         });
         ;
 
