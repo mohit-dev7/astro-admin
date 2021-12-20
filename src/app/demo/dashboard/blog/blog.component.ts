@@ -122,7 +122,7 @@ debugger;
       "createdAt":"2021-01-01",
       "updatedAt":"2021-01-02",
       "description":description,
-      "keyword":keyword,
+      "keywords":keyword,
       "slug":value
     }
 
