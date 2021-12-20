@@ -74,6 +74,13 @@ export class MasterService {
       catchError(this.handleError)
     )
   }  
+  methodPost1( dataApi): Observable<UserData> {
+    return this.http.post<UserData>(this.apURL+dataApi, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  } 
 
   timeslotDataPost(data): Observable<UserData> {
     return this.http.post<UserData>('http://18.219.65.148:8080/saveTimeSlot', JSON.stringify(data), this.httpOptions)
