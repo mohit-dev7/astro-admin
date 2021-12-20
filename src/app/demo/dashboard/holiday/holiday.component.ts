@@ -164,12 +164,14 @@ export class HolidayComponent implements OnInit {
 
 
   getAllHolidays() {
+    this.loader=true
     this.master.holidayGetData().subscribe(data => {
 
       this.holidayData = JSON.parse(JSON.stringify(data));
       setTimeout(function(){
         $('#example').DataTable();
        }, 1000);
+       this.loader=false
 
     });
   }

@@ -1,10 +1,10 @@
 
 <div class="container-fluid p-0">
-    
+    <div class="loader" *ngIf="loader">
+        <img src="../../../../assets/images/loading.gif" />
+    </div>
     <div class="appointment_data card p-3" style="position: relative;"  *ngIf="edit" >
-        <div class="loader" *ngIf="loader">
-            <img src="../../../../assets/images/loading.gif" />
-        </div>
+     
         <h5>Change Status</h5>
         <hr>
         <form [formGroup]="enquireform">
@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-lg-3">
                     <label for="">Select Status</label>
-                    <select class="form-control" formControlName="type">
+                    <select class="form-control" formControlName="type" id="type">
                         <option value="">select</option>
                         <option value="Done">Done</option>
                         <option value="Completed">Completed</option>

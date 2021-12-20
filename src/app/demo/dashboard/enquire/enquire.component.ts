@@ -32,7 +32,7 @@ export class EnquireComponent implements OnInit {
   name:string
   email:string
   phone:any
-  loader:boolean=false
+  loader:boolean=true
 
   constructor( private master:MasterService ,private authservice:AuthService, private router:Router) {
 
@@ -147,6 +147,7 @@ export class EnquireComponent implements OnInit {
 
   
   getEnquire(){
+    this.loader=true
    this.master.getMethod('/getAllEnquiries').subscribe(data=>{
 
     this.enquiredata = JSON.parse(JSON.stringify(data));
@@ -154,12 +155,14 @@ export class EnquireComponent implements OnInit {
       $('#example').DataTable();
      }, 1000);
    
-   
+   this.loader=false;
    });
  }
 
  onUpdate(){
-   var type=this.enquireform.get("type").value;
+  
+   var type=$("#type").val();
+   console.log(type)
    const data={
      "sno":this.id,
      "name":this.name,

@@ -122,6 +122,7 @@ export class CountryComponent implements OnInit {
 
   
  getAllCountry(){
+   this.loader=true
   this.sortedData = [];
    this.master.getMethod('/AllCountries').subscribe(data=>{
 
@@ -148,7 +149,7 @@ export class CountryComponent implements OnInit {
     setTimeout(function(){
       $('#example').DataTable();
      }, 1000);
-     
+     this.loader=false
    
    });
  }

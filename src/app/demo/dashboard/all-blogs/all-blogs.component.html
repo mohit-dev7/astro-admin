@@ -1,5 +1,8 @@
 
 <div class="container-fluid p-0">
+    <div class="loader" *ngIf="loader">
+        <img src="../../../../assets/images/loading.gif" />
+    </div>
 
     <div claASS="col-12 test-right" routerLink="/dashboard/blog">
     <button class="btn update mr-3 mb-3 "  ><i class="fa fa-plus"></i> Create New Blog </button>

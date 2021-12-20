@@ -30,6 +30,7 @@ export class DefaultComponent implements OnInit {
   enqueryData: any;
   appCount: any;
   getAllBlogs: any;
+  loader:boolean=false;
   
   constructor(private master: MasterService) {
     this.getUserCount();
@@ -148,7 +149,7 @@ this.master.getMethod('/getAllEnquiries').subscribe((response:any)=>{
 
 
   getAllTodaysAppointment() {
-  
+     this.loader=true
     const today = new Date();
     // today.setHours(0,0,0);
     
@@ -165,6 +166,7 @@ this.master.getMethod('/getAllEnquiries').subscribe((response:any)=>{
     setTimeout(function () {
       $('#example').DataTable();
     }, 2500);
+    this.loader=false
   }
 
 }

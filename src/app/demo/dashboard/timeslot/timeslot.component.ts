@@ -187,12 +187,14 @@ export class TimeslotComponent implements OnInit {
 
 
   getAllTimeSlots() {
+    this.loader=true
     this.master.timeslotGetData().subscribe(data => {
 
       this.timeslotData = JSON.parse(JSON.stringify(data));
       setTimeout(function(){
         $('#example').DataTable();
        }, 1000);
+       this.loader=false
     });
     
 

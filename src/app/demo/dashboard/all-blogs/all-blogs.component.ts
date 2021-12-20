@@ -70,12 +70,14 @@ export class AllBlogsComponent implements OnInit {
   
 
   getAllAppointment(){
+    this.loader=true
     this.master.getMethod("/getAllBlogs").subscribe(data=>{
       this.getBlogs=JSON.parse(JSON.stringify(data));
       console.log(data)
       setTimeout(function(){
         $('#example').DataTable();
        }, 1000);
+       this.loader=false;
     })
   }
 

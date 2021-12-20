@@ -52,6 +52,7 @@ error:boolean = false;
 
     
     getAllUSerData(){
+      this.loader=true;
     var exampleArray = [];
       this.master.getMethod('/getUsers').subscribe(data=>{
 
@@ -63,7 +64,7 @@ error:boolean = false;
       setTimeout(function(){
         $('#example').DataTable();
       }, 1000);
-
+      this.loader=false;
     
       });
 

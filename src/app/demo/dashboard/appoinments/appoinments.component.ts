@@ -84,12 +84,14 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
   
 
   getAllAppointment(){
+    this.loader=true
     this.master.getMethod("/allAppointments").subscribe(data=>{
       this.allAppointment=JSON.parse(JSON.stringify(data));
       console.log(data)
       setTimeout(function(){
         $('#example').DataTable();
        }, 1000);
+       this.loader=false
     })
   }
 
@@ -102,7 +104,7 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
 
   
 getDiffAppointment(){
- 
+  this.loader=true
   if(this.DiffAppointment=="All"){
     this.appointmentlike=this.DiffAppointment;
     this.loader=true;

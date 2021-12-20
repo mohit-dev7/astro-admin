@@ -53,6 +53,7 @@ export class PromocodeComponent implements OnInit {
   }
 
   getAllPromocode(){
+    this.loader=true
     this.sortedPromocode=[]
     this.master.getMethod('/getPromo').subscribe(data=>{
  
@@ -78,6 +79,7 @@ export class PromocodeComponent implements OnInit {
      setTimeout(function(){
       $('#example').DataTable();
      }, 1000);
+     this.loader=false
     
     });
 

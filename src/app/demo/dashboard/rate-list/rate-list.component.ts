@@ -138,6 +138,7 @@ export class RateListComponent implements OnInit{
 
   
  getRateList(){
+   this.loader=true
    this.sortedRateList=[]
    this.master.getMethod('/getAllRateList').subscribe(data=>{
 
@@ -169,6 +170,7 @@ export class RateListComponent implements OnInit{
    setTimeout(function(){
     $('#example').DataTable();
    }, 1000);
+   this.loader=false
  }
   
  getcountryList(){

@@ -77,6 +77,8 @@ export class BlogComponent implements OnInit {
     }
   }
 
+ 
+
 
 
   postNewBlog(){
@@ -84,7 +86,12 @@ debugger;
     var blogTitle = $('#blog_title').val();
     var blogSubtitle = $('#blogSubtilte').val();
     var blog_ftr = $('#blog_ftr').val();
-var content = $('#editor1 .angular-editor-textarea').html();
+    var content = $('#editor1 .angular-editor-textarea').html();
+    var description=$('#description').val();
+    var value=String($('#blog_title').val()).split(' ').join('_').toLowerCase();
+   
+    var keyword=$('#keyword').val();
+    console.log(value)
 
     if(blogTitle==''){
       alert('Please add blog title');
@@ -107,13 +114,17 @@ var content = $('#editor1 .angular-editor-textarea').html();
     else{
 
       var data ={
-        "title":blogTitle,
+      "title":blogTitle,
       "subtitle":blogSubtitle,
       "content":content,
       "image":"akash.jpg",
       "status":"Active",
       "createdAt":"2021-01-01",
-      "updatedAt":"2021-01-02"}
+      "updatedAt":"2021-01-02",
+      "description":description,
+      "keyword":keyword,
+      "slug":value
+    }
 
        this.master.methodPost(data,'/addBlog').subscribe((response:any)=>{
 
