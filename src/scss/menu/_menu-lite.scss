@@ -603,7 +603,7 @@
 }
 
 .pcoded-navbar .pcoded-inner-navbar li.active > a > .pcoded-micon, .pcoded-navbar .pcoded-inner-navbar li.active > a > .pcoded-micon + .pcoded-mtext{
-    color:#151349 !important;
+    color:#fdfdfd !important;
 }
 
 .pcoded-navbar {
@@ -1492,8 +1492,8 @@ app-nav-group {
   &.menu-light{
     .pcoded-inner-navbar app-nav-item > li.nav-item.active > a,
     .pcoded-inner-navbar app-nav-item > li.nav-item.pcoded-trigger > a{
-      background: #f1f1f1;
-      color: #111;
+      background: #03002b;
+      color: rgb(255, 255, 255);
     }
   }
   &.navbar-collapsed{
@@ -1705,6 +1705,6 @@ app-nav-group {
   height: calc(100% - 5px);
 }
 .pcoded-navbar .pcoded-inner-navbar>app-nav-group>app-nav-collapse>li.active>a, .pcoded-navbar .pcoded-inner-navbar>app-nav-group>app-nav-collapse>li.pcoded-trigger>a, .pcoded-navbar .pcoded-inner-navbar app-nav-item>li.nav-item.active>a, .pcoded-navbar .pcoded-inner-navbar app-nav-item>li.nav-item.pcoded-trigger>a {
-  background: #fff;
+  background: rgb(5, 0, 26);
   color: #fff;
 }

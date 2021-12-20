@@ -26,10 +26,18 @@ export class DefaultComponent implements OnInit {
   allAppointment: any = []
   title = 'datta-able';
   token = localStorage.getItem('userID');
+  userCount: any;
+  enqueryData: any;
+  appCount: any;
+  getAllBlogs: any;
   
   constructor(private master: MasterService) {
-
+    this.getUserCount();
     this.TokenExpired(this.token);
+  
+    setInterval(()=>{
+      this.getUserCount();
+    },2000);
   }
 
   ngOnInit() {
@@ -41,7 +49,33 @@ export class DefaultComponent implements OnInit {
   }
 
 
+getUserCount(){
 
+this.master.getMethod('/getUsers').subscribe((response:any)=>{
+ this.userCount = response.length;
+
+
+});
+
+
+this.master.getMethod('/getAllEnquiries').subscribe((response:any)=>{
+  this.enqueryData = response.length;
+ 
+ 
+ });
+
+ this.master.getMethod('/allAppointments').subscribe((response:any)=>{
+  this.appCount = response.length;
+ 
+ 
+ });
+
+ this.master.getMethod('/getAllBlogs').subscribe((response:any)=>{
+  this.getAllBlogs = response.length;
+ 
+ 
+ });
+}
 
   TokenExpired(token) {
     this.master.getMethod("/AllCountries").subscribe(data => {
