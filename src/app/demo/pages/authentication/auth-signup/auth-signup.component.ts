@@ -65,6 +65,10 @@ debugger;
     var tel = this.phoneForm.get('phone').value;
   var mobile = tel['number'];
   var telcode =tel['dialCode'];
+<<<<<<< HEAD
+=======
+
+>>>>>>> 720e57538f4b33ba34a2b94fe1673bb5b4a1c1a5
     var password = this.signupForm.get('password').value;
     var fname = this.signupForm.get('firstname').value;
     var lname = this.signupForm.get('lastname').value;
