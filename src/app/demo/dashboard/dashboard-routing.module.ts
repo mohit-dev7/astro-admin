@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { CommentComponent } from './comment/comment.component';
 import { EditBlogComponent } from './edit-blog/edit-blog.component';
 import { HolidayComponent } from './holiday/holiday.component';
 import { TimeslotComponent } from './timeslot/timeslot.component';
@@ -84,6 +85,10 @@ const routes: Routes = [
       {
         path: 'editBlog/:id',
         component: EditBlogComponent
+      },
+      {
+        path: 'comment/:id',
+        component: CommentComponent
       }
     ]
   }
