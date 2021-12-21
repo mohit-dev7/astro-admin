@@ -88,8 +88,8 @@ debugger;
     var blog_ftr = $('#blog_ftr').val();
     var content = $('#editor1 .angular-editor-textarea').html();
     var description=$('#description').val();
-    var value=String($('#blog_title').val()).split(' ').join('_').toLowerCase();
-   
+    var value=String($('#blog_title').val()).split(' ').join('-').toLowerCase();
+    var value1 = value.replace('&','and');
     var keyword=$('#keyword').val();
     console.log(value)
 
@@ -123,7 +123,7 @@ debugger;
       "updatedAt":"2021-01-02",
       "description":description,
       "keywords":keyword,
-      "slug":value
+      "slug":value1
     }
 
        this.master.methodPost(data,'/addBlog').subscribe((response:any)=>{

@@ -84,7 +84,15 @@ export class AllBlogsComponent implements OnInit {
 
 
 
+  deleteBlog(id){
 
+if(confirm("Are you sure want to delete this blog?")){
+
+  }
+
+  else{
+  }
+  }
 
 
     onCancel(){
