@@ -314,7 +314,7 @@ export class RateListComponent implements OnInit{
      "sno":id,
      "remarks":''
    }
-   this.master.methodPost(data, '/EditRateList?id='+id).subscribe(reponse=>{
+   this.master.deleteMethod( '/deleteRatelist/'+id).subscribe(reponse=>{
  
      if(reponse['name']!='')
      { 

@@ -31,6 +31,7 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
   singleUserDetail:any=[]
   dateFormat:any
   datepipe: any;
+  edit:boolean=false;
   constructor(private http: HttpClient,private master:MasterService) {
     this.TokenExpired(this.token);
 
@@ -175,6 +176,11 @@ editAppointment(id){
       this.onEdit=false;
       this.message="";
   
+    }
+    editor(id){
+      this.edit=true
+      this.onEdit=false
+
     }
 
 

@@ -59,18 +59,22 @@ export class BlogComponent implements OnInit {
       ['fontSize']
     ]
   };
+  simg: any;
+  loader:boolean = false;
 
   constructor(private master:MasterService, private router:Router) { }
 
   ngOnInit(): void {
   }
 
+
+
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
 
       reader.readAsDataURL(event.target.files[0]); // read file as data url
-
+this.simg = event.target.files[0];
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.urlDt = event.target.result;
       }
@@ -82,6 +86,9 @@ export class BlogComponent implements OnInit {
 
 
   postNewBlog(){
+
+    this.loader = true;
+ 
 debugger;
     var blogTitle = $('#blog_title').val();
     var blogSubtitle = $('#blogSubtilte').val();
@@ -111,16 +118,21 @@ debugger;
 
     }
 
+    else if(keyword==''){
+      alert('Please write some keywords in blog.');
+      return false;
+
+    }
+
     else{
 
       var data ={
       "title":blogTitle,
       "subtitle":blogSubtitle,
       "content":content,
-      "image":"akash.jpg",
+      "image":"test.jpg",
       "status":"Active",
-      "createdAt":"2021-01-01",
-      "updatedAt":"2021-01-02",
+
       "description":description,
       "keywords":keyword,
       "slug":value1
@@ -128,15 +140,46 @@ debugger;
 
        this.master.methodPost(data,'/addBlog').subscribe((response:any)=>{
 
-          console.log(response);
+          console.log(response['id']);
+
+        
+
+          if(this.urlDt != '../../../../assets/images/placeholder.png' && this.urlDt!='' ){
+            this.loader = false;
           alert('Blog Added seuucess fully.');
-          this.router.navigate(['/dashboard/allblogs']);
+              this.router.navigate(['/dashboard/allblogs']);
+          }
+          else{
+            this.uploadBlogImage(response['id']);
+          }
+        
 
        });
 
     }
     
 
+  }
+
+
+
+
+
+
+
+  uploadBlogImage(id){
+    debugger;
+    var formData = new FormData();
+    formData.append('file', this.simg);
+
+
+    console.log(this.simg);
+    this.master.methodPostMulti(formData, '/uploadBlogPic?blogId='+id).subscribe(res=>{
+console.log(res);
+       this.router.navigate(['/dashboard/allblogs']);
+
+       alert('Blog Added successfully.');
+    });
   }
 
 }

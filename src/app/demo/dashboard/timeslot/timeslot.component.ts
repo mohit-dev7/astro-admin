@@ -195,6 +195,7 @@ export class TimeslotComponent implements OnInit {
         $('#example').DataTable();
        }, 1000);
        this.loader=false
+       console.log(this.timeslotData)
     });
     
 
@@ -276,6 +277,25 @@ export class TimeslotComponent implements OnInit {
 
   onCancel(){
 
+  }
+  onDelete(id){
+    if(confirm("Are sure you want to delete this record")){
+      this.master.deleteMethod("/deleteTimeslot/"+id).subscribe(data=>{
+        if(data['name']!='')
+        { 
+          alert("Record deleted successfully.");
+          location.reload();
+    
+        }else{
+          this.error = true;
+          this.message = 'Failed to delete record!';
+          return false;
+        }
+      },(error=>{
+        alert("failed to delete data something wrong please check carefully ")
+      }))
+    }
+  
   }
 
 

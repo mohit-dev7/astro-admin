@@ -127,24 +127,24 @@ export class CountryComponent implements OnInit {
    this.master.getMethod('/AllCountries').subscribe(data=>{
 
     this.countryData = JSON.parse(JSON.stringify(data));
-    for (let i=0;i<this.countryData.length ; i++){
-      if (this.countryData[i].status!="DELETED"){
-          this.filterDeletedData.push(this.countryData[i])
-      }
-    }
-    var low=0;
-    var high=this.filterDeletedData.length -1;
-    while(low<=high){
-      if(this.filterDeletedData[low].sno<this.filterDeletedData[high].sno){
-        this.sortedData.push(this.filterDeletedData[high]);
-        high--
-      }else{
-        this.sortedData.push(this.filterDeletedData[low]); 
-        low++;
-      }
-    }
+    // for (let i=0;i<this.countryData.length ; i++){
+    //   if (this.countryData[i].status!="DELETED"){
+    //       this.filterDeletedData.push(this.countryData[i])
+    //   }
+    // }
+    // var low=0;
+    // var high=this.filterDeletedData.length -1;
+    // while(low<=high){
+    //   if(this.filterDeletedData[low].sno<this.filterDeletedData[high].sno){
+    //     this.sortedData.push(this.filterDeletedData[high]);
+    //     high--
+    //   }else{
+    //     this.sortedData.push(this.filterDeletedData[low]); 
+    //     low++;
+    //   }
+    // }
 
-    console.log(this.sortedData)
+    // console.log(this.sortedData)
     
     setTimeout(function(){
       $('#example').DataTable();
@@ -241,8 +241,10 @@ export class CountryComponent implements OnInit {
 }
 
  OnDelete(id, name, code){
+   debugger
 
    if(confirm("Are you sure want to delete this record?")){
+ 
  
     var Country=this.countryForm.get("country").value;
     var Code=this.countryForm.get("code").value;
@@ -254,12 +256,14 @@ export class CountryComponent implements OnInit {
       "status":"DELETED",
       "sno":id,
       "remarks":''
+     
+     
   
     }
-    this.master.methodPost(data, '/UpdateCountry?id='+id).subscribe(reponse=>{
+    this.master.deleteMethod('/deleteCountry/'+id).subscribe(reponse=>{
   
       if(reponse['name']!='')
-      {    this.sortedData = [];
+      {    
         alert("Record deleted successfully.");
         location.reload();
   

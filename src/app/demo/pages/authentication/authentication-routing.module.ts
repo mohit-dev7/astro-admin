@@ -20,7 +20,7 @@ const routes: Routes = [
       }
       ,
       {
-        path: 'change-password',
+        path: 'changePassword',
         loadChildren: () => import('./reset-password/reset-password.module').then(m => m.ResetPasswordModule)
       }
     ]

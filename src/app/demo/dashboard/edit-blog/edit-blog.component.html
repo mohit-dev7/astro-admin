@@ -2,6 +2,10 @@
 <h3 class="ml-2">Edit Blog</h3>
 <hr>
     <section class="blog_section">
+
+        <div class="loader" *ngIf="loader">
+            <img src="../../../../assets/images/loading.gif" />
+        </div>
         <form action="">
         <div class="col-md-12 col-lg-12">
             <div class="row">
@@ -27,6 +31,15 @@
                                 </div>
                         </div>
 
+                        <div class="col-12">
+                            <div class="form-group mt-2">
+                                <label>Description</label>
+                                <textarea class="form-control" value="{{singleData.description}}" placeholder="write something..." id="description"></textarea>
+                       
+                        </div>
+                        </div>
+
+                                
                                     <div class="col-12">
                                 <div class="form-group mt-3">
                                     <label>Write content here</label>
@@ -42,12 +55,21 @@
                 </div>
 
                 <div class="col-md-4 col-sm-12">
+
+
                      <div class="card">
+
+                        <div class="form-group p-2">
+                            <label><b>Blog Keywords</b></label>
+                       <textarea class="form-control" value="{{singleData.keywords}}" placeholder="Eg: best blog, astroenergy, Indian astro etc." id="keyword"></textarea>
+                       <small>*Note: Seprate your keywords with ( , ).</small>
+                        </div>
+
                         <div class="image_bx">
                             <h4>Select Feature Image</h4>
                             <hr>
                             <label for="blog_ftr" class="btn flBt1"><i class="fa fa-image"></i> Select Feature Image </label>
-                           <input type='file' style="display: none;" id="blog_ftr" (change)="onSelectFile($event)">
+                           <input type='file' style="display: none;"  accept='image/*'  id="blog_ftr" (change)="onSelectFile($event)" (change)="onSelectFile($event)">
                             <hr>
                             <img [src]="urlDt" height="200"> <br/>
                         </div>
