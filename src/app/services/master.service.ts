@@ -30,6 +30,12 @@ export class MasterService {
   }  
 
 
+  httpOption3 = {
+    headers: new HttpHeaders({
+      'Content-Type': 'multipart/form-data'
+    })
+  }  
+
   // httpOptions = {
   //   headers: new HttpHeaders({
   //     'Content-Type': 'application/json',
@@ -81,6 +87,16 @@ export class MasterService {
       catchError(this.handleError)
     )
   }  
+
+
+  methodPostMulti(data, dataApi): Observable<any> {
+    return this.http.post(this.apURL+dataApi, data)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }  
+
   methodPost1( dataApi): Observable<UserData> {
     return this.http.post<UserData>(this.apURL+dataApi, this.httpOptions)
     .pipe(

@@ -32,6 +32,9 @@ export class AllBlogsComponent implements OnInit {
   dateFormat:any
   datepipe: any;
   apURL = 'http://18.219.65.148:8080';
+
+imgURL = this.apURL+"/getBlogPic"+"/";
+
   constructor(private http: HttpClient,private master:MasterService) {
 
 
@@ -84,7 +87,25 @@ export class AllBlogsComponent implements OnInit {
 
 
 
+  deleteBlog(id){
 
+
+if(confirm("Are you sure want to delete this blog?")){
+
+this.master.deleteMethod('/deleteBlog/'+id).subscribe(res=>{
+
+  alert('Your blog deleted success fully!');
+  this.getAllAppointment();
+
+},error=>{
+  alert('something went wrong try again letter!');
+});
+  }
+
+  else{
+    return false;
+  }
+  }
 
 
     onCancel(){

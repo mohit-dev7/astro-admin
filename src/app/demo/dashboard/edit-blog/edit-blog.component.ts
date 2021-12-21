@@ -13,7 +13,9 @@ export class EditBlogComponent implements OnInit {
   singleData:any = [];
   name = 'Angular 4';
   urlDt:any = '../../../../assets/images/placeholder.png';
+  apURL = 'http://18.219.65.148:8080';
 
+imgURL = this.apURL+"/getBlogPic"+"/";
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -61,6 +63,11 @@ export class EditBlogComponent implements OnInit {
     ]
   };
 blogId :any = '';
+  simg: string | Blob;
+
+  imgSlt:boolean = false;
+  loader:boolean = false;
+  userImage: any;
   constructor(private master:MasterService, private router:Router, private route:ActivatedRoute) {
 
     this.blogId =  this.route.params['_value']['id'];
@@ -72,77 +79,158 @@ blogId :any = '';
 
   }
 
-  onSelectFile(event) {
-    if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
 
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
-
-      reader.onload = (event) => { // called once readAsDataURL is completed
-        this.urlDt = event.target.result;
-      }
-    }
-  }
 
 
   getBlogData(id){
 
 this.master.getMethod('/getBlog?id='+id).subscribe(response=>{
 this.singleData = response;
+this.userImage = response['image'];
+this.urlDt = this.imgURL +response['image'] + '/'+response['id'];
 $('#editor1 .angular-editor-textarea').html(response['content']);
 })
 
   }
 
 
+ 
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+this.simg = event.target.files[0];
+this.imgSlt = true;
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.urlDt = event.target.result;
+      }
+    }
+  }
+
+ 
+
+
+
   postNewBlog(){
-    alert('failed to update blog try again letter.')
-// debugger;
-//     var blogTitle = $('#blog_title').val();
-//     var blogSubtitle = $('#blogSubtilte').val();
-//     var blog_ftr = $('#blog_ftr').val();
-// var content = $('#editor1 .angular-editor-textarea').html();
+    this.loader = true;
+ 
+debugger;
+    var blogTitle = $('#blog_title').val();
+    var blogSubtitle = $('#blogSubtilte').val();
+    var blog_ftr = $('#blog_ftr').val();
+    var content = $('#editor1 .angular-editor-textarea').html();
+    var description=$('#description').val();
+    var value=String($('#blog_title').val()).split(' ').join('-').toLowerCase();
+    var value1 = value.replace('&','and');
+    var keyword=$('#keyword').val();
+    console.log(value)
 
-//     if(blogTitle==''){
-//       alert('Please add blog title');
-//       return false;
+    if(blogTitle==''){
+      alert('Please add blog title');
+      return false;
 
-//     }
+    }
 
-//     else if(blogSubtitle==''){
-//       alert('Please add blog subtitle');
-//       return false;
+    else if(blogSubtitle==''){
+      alert('Please add blog subtitle');
+      return false;
 
-//     }
+    }
 
-//     else if(content==''){
-//       alert('Please write something in blog.');
-//       return false;
+    else if(content==''){
+      alert('Please write something in blog.');
+      return false;
 
-//     }
+    }
 
-//     else{
+    else if(keyword==''){
+      alert('Please write some keywords in blog.');
+      return false;
 
-//       var data ={
-//         "title":blogTitle,
-//       "subtitle":blogSubtitle,
-//       "content":content,
-//       "image":"akash.jpg",
-//       "status":"Active",
-//       "createdAt":"2021-01-01",
-//       "updatedAt":"2021-01-02"}
+    }
 
-//        this.master.methodPost(data,'/addBlog').subscribe((response:any)=>{
+    else{
 
-//           console.log(response);
-//           alert('Blog Added seuucess fully.');
-//           this.router.navigate(['/dashboard/allblogs']);
+      if(this.imgSlt!=true){
+        
+      var data ={
+        "id": this.blogId,
+      "title":blogTitle,
+      "subtitle":blogSubtitle,
+      "content":content,
+      "image":this.userImage,
+      "status":"Active",
+      "description":description,
+      "keywords":keyword,
+      "slug":value1
+    }
 
-//        });
 
-//     }
+    this.master.methodPost(data,'/addBlog').subscribe((response:any)=>{
+
+      console.log(response['id']);
+
+      this.loader = false;
+      alert('Blog Added seuucess fully.');
+          this.router.navigate(['/dashboard/allblogs']);
+      
+     
     
 
+   });
+
+      }
+
+      else{
+        var data2 ={
+          "id": this.blogId,
+        "title":blogTitle,
+        "subtitle":blogSubtitle,
+        "content":content,
+        "status":"Active",
+        "description":description,
+        "keywords":keyword,
+        "slug":value1
+      }
+  
+  
+      this.master.methodPost(data2,'/addBlog').subscribe((response:any)=>{
+  
+        console.log(response['id']);
+        
+       this.uploadBlogImage(response['id']);
+      
+  
+     });
+      }
+
+  
+
+    }
+    
+
+  }
+
+
+
+
+
+
+
+  uploadBlogImage(id){
+    debugger;
+    var formData = new FormData();
+    formData.append('file', this.simg);
+
+
+    console.log(this.simg);
+    this.master.methodPostMulti(formData, '/uploadBlogPic?blogId='+id).subscribe(res=>{
+console.log(res);
+       this.router.navigate(['/dashboard/allblogs']);
+       this.loader = false;
+       alert('Blog Added successfully.');
+    });
   }
 
 }

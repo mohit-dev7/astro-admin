@@ -31,11 +31,12 @@
             <tr *ngFor="let data of getBlogs">
                 <td>{{data.id}}</td>
                
+                <td><img  src="{{imgURL}}{{data.image}}/{{data.id}}" style="width:50px; height: 50px; border-radius: 10px;; object-fit: cover;"/></td>
                 <td>{{data.title}}</td>
                 <td><div class="cont_bx" [innerHTML]="data.content"></div></td>
                 <td >
                   <button class="btn btn-success"  routerLink="/dashboard/editBlog/{{data.id}}"><i class="ng-tns-c22-2 feather icon-edit"></i></button> 
-                  <button class="btn btn-danger"  ><i class="ng-tns-c22-2 feather icon-trash"></i></button> 
+                  <button class="btn btn-danger"  (click)="deleteBlog(data.id)"><i class="ng-tns-c22-2 feather icon-trash"></i></button> 
                   <button class="btn btn-primary"  ><i class="fa fa-comment"></i> Comments</button> 
                 </td>
             </tr>
