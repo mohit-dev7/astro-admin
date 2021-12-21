@@ -65,6 +65,13 @@ export class MasterService {
     )
   }
 
+
+
+  deleteMethod(dataApi){
+    return this.http.delete(this.apURL+dataApi);
+  
+  }
+
   // kaushal
 
   methodPost(data, dataApi): Observable<UserData> {

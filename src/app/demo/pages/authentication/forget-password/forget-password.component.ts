@@ -34,7 +34,7 @@ export class ForgetPasswordComponent implements OnInit {
  
       this.error = false;
       this.message = ' email send to your mail-id please check ';
-      // setTimeout(()=>{location.reload()},1000);
+      setTimeout(()=>{location.reload()},2000);
       location.reload();
       return false;
 

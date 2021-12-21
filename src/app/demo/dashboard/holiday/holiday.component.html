@@ -106,7 +106,7 @@
                 <td>{{index+1}}</td>
                 <td>{{data.holidayDate}}</td>
                 <td><div *ngFor="let timeslotData of data.timeSlots">{{timeslotData.timeSlotName}}</div></td>
-                <td> <button class="btn btn-success" (click)="editHoliday(data.id)"><i class="ng-tns-c22-2 feather icon-edit"></i></button> <button class="btn btn-danger"><i class="ng-tns-c22-2 feather icon-trash"></i></button> </td>
+                <td> <button class="btn btn-success" (click)="editHoliday(data.id)"><i class="ng-tns-c22-2 feather icon-edit"></i></button> <button class="btn btn-danger" (click)="onDelete(data.id)"><i class="ng-tns-c22-2 feather icon-trash"></i></button> </td>
                
             </tr>
          

@@ -249,7 +249,7 @@ export class PromocodeComponent implements OnInit {
         "status": "DELETED"
 
       }
-      this.master.methodPost(data, '/editPromo').subscribe(reponse=>{
+      this.master.deleteMethod('/deletePromo/'+id).subscribe(reponse=>{
     
         if(reponse['name']!='')
         { 

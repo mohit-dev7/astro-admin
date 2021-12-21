@@ -54,6 +54,12 @@
                 
                   
                 </div>
+                <div class="text-editor col-lg-12" *ngIf="edit">
+                    <div class="form-group mt-3">
+                        <label>Write content here</label>
+                        <angular-editor id="editor1" [config]="editorConfig"></angular-editor>
+                    </div>
+                </div>
             </form>
               
 
@@ -121,7 +127,8 @@
             <tr *ngFor="let data of allAppointment ;let index=index">
                 <td>{{index+1}}</td>
                 <td>{{data.appointDate | date:'d/M/y' }}</td>
-                <td>{{data.timeSlot.timeSlotName}}</td>
+                <td *ngIf='data.timeSlot!=Null'>{{data.timeSlot.timeSlotName}}</td>
+                <td *ngIf='data.timeSlot==Null'>null</td>
                 <td>{{data.userProfile.firstName}} &nbsp; {{data.userProfile.lastName}}</td>
                 <td>2011/01/25</td>
                 <td>{{data.userProfile.timeOfBirth}}</td>
@@ -132,6 +139,7 @@
                 <td>{{data.status}}</td>
                 <td style="display: flex;">
                   <button class="btn btn-success" (click)="editAppointment(data.id)" ><i class="ng-tns-c22-2 feather icon-edit"></i></button> 
+                  <button class="btn btn-success" (click)="editor(data.id)" ><i class="ng-tns-c22-2 feather icon-edit"></i></button> 
                 </td>
             </tr>
         </tbody>
