@@ -58,23 +58,23 @@ export class PromocodeComponent implements OnInit {
     this.master.getMethod('/getPromo').subscribe(data=>{
  
      this.promocode = JSON.parse(JSON.stringify(data));
-     for (let i=0;i<this.promocode.length ; i++){
-      if (this.promocode[i].status!="DELETED"){
-          this.filterDeletedData.push(this.promocode[i])
-      }
-    }
-     console.log(data)
-     var low=0;
-     var high=this.filterDeletedData.length -1;
-     while(low<=high){
-       if(this.filterDeletedData[low].sno<this.filterDeletedData[high].sno){
-         this.sortedPromocode.push(this.filterDeletedData[high]);
-         high--
-       }else{
-         this.sortedPromocode.push(this.filterDeletedData[low]); 
-         low++;
-       }
-     }
+    //  for (let i=0;i<this.promocode.length ; i++){
+    //   if (this.promocode[i].status!="DELETED"){
+    //       this.filterDeletedData.push(this.promocode[i])
+    //   }
+    // }
+    //  console.log(data)
+    //  var low=0;
+    //  var high=this.filterDeletedData.length -1;
+    //  while(low<=high){
+    //    if(this.filterDeletedData[low].sno<this.filterDeletedData[high].sno){
+    //      this.sortedPromocode.push(this.filterDeletedData[high]);
+    //      high--
+    //    }else{
+    //      this.sortedPromocode.push(this.filterDeletedData[low]); 
+    //      low++;
+    //    }
+    //  }
 
      setTimeout(function(){
       $('#example').DataTable();

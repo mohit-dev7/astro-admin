@@ -20,12 +20,12 @@
                 </div>
             <form action="" [formGroup]="appointmentForm">
 
-             
-                <div class="row col-lg-12" *ngIf="onEdit">
+              
+                <div class="row col-lg-12" *ngIf="onEdit1">
                     <form  action="" [formGroup]="appointmentForm"></form>
                     <div class="form-group col-lg-2">
                         <label for="">Name:</label>
-                        <input class="form-control" type="text" formControlName="name" readonly >
+                        <input class="form-control" type="text" formControlName="name1" readonly >
                     </div>
                     <div class="form-group col-lg-3">
                         <label for="">App Date:</label>
@@ -54,16 +54,23 @@
                 
                   
                 </div>
+                <input type="hidden" id="userId">
                 <div class="text-editor col-lg-12" *ngIf="edit">
-                    <div class="form-group mt-3">
-                        <label>Write content here</label>
+                    <div class="form-group ">
+                        <label class="remedies">Write Your Remedies Here</label>
                         <angular-editor id="editor1" [config]="editorConfig"></angular-editor>
+                    </div>
+                    <div class="form-group text-center center  ">
+                        <div class="col-lg-12 text-center">
+                            <button class=" btn  save" (click)="saveRemedies()" >Save</button>
+                            <button class="btn  cancel" (click)="onCancel()">Cancel</button>
+                        </div>
                     </div>
                 </div>
             </form>
               
 
-                <div class="col-md-3" *ngIf="!onEdit">
+                <div class="col-md-3" *ngIf="onEdit">
                     <div class="form-group">
                         <label>Select Type:</label>
                        <select class="form-control" (change)="getAppointment($event.target.value)" >
@@ -89,7 +96,7 @@
                     </div>
                </div>
 
-            <div class="col-md-2 " *ngIf="!onEdit">
+            <div class="col-md-2 " *ngIf="onEdit2">
               <button class="btn btn-primarry pull-left w-100" style="float: left; margin-top: 34px;" (click)="getDiffAppointment()">Search</button>
              </div>
 
@@ -117,6 +124,7 @@
                 <th>Meeting Mode</th>
                 <th>Skype/Whatsapp/Phone</th>
                 <th>Appointment Status</th>
+                <th>Remedy</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -127,8 +135,8 @@
             <tr *ngFor="let data of allAppointment ;let index=index">
                 <td>{{index+1}}</td>
                 <td>{{data.appointDate | date:'d/M/y' }}</td>
-                <td *ngIf='data.timeSlot!=Null'>{{data.timeSlot.timeSlotName}}</td>
-                <td *ngIf='data.timeSlot==Null'>null</td>
+                <td *ngIf='data.timeSlot!=null'>{{data.timeSlot.timeSlotName}}</td>
+                <td *ngIf='data.timeSlot==null'>null</td>
                 <td>{{data.userProfile.firstName}} &nbsp; {{data.userProfile.lastName}}</td>
                 <td>2011/01/25</td>
                 <td>{{data.userProfile.timeOfBirth}}</td>
@@ -137,9 +145,11 @@
                 <td>{{data.meetingType}}</td>
                 <td>{{data.skypeId}}</td>
                 <td>{{data.status}}</td>
+                <td *ngIf="data.remedy!=null" class="text-primary">Remedy Added</td>
+                <td *ngIf="data.remedy==null " class="text-danger">Remedy Not Added</td>
                 <td style="display: flex;">
-                  <button class="btn btn-success" (click)="editAppointment(data.id)" ><i class="ng-tns-c22-2 feather icon-edit"></i></button> 
-                  <button class="btn btn-success" (click)="editor(data.id)" ><i class="ng-tns-c22-2 feather icon-edit"></i></button> 
+                  <button class="btn btn-success edit" (click)="editAppointment(data.id)" ><i class="ng-tns-c22-2 feather icon-edit"></i></button> 
+                  <button class="btn btn-primary edit" (click)="editor(data.id, data.remedy)" ><i class="ng-tns-c22-2 feather icon-book"></i></button> 
                 </td>
             </tr>
         </tbody>

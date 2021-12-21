@@ -21,6 +21,7 @@ import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import { ContactdComponent } from './contactd/contactd.component';
 import { BlogComponent } from './blog/blog.component';
 import { EditBlogComponent } from './edit-blog/edit-blog.component';
+import { CommentComponent } from './comment/comment.component';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import { EditBlogComponent } from './edit-blog/edit-blog.component';
  
 
  
-  declarations: [UsersComponent, AppoinmentsComponent, AllBlogsComponent,  PromocodeComponent, EnquireComponent, FeedbackComponent, CountryComponent, TimeslotComponent, HolidayComponent, ContactdComponent, BlogComponent, EditBlogComponent],
+  declarations: [UsersComponent, AppoinmentsComponent, AllBlogsComponent,  PromocodeComponent, EnquireComponent, FeedbackComponent, CountryComponent, TimeslotComponent, HolidayComponent, ContactdComponent, BlogComponent, EditBlogComponent, CommentComponent],
  schemas:[NO_ERRORS_SCHEMA]
 })
 export class DashboardModule { }
