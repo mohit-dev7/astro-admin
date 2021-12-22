@@ -22,7 +22,7 @@ import { MasterService } from 'src/app/services/master.service.js';
   styleUrls: ['./default.component.scss']
 })
 export class DefaultComponent implements OnInit {
-  appointment: any = "Today"
+  appointment: any = "Todays"
   allAppointment: any = []
   title = 'datta-able';
   token = localStorage.getItem('userID');
@@ -95,10 +95,13 @@ this.master.getMethod('/getAllEnquiries').subscribe((response:any)=>{
 
   }
 
-  OnClick(value: any) {
-    this.appointment = value;
+  OnClick(event) {
+    var value1=event.target.value
+    this.appointment = value1;
+    console.log(value1,this.appointment)
+  
 
-    if (value === "Tomorrows") {
+    if (value1 === "Tomorrows") {
       const today = new Date();
       const tomorrow = new Date(today.setDate(today.getDate() + 1));
       let data = {
@@ -113,7 +116,7 @@ this.master.getMethod('/getAllEnquiries').subscribe((response:any)=>{
       setTimeout(function () {
         $('#example').DataTable();
       }, 2500);
-    } else if (value === "Todays") {
+    } else if (value1 === "Todays") {
       const today = new Date();
       let data = {
         "fromDate": today.toISOString().slice(0,10),
@@ -128,7 +131,7 @@ this.master.getMethod('/getAllEnquiries').subscribe((response:any)=>{
       setTimeout(function () {
         $('#example').DataTable();
       }, 2500);
-    } else if (value === "Upcoming") {
+    } else if (value1 === "Upcoming") {
       const today = new Date();
       const tomorrow = new Date(today.setDate(today.getDate() + 1000));
       let data = {
@@ -161,6 +164,7 @@ this.master.getMethod('/getAllEnquiries').subscribe((response:any)=>{
       console.log(today.toISOString().slice(0,10));
       this.master.getAppointmentsByCriteria(data).subscribe(data => {
         this.allAppointment = JSON.parse(JSON.stringify(data));
+        console.log(this.allAppointment)
 
       });
     setTimeout(function () {
@@ -169,4 +173,5 @@ this.master.getMethod('/getAllEnquiries').subscribe((response:any)=>{
     this.loader=false
   }
 
+ 
 }

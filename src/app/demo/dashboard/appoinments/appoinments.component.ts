@@ -17,6 +17,7 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
   singleData:any = [];
   name = 'Angular 4';
   urlDt:any = '../../../../assets/images/placeholder.png';
+  typeCunsultant:any=["Kundali/Birth Chart Consultation","Gemstone Consultation","Match Making Consultation","Vastu"]
 
 
   editorConfig: AngularEditorConfig = {
@@ -142,13 +143,22 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
     this.loader=true
     this.master.getMethod("/allAppointments").subscribe(data=>{
       this.allAppointment=JSON.parse(JSON.stringify(data));
-      console.log(data)
+      console.log(this.allAppointment)
+      for(let x of this.allAppointment){
+        x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
+      }
+      // for(var i=1;i<=this.allAppointment.length;i++){
+      //   if (this.allAppointment[i].consultationType==i){
+      //     this.allAppointment[i].consultationType=this.typeCunsultant[i-1]
+        
+      // }
+      this.loader=false
 
       // this.remedy=content;
       setTimeout(function(){
         $('#example').DataTable();
        }, 1000);
-       this.loader=false
+       
     })
   }
 
@@ -167,6 +177,9 @@ getDiffAppointment(){
     this.loader=true;
     this.master.getMethod("/allAppointments").subscribe(data=>{
     this.allAppointment=JSON.parse(JSON.stringify(data));
+    for(let x of this.allAppointment){
+      x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
+    }
      this.loader=false;
     })
   }else if (this.DiffAppointment!="All"){
@@ -174,6 +187,9 @@ getDiffAppointment(){
     this.loader=true;
     this.master.getMethod("/getAppointment/"+this.DiffAppointment).subscribe(data=>{
     this.allAppointment=JSON.parse(JSON.stringify(data));
+    for(let x of this.allAppointment){
+      x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
+    }
 
       this.loader=false;
     });

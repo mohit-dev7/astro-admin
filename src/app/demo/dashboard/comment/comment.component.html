@@ -8,11 +8,11 @@
 <div class="table_data card p-3">
     <div class="row">
         <div class="col-lg-12">
-            <div *ngIf="message!='' && error==true" class="alert alert-danger w-100" role="alert">
+            <div *ngIf="message!='' && error==true" class="alert alert-success w-100" role="alert">
                 {{message}}
             </div>
 
-            <div *ngIf="message!='' && error!=true" class="alert alert-success w-100" role="alert">
+            <div *ngIf="message!='' && error!=true" class="alert alert-danger w-100" role="alert">
                 {{message}}
             </div>
 
@@ -52,7 +52,7 @@
                 <td>{{data.email}}</td>
                 <td>{{data.content}}</td>
                 <td>{{data.commentedOn}}</td>
-                <td> <button class="btn btn-success" (click)="OnCheck()"><i class="ng-tns-c22-2 feather icon-check"></i></button> <button class="btn btn-danger" (click)="onDelete(data.id)" ><i class="ng-tns-c22-2 feather icon-trash"></i></button> </td>
+                <td> <button class="btn btn-success" (click)="OnCheck(data.id)"><i class="ng-tns-c22-2 feather icon-check"></i></button> <button class="btn btn-danger" (click)="onDelete(data.id)" ><i class="ng-tns-c22-2 feather icon-trash"></i></button> </td>
                
             </tr>
          
