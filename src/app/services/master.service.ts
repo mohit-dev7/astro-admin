@@ -88,7 +88,7 @@ export class MasterService {
     )
   }  
 
-
+  
   methodPostMulti(data, dataApi): Observable<any> {
     return this.http.post(this.apURL+dataApi, data)
     .pipe(
