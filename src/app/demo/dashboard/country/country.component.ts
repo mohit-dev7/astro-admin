@@ -5,8 +5,8 @@ import { MasterService } from 'src/app/services/master.service';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import {  Router } from '@angular/router';
-
 declare var $: any;
+
 @Component({
   selector: 'app-country',
   templateUrl:'./country.component.html',
