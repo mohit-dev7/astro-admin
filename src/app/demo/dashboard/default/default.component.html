@@ -47,6 +47,29 @@
           </div>
       </div>
   </div>
+  <div class="row align-items-center justify-content-center appoint">
+      <div class="col-lg-4">
+          <div class="box text-center ">
+            <h2> Today's Appointment </h2>
+            <button class="btn priamry mt-1" value="Todays" (click)="OnClick($event)">Today's Appointment</button>
+          </div>
+        
+      </div>
+      <div class="col-lg-4">
+        <div class="box text-center ">
+            <h2> Tomorrow Appointment </h2>
+            <button class="btn priamry mt-1" value="Tomorrows" (click)="OnClick($event)">Tomorrow Appointment</button>
+          </div>
+        
+     </div>
+     <div class="col-lg-4">
+        <div class="box text-center ">
+            <h2> Upcoming Appointment </h2>
+            <button class="btn priamry mt-1" value="Upcoming" (click)="OnClick($event)" >Upcoming Appointment</button>
+          </div>
+    </div>
+  </div>
+
 </div>
 
 
@@ -88,8 +111,8 @@
                   <td *ngIf="data.timeSlot==null">null</td>
                   <td>{{data.userProfile.firstName}} &nbsp; {{data.userProfile.lastName}}</td>
                   <td>2011/01/25</td>
-                  <td>{{data.userProfile.timeOfBirth}}</td>
-                  <td>{{data.userProfile.placeOfBirth}}</td>
+                  <td>{{data.timeOfBirth}}</td>
+                  <td>{{data.placeOfBirth}}</td>
                   <td *ngIf="data.consultationType==1">{{data.consultationType}}</td>
                   
                   <td>{{data.meetingType}}</td>

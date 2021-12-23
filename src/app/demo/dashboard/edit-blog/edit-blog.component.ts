@@ -128,23 +128,27 @@ debugger;
 
     if(blogTitle==''){
       alert('Please add blog title');
+      this.loader=false
       return false;
 
     }
 
     else if(blogSubtitle==''){
+      this.loader=false
       alert('Please add blog subtitle');
       return false;
 
     }
 
     else if(content==''){
+      this.loader=false
       alert('Please write something in blog.');
       return false;
 
     }
 
     else if(keyword==''){
+      this.loader=false
       alert('Please write some keywords in blog.');
       return false;
 

@@ -6,12 +6,14 @@ import { AppoinmentsComponent } from './appoinments.component';
 import { AppoinmentsRoutingModule } from './appoinments-routing.module';
 
 import { DataTablesModule } from 'angular-datatables';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 @NgModule({
   imports: [
     CommonModule,
     AppoinmentsRoutingModule,
     SharedModule,
-    DataTablesModule
+    DataTablesModule,
+    AngularEditorModule
   ],
   exports:[
     DataTablesModule

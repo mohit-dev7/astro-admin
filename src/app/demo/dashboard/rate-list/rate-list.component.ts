@@ -143,23 +143,23 @@ export class RateListComponent implements OnInit{
    this.master.getMethod('/getAllRateList').subscribe(data=>{
 
     this.rateList = JSON.parse(JSON.stringify(data));
-    for (let i=0;i<this.rateList.length ; i++){
-      if (this.rateList[i].status!="DELETED"){
-          this.filterDeletedData.push(this.rateList[i])
-      }
-    }
-    console.log(this.rateList)
-    var low=0;
-    var high=this.filterDeletedData.length -1;
-    while(low<=high){
-      if(this.filterDeletedData[low].sno<this.filterDeletedData[high].sno){
-        this.sortedRateList.push(this.filterDeletedData[high]);
-        high--
-      }else{
-        this.sortedRateList.push(this.filterDeletedData[low]); 
-        low++;
-      }
-    }
+    // for (let i=0;i<this.rateList.length ; i++){
+    //   if (this.rateList[i].status!="DELETED"){
+    //       this.filterDeletedData.push(this.rateList[i])
+    //   }
+    // }
+    // console.log(this.rateList)
+    // var low=0;
+    // var high=this.filterDeletedData.length -1;
+    // while(low<=high){
+    //   if(this.filterDeletedData[low].sno<this.filterDeletedData[high].sno){
+    //     this.sortedRateList.push(this.filterDeletedData[high]);
+    //     high--
+    //   }else{
+    //     this.sortedRateList.push(this.filterDeletedData[low]); 
+    //     low++;
+    //   }
+    // }
 
   
    

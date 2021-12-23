@@ -5,6 +5,7 @@ import {Subject} from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { MasterService } from 'src/app/services/master.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 
 @Component({
@@ -13,10 +14,61 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./appoinments.component.scss']
 })
 export class AppoinmentsComponent implements OnInit, AfterViewInit {
+  singleData:any = [];
+  name = 'Angular 4';
+  urlDt:any = '../../../../assets/images/placeholder.png';
+  typeCunsultant:any=["Kundali/Birth Chart Consultation","Gemstone Consultation","Match Making Consultation","Vastu"]
+
+
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: 'auto',
+    minHeight: '0',
+    maxHeight: 'auto',
+    width: 'auto',
+    minWidth: '0',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Enter text here...',
+    defaultParagraphSeparator: '',
+    defaultFontName: '',
+    defaultFontSize: '',
+    fonts: [
+      {class: 'arial', name: 'Arial'},
+      {class: 'times-new-roman', name: 'Times New Roman'},
+      {class: 'calibri', name: 'Calibri'},
+      {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+    ],
+    customClasses: [
+    {
+      name: 'quote',
+      class: 'quote',
+    },
+    {
+      name: 'redText',
+      class: 'redText'
+    },
+    {
+      name: 'titleText',
+      class: 'titleText',
+      tag: 'h1',
+    },
+    ],
+    uploadUrl: 'v1/image',
+    uploadWithCredentials: false,
+    sanitize: true,
+    toolbarPosition: 'top',
+    toolbarHiddenButtons: [
+      ['bold', 'italic'],
+      ['fontSize']
+    ]
+  };
 
   appointmentForm:FormGroup;
   type=new FormControl("")
-  name=new FormControl("");
+  name1=new FormControl("");
   date=new FormControl("");
   public allAppointment:any=[];
   loader:boolean=false;
@@ -24,7 +76,7 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
   DiffAppointment:any
   appointmentlike:string="All";
   token=localStorage.getItem('userID');
-  onEdit:boolean=false;
+  onEdit:boolean=true;
   id:any
   message:any = '';
   error:boolean = false;
@@ -32,6 +84,9 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
   dateFormat:any
   datepipe: any;
   edit:boolean=false;
+  onEdit1:boolean=false
+  onEdit2:boolean=true
+  remedy:any
   constructor(private http: HttpClient,private master:MasterService) {
     this.TokenExpired(this.token);
 
@@ -88,11 +143,22 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
     this.loader=true
     this.master.getMethod("/allAppointments").subscribe(data=>{
       this.allAppointment=JSON.parse(JSON.stringify(data));
-      console.log(data)
+      console.log(this.allAppointment)
+      for(let x of this.allAppointment){
+        x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
+      }
+      // for(var i=1;i<=this.allAppointment.length;i++){
+      //   if (this.allAppointment[i].consultationType==i){
+      //     this.allAppointment[i].consultationType=this.typeCunsultant[i-1]
+        
+      // }
+      this.loader=false
+
+      // this.remedy=content;
       setTimeout(function(){
         $('#example').DataTable();
        }, 1000);
-       this.loader=false
+       
     })
   }
 
@@ -111,6 +177,9 @@ getDiffAppointment(){
     this.loader=true;
     this.master.getMethod("/allAppointments").subscribe(data=>{
     this.allAppointment=JSON.parse(JSON.stringify(data));
+    for(let x of this.allAppointment){
+      x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
+    }
      this.loader=false;
     })
   }else if (this.DiffAppointment!="All"){
@@ -118,6 +187,9 @@ getDiffAppointment(){
     this.loader=true;
     this.master.getMethod("/getAppointment/"+this.DiffAppointment).subscribe(data=>{
     this.allAppointment=JSON.parse(JSON.stringify(data));
+    for(let x of this.allAppointment){
+      x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
+    }
 
       this.loader=false;
     });
@@ -127,7 +199,12 @@ getDiffAppointment(){
 editAppointment(id){
 
   $(window).scrollTop(0);
-  this.onEdit=true;
+  
+  this.onEdit=false;
+  this.onEdit2=false
+  this.onEdit1=true
+  this.edit=false
+
   this.id=id
   this.master.getMethod("/getAppointmentDetail?id="+this.id).subscribe(data=>{
     this.singleUserDetail=JSON.parse(JSON.stringify(data));
@@ -148,6 +225,7 @@ editAppointment(id){
     updateStatus(){
       this.loader=true
     var type=this.appointmentForm.get("type").value;
+    $('#userId').val(this.id);
     this.master.getMethod("/changeAppointmentStatus?id="+this.id+"&status="+type).subscribe(reponse=>{
         if(reponse['name']!='')
         {  
@@ -173,14 +251,68 @@ editAppointment(id){
 
 
     onCancel(){
-      this.onEdit=false;
+      this.onEdit=true;
+      this.onEdit2=true;
+      this.onEdit1=false;
+      this.edit=false
+
       this.message="";
   
     }
-    editor(id){
-      this.edit=true
-      this.onEdit=false
+  
+    editor(id, rmd){
 
+     
+      $(window).scrollTop(0);
+      $('#userId').val(id)
+      this.loader=true
+      setTimeout(()=>{
+        this.loader=false
+      }, 1000)
+      
+      this.onEdit=false;
+      this.onEdit2=false;
+      this.edit=true
+      this.onEdit1=false
+      this.message=""
+      setTimeout(()=>{
+        $('#editor1 .angular-editor-textarea').html(rmd);
+      },1000)
+    
+      
+
+
+    }
+
+    saveRemedies(){
+      var id1=$("#userId").val()
+   
+      
+      var content = $('#editor1 .angular-editor-textarea').html();
+
+      this.master.getMethod("/addRemedyAppointment?id="+id1+"&remedy="+content).subscribe(data=>{
+        if(data['name']!='')
+        {  
+        
+
+          this.error = false;
+          this.message = ' Remedy addes  successfully!';
+          setTimeout(()=>{location.reload()},1000);
+          this.loader=false
+          this.ngOnInit();
+          return false;
+        
+      } else{
+        this.error = true;
+        this.message = 'Failed to add remedy please check all details!';
+        this.loader=false;
+        return false;
+      }
+    },(error=>{
+      alert("failed to add remedie  something went wrong");
+     }))
+
+      
     }
 
 
