@@ -137,7 +137,9 @@ export class MasterService {
       retry(1),
       catchError(this.handleError)
     )
-  }  
+  } 
+  
+  
   holidayDataEdit(data): Observable<UserData> {
     return this.http.post<UserData>('http://18.219.65.148:8080/editHoliday', JSON.stringify(data), this.httpOptions)
     .pipe(
@@ -194,6 +196,22 @@ export class MasterService {
       retry(1),
       catchError(this.handleError)
     )
-  }  
+  } 
+  
+  contactPost(data): Observable<UserData> {
+    return this.http.post<UserData>('http://18.219.65.148:8080/addContact', JSON.stringify(data), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  } 
+
+  contactGet(): Observable<UserData> {
+    return this.http.post<any>('http://18.219.65.148:8080/getContact', this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  } 
 
 }

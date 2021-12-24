@@ -1,6 +1,6 @@
 <div id="form-section">
     <div class="container">
-        <form action="" class="shadow">
+        <form [formGroup]="contactForm" class="shadow">
             <div class="row pb-4">
                 <div class="col-lg-12 text-center">
                     <h6>Contact Details</h6>
@@ -9,12 +9,12 @@
             <div class="row">
                 <div class="form-group col-lg-6">
                     <label for="DisplayName">Display Name</label>
-                    <input type="email" class="form-control" id="DisplayName" >
+                    <input type="email" class="form-control" formControlName="displayName" id="DisplayName" >
                    
                 </div>
                 <div class="form-group col-lg-6">
                     <label for="DisplayAddress">Display Address</label>
-                   <textarea class="form-control"></textarea>
+                   <textarea class="form-control" formControlName="displayAddress"></textarea>
                    
                 </div>
               
@@ -22,42 +22,42 @@
             <div class="row">
                 <div class="form-group col-lg-6">
                     <label for="DisplayPhone">Display Phone</label>
-                    <input type="email" class="form-control" id="DisplayPhone" >
+                    <input type="email" class="form-control" formControlName="displayPhone" id="DisplayPhone" >
                    
                 </div>
                 <div class="form-group col-lg-6">
                     <label for="DisplayMobile">Display Mobile</label>
-                    <input type="email" class="form-control" id="DisplayMobile" >
+                    <input type="email" class="form-control" formControlName="displayMobile" id="DisplayMobile" >
                    
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-lg-6">
                     <label for="DisplayWhatapp">Display Whatapp</label>
-                    <input type="email" class="form-control" id="DisplayWhatapp">
+                    <input type="email" class="form-control" formControlName="displayWatsapp" id="DisplayWhatapp">
                    
                 </div>
                 <div class="form-group col-lg-6">
                     <label for="DisplaySkype">Display Skype</label>
-                    <input type="email" class="form-control" id="DisplaySkype" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" formControlName="displaySkype" id="DisplaySkype" aria-describedby="emailHelp">
                    
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-lg-6">
                     <label for="DisplayFacebook">Display Facebook</label>
-                    <input type="email" class="form-control" id="DisplayFacebook" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" formControlName="displayFaceBook" id="DisplayFacebook" aria-describedby="emailHelp">
                    
                 </div>
                 <div class="form-group col-lg-6">
                     <label for="DisplayTwitter">Display Twitter</label>
-                    <input type="email" class="form-control" id="DisplayTwitter" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" formControlName="displayTwitter" id="DisplayTwitter" aria-describedby="emailHelp">
                    
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <button class="btn save">save</button>
+                    <button class="btn save" (click)="addContact()">save</button>
                     <button class="btn clear">Clear</button>
                 </div>
                 
