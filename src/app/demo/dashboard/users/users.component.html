@@ -24,14 +24,14 @@
                 <div class="col-md-3 ">
                     <div class="form-group">
                         <label>First Name</label>
-                        <input class="form-control" formControlName="firstName" placeholder="First Name" />
+                        <input class="form-control" formControlName="firstName" placeholder="First Name" required/>
                     </div>
 
                 </div>
                 <div class="col-md-3 ">
                     <div class="form-group">
                         <label>Last Name</label>
-                        <input class="form-control" formControlName="lastName" placeholder="Last Name" />
+                        <input class="form-control" formControlName="lastName" placeholder="Last Name" required/>
                     </div>
 
                 </div>
@@ -39,7 +39,7 @@
                 <div class="col-md-3 ">
                     <div class="form-group">
                         <label>Email ID</label>
-                        <input class="form-control" formControlName="email" placeholder="Email ID" />
+                        <input class="form-control" formControlName="email" placeholder="Email ID" required/>
                     </div>
 
                 </div>
@@ -47,7 +47,7 @@
                 <div class="col-md-3 ">
                     <div class="form-group">
                         <label>Mobile No</label>
-                        <input class="form-control" formControlName="phone" placeholder="Mobile No" />
+                        <input class="form-control" formControlName="phone" placeholder="Mobile No" required/>
                     </div>
 
                 </div>
@@ -55,7 +55,7 @@
               
 
                 <div class="col-md-2 ">
-                <button (click)="onUpdate()" class="btn update pull-left w-100" style="float: left; margin-top: 28px;">Update</button>
+                <button [disable] ="true" (click)="onUpdate()" class="btn update pull-left w-100" style="float: left; margin-top: 28px;">Update</button>
                 </div>
                 <div class="col-md-2 ">
                     <button class="btn cancel pull-left w-100" style="float: left; margin-top: 28px;" (click)="onCancel()">Cancel</button>

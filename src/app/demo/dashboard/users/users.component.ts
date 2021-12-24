@@ -13,28 +13,28 @@ import { first } from 'rxjs-compat/operator/first';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit, AfterViewInit {
-userForm:FormGroup
+userForm:FormGroup = new FormGroup({
+  firstName:new FormControl("",Validators.required),
+  lastName:new FormControl("",[Validators.required]),
+  email:new FormControl("",[Validators.required,Validators.email]),
+  phone:new FormControl("",[Validators.required,Validators.pattern("/[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im")])
+})
 userData:any = [];
 self=this;
 isForm:boolean=false;
 loader:boolean=false;
 singleUser:any
-firstName=new FormControl("",Validators.required)
-lastName=new FormControl("")
-email=new FormControl("")
-phone=new FormControl("")
+// firstName=new FormControl("",Validators.required)
+// lastName=new FormControl("",[Validators.required])
+// email=new FormControl("",[Validators.required,Validators.email])
+// phone=new FormControl("",[Validators.required,Validators.pattern("/[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im")])
 message:any = '';
 error:boolean = false;
 
   constructor(private http: HttpClient, private master:MasterService) { }
 
     ngOnInit(): void {
-      this.userForm=new FormGroup({
-        firstName:new FormControl(""),
-        lastName:new FormControl(""),
-        email:new FormControl(""),
-        phone:new FormControl("")
-      })
+      // this.userForm = 
   this.getAllUSerData();
     }
 
@@ -72,12 +72,17 @@ error:boolean = false;
     }
 
     onUpdate(){
+
       var id = $('#userID').val();
       var firstName=this.userForm.get("firstName").value;
       var lastName=this.userForm.get("lastName").value;
       var email=this.userForm.get("email").value;
       var phone=this.userForm.get("phone").value;
-      console.log(firstName,lastName,email,phone)
+      if(this.userForm.invalid){
+        console.log(this.userForm)
+        return
+      }
+
       const data={
         "aboutMe": this.singleUser.aboutMe,
         "country": this.singleUser.country,
@@ -93,6 +98,8 @@ error:boolean = false;
         "timeOfBirth": this.singleUser.timeOfBirth
         
       }
+
+
       console.log(data)
       this.master.methodPost(data,"/saveProfile?userId="+id).subscribe(reponse=>{
 
@@ -148,22 +155,22 @@ error:boolean = false;
     }
 
     onDelete(id){
-      // if(confirm("Are sure you want to delete this record")){
-      //   this.master.deleteMethod("/deleteUser/"+id).subscribe(data=>{
-      //     if(data['name']!='')
-      //     { 
-      //       alert("Record deleted successfully.");
-      //       location.reload();
+      if(confirm("Are sure you want to delete this record")){
+        this.master.deleteMethod("/deleteUser/"+id).subscribe(data=>{
+          if(data['name']!='')
+          { 
+            alert("Record deleted successfully.");
+            location.reload();
       
-      //     }else{
-      //       this.error = true;
-      //       this.message = 'Failed to delete record!';
-      //       return false;
-      //     }
-      //   },(error=>{
-      //     alert("failed to delete data something wrong please check carefully ")
-      //   }))
-      // }
+          }else{
+            this.error = true;
+            this.message = 'Failed to delete record!';
+            return false;
+          }
+        },(error=>{
+          alert("failed to delete data something wrong please check carefully ")
+        }))
+      }
     
     }
   

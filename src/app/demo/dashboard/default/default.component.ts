@@ -15,6 +15,7 @@ import '../../../../assets/charts/amchart/radar.js';
 import '../../../../assets/charts/amchart/worldLow.js';
 import { PromocodeRoutingModule } from '../promocode/promocode-routing.module.js';
 import { MasterService } from 'src/app/services/master.service.js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-default',
@@ -31,8 +32,11 @@ export class DefaultComponent implements OnInit {
   appCount: any;
   getAllBlogs: any;
   loader:boolean=false;
+  typeCunsultation = ["Kundali/Birth Chart Consultation", "Gemstone Consultation", "Match Making Consultation", "Vastu"];
   
-  constructor(private master: MasterService) {
+  constructor(private master: MasterService,
+    private router:Router
+    ) {
     this.getUserCount();
     this.TokenExpired(this.token);
   
@@ -163,15 +167,34 @@ this.master.getMethod('/getAllEnquiries').subscribe((response:any)=>{
 
       console.log(today.toISOString().slice(0,10));
       this.master.getAppointmentsByCriteria(data).subscribe(data => {
-        this.allAppointment = JSON.parse(JSON.stringify(data));
+        this.allAppointment = data;
+        for(let i=0;i<this.allAppointment.length;i++){
+          console.log(this.allAppointment[i])
+            this.allAppointment[i].consultationType = this.typeCunsultation[Number(data[i].consultationType)-1]
+        }
         console.log(this.allAppointment)
 
       });
+
     setTimeout(function () {
       $('#example').DataTable();
     }, 2500);
     this.loader=false
   }
 
- 
+  totalUser(){
+    console.log("user")
+    this.router.navigate(["/dashboard/users"])
+  }
+
+  totalEnquiry(){
+    this.router.navigate(["/dashboard/enquire"])
+  }
+  totalAppoint(){
+    this.router.navigate(["/dashboard/appointments"])
+    
+  }
+totalBlogs(){
+  this.router.navigate(["/dashboard/allblogs"]) 
+}
 }
