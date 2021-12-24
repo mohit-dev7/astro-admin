@@ -34,7 +34,7 @@ export class DefaultComponent implements OnInit {
   
   constructor(private master: MasterService) {
     this.getUserCount();
-    this.TokenExpired(this.token);
+    // this.TokenExpired(this.token);
   
     setInterval(()=>{
       this.getUserCount();

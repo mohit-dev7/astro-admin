@@ -135,7 +135,8 @@ export class HolidayComponent implements OnInit {
         return false;
       }));
     }else{
-      this.master.holidayDataPost(data).subscribe(response => {
+      debugger;
+      this.master.holidayDataEdit(data).subscribe(response => {
         if (response) {
           this.error = false;
           this.message = 'Holiday Updated successfully!';
@@ -176,7 +177,7 @@ export class HolidayComponent implements OnInit {
     });
   }
 
-  getAllTimeSlots() {
+  getAllTimeSlots(slots? : any) {
     this.master.timeslotGetData().subscribe(data => {
       let dayArray = [];
    
@@ -188,6 +189,10 @@ export class HolidayComponent implements OnInit {
         dayArray.push(saveObj);
       })
       this.dropdownList = dayArray;
+      if(slots)
+      {
+        this.selectedItems = slots['timeSlots'];
+      }
     });
   }
 
@@ -197,16 +202,13 @@ export class HolidayComponent implements OnInit {
     this.master.holidayGetDetailData(id).subscribe(data => {
       this.holidayForm.patchValue(data);
       this.loader=false;
-      this.getAllTimeSlots();
+      this.getAllTimeSlots(data);
     });
 
 
   }
 
 
-  onUpdate(){
-
-  }
 
   OnCancel(){
     this.edit=false;

@@ -38,6 +38,7 @@
                     (onSelect)="onItemSelect($event)"
                     (onSelectAll)="onSelectAll($event)"
                     (onDeSelect)="onItemDeSelect($event)"
+                    [ngModelOptions]="{standalone: true}"
                   >
                   </ng-multiselect-dropdown>
                     </div>
@@ -62,7 +63,7 @@
         <div class="col-md-6 " *ngIf="edit">
             <div class="row">
                 <div class="col-lg-3">
-                    <button class="btn update pull-left w-100" style="float: left; margin-top: 28px;"  (click)="onUpdate()">Update</button>
+                    <button class="btn update pull-left w-100" style="float: left; margin-top: 28px;"  (click)="addNewHoliday()">Update</button>
                 </div>
                 <div class="col-lg-3">
                     <button class="btn cancel pull-left w-100" style="float: left; margin-top: 28px;"  (click)="OnCancel()">Cancel</button>
