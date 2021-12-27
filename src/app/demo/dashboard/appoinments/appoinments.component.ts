@@ -14,6 +14,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
   styleUrls: ['./appoinments.component.scss']
 })
 export class AppoinmentsComponent implements OnInit, AfterViewInit {
+ 
   singleData:any = [];
   name = 'Angular 4';
   urlDt:any = '../../../../assets/images/placeholder.png';
@@ -170,14 +171,14 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
     this.loader=true;
     await this.master.getMethod("/getAppointment/"+this.DiffAppointment).subscribe(data=>{
       console.log(data)
-      this.addData(data)
-    // this.allAppointment=JSON.parse(JSON.stringify(data));
-    // console.log(this.allAppointment)
-    // for(let x of this.allAppointment){
-    //   x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
-    // }
+      
+    this.allAppointment=JSON.parse(JSON.stringify(data));
+    console.log(this.allAppointment)
+    for(let x of this.allAppointment){
+      x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
+    }
 
-    //   this.loader=false;
+      this.loader=false;
     });
   }
 

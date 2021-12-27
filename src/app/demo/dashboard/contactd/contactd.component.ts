@@ -46,6 +46,20 @@ export class ContactdComponent implements OnInit {
       });
     }
 
+    onClick(){
+      this.contactForm = new FormGroup({
+        id: new FormControl(""),
+        displayName: new FormControl(""),
+        displayAddress: new FormControl(""),
+        displayPhone: new FormControl(""),
+        displayMobile: new FormControl(""),
+        displayWatsapp: new FormControl(""),
+        displaySkype: new FormControl(""),
+        displayFaceBook: new FormControl(""),
+        displayTwitter: new FormControl(""),
+      });
+    }
+
 
   TokenExpired(token){
     this.master.getMethod("/AllCountries").subscribe(data=>{
