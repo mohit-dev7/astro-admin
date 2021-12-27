@@ -39,10 +39,10 @@
                    
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label>Type *</label>
-                           <select class="form-control " formControlName="option"  >select
+                            <label>Discount Type *</label>
+                           <select class="form-control " formControlName="option">select
                            
-                           
+                           <!-- <option value="" selected>Select Type</option> -->
                             <option value="Amount">Amount</option>
                             <option value="Percentage">percentage</option>
                               
@@ -58,15 +58,19 @@
                       
     
                     </div>
-                    <div class="checkbox form-inline ">
-                        <label class="label-1"><input type="checkbox"  name="ch_name[] pr-3" value="ch01">Application for limited time *</label>
-                        <div class=" ch_for hide mr-2">
+                    <div class="col-lg-5" style="padding-top: 28px;" >
+                        <label class="label-1"><input type="checkbox" [checked]="ischecked" (change)="onChange($event)"   name="aplicable" >Application for limited time *</label>
+                    </div>
+                    
+                    <div class="checkbox form-inline ml-3 " *ngIf="checked==true">
+                       
+                        <div class=" ch_for  mr-2">
                             <label for="">Effective Date*</label>
-                            <input type="date" name="ch_for[]" value="" placeholder="Channel details"  formControlName="effective"  class="form-control ">
+                            <input type="date"  value="" placeholder="Channel details" min="{{today}}"  formControlName="effective"  class="form-control ">
                         </div>
-                        <div class=" ch_for hide">
+                        <div class=" ch_for ">
                             <label for="">Expiry Date *</label>
-                            <input type="date" name="ch_for[]" value="" placeholder="Channel details"  formControlName="expiry"  class="form-control ">
+                            <input type="date"  value="" placeholder="Channel details" min="{{today}}"  formControlName="expiry"  class="form-control ">
                         </div>
                        
                     </div>
@@ -119,7 +123,7 @@
         <tbody>
             <tr  *ngFor="let item of promocode;let index=index">
                 <td>{{index+1}}</td>
-                <td>{{item.code}}</td>
+                <td>{{item.code |  uppercase }}</td>
                 <td>{{item.type}}</td>
                 <td>{{item.amount}}</td>
                 <td>{{item.remarks}}</td>

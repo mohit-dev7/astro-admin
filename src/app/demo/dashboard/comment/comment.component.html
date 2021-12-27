@@ -48,7 +48,7 @@
         <tbody>
             <tr  *ngFor="let data of blog;let index=index">
                 <td>{{index+1}}</td>
-                <td>Name</td>
+                <td>{{data.commentedBy}}</td>
                 <td>{{data.email}}</td>
                 <td>{{data.content}}</td>
                 <td>{{data.commentedOn}}</td>

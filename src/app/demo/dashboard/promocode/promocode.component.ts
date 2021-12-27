@@ -31,6 +31,10 @@ export class PromocodeComponent implements OnInit {
   singlePromocodeData:any
   sortedPromocode:any=[]
   filterDeletedData:any=[]
+  checked:boolean=false
+
+  ischecked:boolean
+  today = new Date().toJSON().split('T')[0];;
  
 
   
@@ -87,6 +91,7 @@ export class PromocodeComponent implements OnInit {
   }
 
   addNewPromoCode(){
+    debugger
     var procode=this.promoForm.get('promcode').value;
     var percentAmount=this.promoForm.get('percentAmount').value;
     var effective=this.promoForm.get("effective").value;
@@ -107,6 +112,11 @@ export class PromocodeComponent implements OnInit {
       return false;
 
     
+    }else if(option==null ||  option==""){
+      this.error=true
+      this.message="please select the type Discount type"
+      return false
+
     }else{
       var data ={
         "code":procode,
@@ -151,11 +161,11 @@ export class PromocodeComponent implements OnInit {
     this.loader =true;
     this.master.getMethod("/getPromoDetail?id=" + id).subscribe((res)=>{
     this.loader =false;
-   
+    this.checked=true
     this.ifUpdate=true;
    
     this.singlePromocodeData=res;
-    console.log(this.singlePromocodeData.name);
+    console.log(this.singlePromocodeData);
 
 
     this.promoForm= new FormGroup({
@@ -165,6 +175,9 @@ export class PromocodeComponent implements OnInit {
       expiry: new FormControl(this.singlePromocodeData.expiryDate),
       option: new FormControl(this.singlePromocodeData.type)
     });
+    if(this.singlePromocodeData.status=="active"){
+      this.ischecked=true;
+    }
   
 
     $('#promocodeid').val(this.singlePromocodeData.sno);
@@ -174,12 +187,14 @@ export class PromocodeComponent implements OnInit {
 
 
   updatePromocode(){
+   
     var id = $('#promocodeid').val();
     var procode=this.promoForm.get('promcode').value;
     var percentAmount=this.promoForm.get('percentAmount').value;
     var effective=this.promoForm.get("effective").value;
     var expiry=this.promoForm.get("expiry").value;
     var option=this.promoForm.get("option").value;
+    console.log(option)
  
     if(procode==''){
       this.error = true;
@@ -187,6 +202,22 @@ export class PromocodeComponent implements OnInit {
    
       return false;
   
+    }else if(percentAmount==''){
+      this.error=true;
+      this.message="please Enter percentage/amount in field";
+      return false
+
+    }else if(option==null || option==''){
+      this.error=true;
+      this.message="please select type of field ";
+      return false;
+    }else if(option=="Percentage" ){
+      if (percentAmount > 100){
+        this.error=true
+        this.message="percentage amount cant be grater the 100% "
+        return false;
+      }
+
     }
   
      else{
@@ -271,13 +302,21 @@ export class PromocodeComponent implements OnInit {
        return false;
      }
   }
+  onChange(event){
 
+   if(this.checked==false){
+    this.checked=true
+   }else{
+    this.checked=false
+   }
+  }
 
 
   onCancel(){
     this.loader =false;
-   
+   this.ischecked=false
     this.ifUpdate=false;
+    this.checked=false
     this.promoForm= new FormGroup({
       promcode:new FormControl(""),
       percentAmount:new FormControl(""),

@@ -132,34 +132,23 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
 
-  //   $(document).ready( function () {
-    
-  //     $('#example').DataTable();
-  // } );
   }
   
 
-  getAllAppointment(){
+  async getAllAppointment(){
     this.loader=true
-    this.master.getMethod("/allAppointments").subscribe(data=>{
+    await this.master.getMethod("/allAppointments").subscribe(data=>{
       this.allAppointment=JSON.parse(JSON.stringify(data));
       console.log(this.allAppointment)
       for(let x of this.allAppointment){
         x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
       }
-      // for(var i=1;i<=this.allAppointment.length;i++){
-      //   if (this.allAppointment[i].consultationType==i){
-      //     this.allAppointment[i].consultationType=this.typeCunsultant[i-1]
-        
-      // }
+      
       this.loader=false
 
-      // this.remedy=content;
-      setTimeout(function(){
-        $('#example').DataTable();
-       }, 1000);
-       
     })
+
+    this.loadDataTable()
   }
 
 
@@ -170,30 +159,30 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
   }
 
   
-getDiffAppointment(){
+  async getDiffAppointment(){
   this.loader=true
+  await this.clearDataTable()
+ 
   if(this.DiffAppointment=="All"){
-    this.appointmentlike=this.DiffAppointment;
-    this.loader=true;
-    this.master.getMethod("/allAppointments").subscribe(data=>{
-    this.allAppointment=JSON.parse(JSON.stringify(data));
-    for(let x of this.allAppointment){
-      x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
-    }
-     this.loader=false;
-    })
+    await this.getAllAppointment();
   }else if (this.DiffAppointment!="All"){
     this.appointmentlike=this.DiffAppointment;
     this.loader=true;
-    this.master.getMethod("/getAppointment/"+this.DiffAppointment).subscribe(data=>{
-    this.allAppointment=JSON.parse(JSON.stringify(data));
-    for(let x of this.allAppointment){
-      x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
-    }
+    await this.master.getMethod("/getAppointment/"+this.DiffAppointment).subscribe(data=>{
+      console.log(data)
+      this.addData(data)
+    // this.allAppointment=JSON.parse(JSON.stringify(data));
+    // console.log(this.allAppointment)
+    // for(let x of this.allAppointment){
+    //   x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
+    // }
 
-      this.loader=false;
+    //   this.loader=false;
     });
   }
+
+  await  this.loadDataTable()
+
 }
 
 editAppointment(id){
@@ -315,6 +304,20 @@ editAppointment(id){
       
     }
 
+    addData(data){
+      $('#example').DataTable().fnAddData(data);
+    }
 
+    loadDataTable(){
+      console.log("hi")
+      setTimeout(() => {
+        $('#example').DataTable();
+      }, 2000);
+    }
 
+    clearDataTable(){
+      var table = $('#example').DataTable();
+     
+      table.clear()
+    }
 }

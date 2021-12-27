@@ -31,6 +31,8 @@ export class CountryComponent implements OnInit {
   ifUpdate:boolean=false;
   singaleCountry:any = [];
   filterDeletedData:any=[]
+  ischecked:boolean=false
+  
   constructor( private master:MasterService ,private authservice:AuthService, private router:Router ) {
 
 
@@ -165,13 +167,16 @@ export class CountryComponent implements OnInit {
     this.ifUpdate=true;
  
      this.singaleCountry=res;
-     console.log(this.singaleCountry.name);
+     console.log(this.singaleCountry);
 
 
      this.countryForm= new FormGroup({
       country: new FormControl(this.singaleCountry.name),
       code: new FormControl(this.singaleCountry.code)
     });
+    if (this.singaleCountry.status=="ACTIVE"){
+      this.ischecked=true
+    }
 
     $('#contryid').val(this.singaleCountry.sno);
   
@@ -288,6 +293,7 @@ export class CountryComponent implements OnInit {
     this.loader =false;
     this.formTitle="Add";
     this.ifUpdate=false;
+    this.ischecked=false
     this.countryForm= new FormGroup({
       country: new FormControl(""),
       code: new FormControl("")

@@ -29,6 +29,8 @@ export class TimeslotComponent implements OnInit {
   loader:boolean=false;
   formTitle:any="Add Timeslot";
   ifUpdate:boolean=false;
+  ischecked:boolean
+  singleData:any
 
   constructor(private master: MasterService, private authservice: AuthService, private router: Router) {
 
@@ -169,6 +171,7 @@ export class TimeslotComponent implements OnInit {
             this.error = false;
             this.message = 'Time Slot Updated successfully!';
             this.edit = false;
+          
             // setTimeout(()=>{location.reload()},1000);
             this.ngOnInit();
             return false;
@@ -237,10 +240,14 @@ export class TimeslotComponent implements OnInit {
    
     this.edit = true;
     this.master.timeSlotGetDetailData(id).subscribe(data => {
+      this.singleData=JSON.parse(JSON.stringify(data))
       this.loader =false;
       this.formTitle="Update";
       this.ifUpdate=true;
       this.timeslotForm.patchValue(data);
+      if(this.singleData.status=="ACTIVE"){
+        this.ischecked=true;
+      }
       this.getAllDays(data);
       this.getAllTimeSlots();
 
@@ -276,6 +283,15 @@ export class TimeslotComponent implements OnInit {
 
 
   onCancel(){
+    this.edit=false;
+    this.ischecked=false;
+    this.formTitle="Add TimeSlot";
+    this.timeslotForm=new FormGroup({
+      startTime : new FormControl("", [Validators.required]),
+      endTime : new FormControl("", [Validators.required])
+    })
+ 
+
 
   }
   onDelete(id){

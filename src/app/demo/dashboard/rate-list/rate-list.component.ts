@@ -36,6 +36,7 @@ export class RateListComponent implements OnInit{
   sortedRateList:any=[]
   filterDeletedData:any=[]
   destroy: number = 0;
+  ischecked:boolean
 
   constructor( private master:MasterService ,private authservice:AuthService, private router:Router) {
 
@@ -216,6 +217,9 @@ export class RateListComponent implements OnInit{
       rateofvalue: new FormControl(this.singaleCountry.rateOfValues),
       status: new FormControl(this.singaleCountry.status)
     });
+    if(this.singaleCountry.status=="ACTIVE"){
+      this.ischecked=true
+    }
 
     $('#ratelistid').val(this.singaleCountry.sno);
   
@@ -341,6 +345,7 @@ onCancel(){
   this.loader =false;
     this.formTitle="Add rateList";
     this.ifUpdate=false;
+    this.ischecked=false
     this.ratelistform= new FormGroup({
       country: new FormControl(""),
       ctype: new FormControl(""),

@@ -21,14 +21,14 @@
 
                 </div>
                 
-                <div class="col-md-3 ">
+                <div class="col-md-2 ">
                     <div class="form-group">
                         <label>First Name</label>
                         <input class="form-control" formControlName="firstName" placeholder="First Name" required/>
                     </div>
 
                 </div>
-                <div class="col-md-3 ">
+                <div class="col-md-2 ">
                     <div class="form-group">
                         <label>Last Name</label>
                         <input class="form-control" formControlName="lastName" placeholder="Last Name" required/>
@@ -39,12 +39,19 @@
                 <div class="col-md-3 ">
                     <div class="form-group">
                         <label>Email ID</label>
-                        <input class="form-control" formControlName="email" placeholder="Email ID" required/>
+                        <input class="form-control" formControlName="email" placeholder="Email ID" required muted/>
+                    </div>
+
+                </div>
+                <div class="col-md-2 ">
+                    <div class="form-group">
+                        <label>Country code</label>
+                        <input class="form-control" formControlName="phone" placeholder="CountryCode" required/>
                     </div>
 
                 </div>
               
-                <div class="col-md-3 ">
+                <div class="col-md-2 ">
                     <div class="form-group">
                         <label>Mobile No</label>
                         <input class="form-control" formControlName="phone" placeholder="Mobile No" required/>
@@ -90,10 +97,10 @@
        
         <tr *ngFor="let data of userData;let index=index">
             <td>{{index+1}}</td>
-            <td>{{data.userProfile.firstName}} {{data.userProfile.lastName}}</td>
-            <td>{{data.userProfile.email}} </td>
+            <td>{{data.firstName}} {{data.lastName}}</td>
+            <td>{{data.email}} </td>
             <td style="width: 44px;">{{data.countryCode}} </td>
-            <td>{{data.userProfile.phone}} </td>
+            <td>{{data.phone}} </td>
             <td><span class="badge badge-danger" *ngIf="data.enabled==false ">Unverified</span> <span class="badge badge-success" *ngIf="data.enabled==true">Verified</span> </td>
             <td> <button class="btn btn-success btn-sm" (click)=editUser(data.id) ><i class="ng-tns-c22-2 feather icon-edit"></i></button> <button class="btn btn-danger btn-sm" (click)="onDelete(data.id)"><i class="ng-tns-c22-2 feather icon-trash"></i></button> </td>
                

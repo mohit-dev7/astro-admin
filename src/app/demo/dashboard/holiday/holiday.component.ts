@@ -27,6 +27,7 @@ export class HolidayComponent implements OnInit {
   selectedItems = [];
   dropdownSettings = {};
   loader:boolean=false;
+  today = new Date().toJSON().split('T')[0];;
 
 
 

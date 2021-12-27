@@ -52,7 +52,7 @@
             <td>{{data.subject}}</td>
             <td>{{data.message}}</td>
             <td>{{data.remarks}}</td>
-            <td><button class="btn-sm btn btn-danger"><i class="ng-tns-c22-2 feather icon-trash"></i></button> </td>
+            <td><button class="btn-sm btn btn-danger" (click)="onDelete(data.sno)"><i class="ng-tns-c22-2 feather icon-trash"></i></button> </td>
                
         </tr>   
     </tbody>

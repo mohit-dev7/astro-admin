@@ -17,7 +17,8 @@ userForm:FormGroup = new FormGroup({
   firstName:new FormControl("",Validators.required),
   lastName:new FormControl("",[Validators.required]),
   email:new FormControl("",[Validators.required,Validators.email]),
-  phone:new FormControl("",[Validators.required,Validators.pattern("/[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im")])
+  phone:new FormControl("",[Validators.required,Validators.pattern("/[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im")]),
+  countryCode:new FormControl("",[Validators.required])
 })
 userData:any = [];
 self=this;
@@ -78,50 +79,77 @@ error:boolean = false;
       var lastName=this.userForm.get("lastName").value;
       var email=this.userForm.get("email").value;
       var phone=this.userForm.get("phone").value;
-      if(this.userForm.invalid){
-        console.log(this.userForm)
-        return
+      var countryCode=this.userForm.get("countryCode").value;
+      // if(this.userForm.invalid){
+      //   console.log(this.userForm)
+      //   return
+      // }
+      if(firstName==""){
+        this.error = true;
+        this.message="please enter Your first Name"
+        return false;
+      }else if(lastName==""){
+        this.error=true;
+        this.message="please enter Your last Name"
+        return false;
+      }else if(email=="" || !this.validateEmail(email) ){
+        this.error=true;
+        this.message="Please enter your Email address"
+        return false;
+      }else if(phone=="" || !this.validateMobile(phone)){
+        this.error=true 
+        this.message="please enter the Phone number "
+        return false;
+      }else if(phone.length>10 && phone.length<10){
+       
+        this.error=true 
+        this.message=" Mobile number can not be less than 10 digits "
+        return false;
       }
-
-      const data={
-        "aboutMe": this.singleUser.aboutMe,
-        "country": this.singleUser.country,
-        "dob": this.singleUser.dob,
-        "email": email,
-        "firstName": firstName,
-        "gender": this.singleUser.gender,
-        "id": id,
-        "lastName": lastName,
-        "phone": phone,
-        "placeOfBirth": this.singleUser.placeOfBirth,
-        "profilePicName": this.singleUser.profilePicName,
-        "timeOfBirth": this.singleUser.timeOfBirth
-        
-      }
-
-
-      console.log(data)
-      this.master.methodPost(data,"/saveProfile?userId="+id).subscribe(reponse=>{
-
-        if(reponse['name']!='')
-        {  
-        
-     
-          this.error = false;
-          this.message = ' user updated successfully!';
-          // setTimeout(()=>{location.reload()},1000);
-          this.ngOnInit();
-          return false;
-    
-        }else{
-          this.error = true;
-          this.message = 'Failed to update user please check all details!';
-          return false;
+      else{
+        const data={
+          "aboutMe": this.singleUser.aboutMe,
+          "country": this.singleUser.country,
+          "dob": this.singleUser.dob,
+          "email": email,
+          "firstName": firstName,
+          "gender": this.singleUser.gender,
+          "id": id,
+          "lastName": lastName,
+          "phone": phone,
+          "placeOfBirth": this.singleUser.placeOfBirth,
+          "profilePicName": this.singleUser.profilePicName,
+          "timeOfBirth": this.singleUser.timeOfBirth
+          
         }
+        console.log(data)
+        this.master.methodPost(data,"/saveProfile?userId="+id).subscribe(reponse=>{
+  
+          if(reponse['name']!='')
+          {  
+          
+       
+            this.error = false;
+            this.message = ' user updated successfully!';
+            // setTimeout(()=>{location.reload()},1000);
+            this.ngOnInit();
+            return false;
+      
+          }else{
+            this.error = true;
+            this.message = 'Failed to update user please check all details!';
+            return false;
+          }
+      
+        },(error=>{
+          alert("failed to update user something went wrong");
+        }))
+  
+      }
+
+ 
+
     
-      },(error=>{
-        alert("failed to update user something went wrong");
-      }))
     
     }
 
@@ -129,6 +157,7 @@ error:boolean = false;
 
 
     editUser(id:any){
+      alert(id)
       $(window).scrollTop(0);
       this.isForm=true;
       this.loader=true;
@@ -139,7 +168,8 @@ error:boolean = false;
         firstName:new FormControl(this.singleUser.firstName),
         lastName:new FormControl(this.singleUser.lastName),
         email:new FormControl(this.singleUser.email),
-        phone:new FormControl(this.singleUser.phone)
+        phone:new FormControl(this.singleUser.phone),
+        countryCode:new FormControl(this.singleUser.countryCode)
       })
       this.loader=false;
       $('#userID').val(id);
@@ -173,7 +203,15 @@ error:boolean = false;
       }
     
     }
+    validateEmail(email:any) {
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
   
+    validateMobile(mobile:any) {
+      const re = /^([0-9\(\)\/\+ \-]*)$/;
+      return re.test(String(mobile).toLowerCase());
+    }
 
 }
 

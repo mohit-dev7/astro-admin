@@ -62,26 +62,29 @@ export class CommentComponent implements OnInit {
 
   }
   onDelete(ID){
-    this.loader=true
-    this.master.deleteMethod("/deleteComment/"+ID).subscribe(data=>{
-      if(data['name']!='')
-      {    
-        this.error=true
-        this.loader=false
-        this.message="Comment deleted successfully."
-        location.reload();
-  
-      }else{
-        this.error = true;
-        this.loader=false
-        this.message = 'Failed to delete Comment!';
-        return false;
-      }
-  
-     
-     },(error=>{
-      alert("failed to delete comment something went wrong");
-     }))
+    
+    if(confirm("Are sure you want to delete this data")){
+      this.master.deleteMethod("/deleteComment/"+ID).subscribe(data=>{
+        if(data['name']!='')
+        {    
+          this.error=true
+          this.loader=false
+          this.message="Comment deleted successfully."
+          location.reload();
+    
+        }else{
+          this.error = true;
+          this.loader=false
+          this.message = 'Failed to delete Comment!';
+          return false;
+        }
+    
+       
+       },(error=>{
+        alert("failed to delete comment something went wrong");
+       }))
+    }
+    
 
   }
 

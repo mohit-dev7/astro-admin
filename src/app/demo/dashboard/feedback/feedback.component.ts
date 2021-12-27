@@ -13,6 +13,9 @@ declare var require: any
 })
 export class FeedbackComponent implements OnInit {
   feedData: any = [];
+  error:boolean=false;
+  message:any=""
+  
 
   constructor(private master:MasterService) { }
 
@@ -80,5 +83,27 @@ export class FeedbackComponent implements OnInit {
     })
 
   }
+
+ onDelete(id){
+   if(confirm("Are Sure you want to delete this data")){
+     this.master.deleteMethod("/deleteFeedback/"+id).subscribe(data=>{
+       if(data["name"]!=""){
+         this.error=true
+         alert("this data is deleted successfully")
+         this.getFeedbackData()
+       }else{
+         this.error=true
+         alert("failed to delete feedback")
+         
+       }
+     },(error=>{
+       alert("something went wrong please check carefully")
+     }))
+   }
+ }
+
+ onCancel(){
+   
+ }
 
 }

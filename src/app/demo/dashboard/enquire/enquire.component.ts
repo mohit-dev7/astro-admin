@@ -33,6 +33,7 @@ export class EnquireComponent implements OnInit {
   email:string
   phone:any
   loader:boolean=true
+  cancel:boolean
 
   constructor( private master:MasterService ,private authservice:AuthService, private router:Router) {
 
@@ -163,34 +164,42 @@ export class EnquireComponent implements OnInit {
   
    var type=$("#type").val();
    console.log(type)
-   const data={
-     "sno":this.id,
-     "name":this.name,
-     "mobile":this.phone,
-     "email":this.email,
-     "status":type
-   }
-   this.master.methodPost(data,"/editEnquiry").subscribe(reponse=>{
-    if(reponse['name']!='')
-    { 
- 
- 
-      this.error = false;
-      this.message = ' Status updated successfully!';
-      // setTimeout(()=>{location.reload()},1000);
-      this.ngOnInit();
-      return false;
-
-    }else{
-      this.error = true;
-      this.message = 'Failed to update Status please check all details!';
-      return false;
+   if(type=="" || type==null){
+     this.error=true
+     this.message="please select type ";
+     return false
+   }else{
+    const data={
+      "sno":this.id,
+      "name":this.name,
+      "mobile":this.phone,
+      "email":this.email,
+      "status":type
     }
-
+    this.master.methodPost(data,"/editEnquiry").subscribe(reponse=>{
+      if(reponse['name']!='')
+      { 
    
-   },(error=>{
-    alert("failed to update status something went wrong");
-   }));
+   
+        this.error = false;
+        this.message = ' Status updated successfully!';
+        // setTimeout(()=>{location.reload()},1000);
+        this.ngOnInit();
+        return false;
+  
+      }else{
+        this.error = true;
+        this.message = 'Failed to update Status please check all details!';
+        return false;
+      }
+  
+     
+     },(error=>{
+      alert("failed to update status something went wrong");
+     }));
+   }
+   
+
    
 
  }
@@ -198,6 +207,7 @@ export class EnquireComponent implements OnInit {
 
 OnEdit(id:any,name,email,phone){
   $(window).scrollTop(0);
+  this.cancel=true
   this.edit=true;
   this.id=id
   this.name=name;
@@ -208,9 +218,27 @@ OnEdit(id:any,name,email,phone){
  })
 }
 
-onDelete(){
-  this.edit=false;
-  
+onDelete(id){
+  if(confirm("Are Sure you want to delete this data")){
+    this.master.deleteMethod("/deleteEnquiry/"+id).subscribe(data=>{
+      if(data["name"]!=""){
+        this.error=true
+        alert("this data is deleted successfully")
+        this.getEnquire()
+      }else{
+        this.error=true
+        alert("failed to delete Enquiry")
+        
+      }
+    },(error=>{
+      alert("something went wrong please check carefully")
+    }))
+  }
 }
+
+onCancel(){
+  this.cancel=false
+}
+
 
 }

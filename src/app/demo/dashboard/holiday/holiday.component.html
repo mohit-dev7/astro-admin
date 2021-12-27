@@ -23,7 +23,7 @@
                 <div class="col-md-3 ">
                     <div class="form-group">
                         <label>Holiday Date</label>
-                        <input class="form-control" type="date" formControlName="holidayDate" placeholder="Holiday Time" />
+                        <input class="form-control" min="{{today}}" type="date" formControlName="holidayDate" placeholder="Holiday Time" />
                     </div>
 
                 </div>
@@ -57,7 +57,7 @@
             </div> -->
 
             <div class="col-md-2 " *ngIf="!edit">
-              <button class="btn add pull-left w-100" style="float: left; margin-top: 28px;"  (click)="addNewHoliday()">Add</button>
+              <button class="btn add pull-left w-100" style="float: left; margin-top: 28px;"   (click)="addNewHoliday()">Add</button>
         </div>
         <div class="col-md-6 " *ngIf="edit">
             <div class="row">

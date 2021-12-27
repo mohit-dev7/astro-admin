@@ -63,7 +63,7 @@
 
                         <div class="col-md-2 align-items-center" style="padding-top: 35px;">
                             <div class="form-check" >
-                                <input class="form-check-input" type="checkbox" value="" ngModel  id="flexCheckDefault" (change)="checkCheckBoxvalue($event)">
+                                <input class="form-check-input" type="checkbox" [checked]="ischecked" value="" ngModel  id="flexCheckDefault" (change) ="checkCheckBoxvalue($event)">
                                 <label class="form-check-label" for="flexCheckDefault">
                                 Active
                                 </label>
@@ -74,9 +74,9 @@
                             <button  type="button " (click)="AddRateList()" class="btn  add pull-left " style="float: left; margin-top: 28px;">Add Ratelist</button>
                             
                         </div>
-                        <div class="col-md-6 col-lg-6 " *ngIf="ifUpdate==true" style="display: flex;" >
+                        <div class="col-md-6 col-lg-6 justify-content-end" *ngIf="ifUpdate==true" style="display: flex;" >
                             <button  type="button " (click)="updateRateList()" class="btn  add pull-left " style="float: left; margin-top: 28px;">Update</button>
-                            <button type="button " (click)="onCancel()" class="btn  add pull-left " style="float: left; margin-top: 28px;">Cancel</button>
+                            <button type="button " (click)="onCancel()" class="btn  add pull-left cancel " style="float: left; margin-top: 28px;">Cancel</button>
                         </div>
                     </div>    
             
