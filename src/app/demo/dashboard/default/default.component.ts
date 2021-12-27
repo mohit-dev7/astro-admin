@@ -38,7 +38,7 @@ export class DefaultComponent implements OnInit {
     private router:Router
     ) {
     this.getUserCount();
-    this.TokenExpired(this.token);
+    // this.TokenExpired(this.token);
   
     setInterval(()=>{
       this.getUserCount();
