@@ -24,6 +24,7 @@ export class CommentComponent implements OnInit {
     this.getAllBlogComment()
     
   }
+  
   getAllBlogComment(){
     this.loader=true
     this.master.getMethod("/getBlogComments?id="+this.id).subscribe(data=>{
