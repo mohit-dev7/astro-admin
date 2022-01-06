@@ -1,0 +1,45 @@
+<div>
+    <h3>
+        Category image
+    </h3>
+    <form>
+        <div class="mb-3">
+            <label for="name" class="form-label">Category Name</label>
+            <select name="product" #imageId class="form-control">
+                <option *ngFor="let category of Categories" value="{{category.id}}">{{category.name}}</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="file" class="form-label">Select File</label>
+            <input type="file" (change)="changeFile($event.target.files)" class="from-control">
+        </div>
+
+        <div class="text-center">
+                <button class="btn btn-primary" (click)="uploadImage(imageId.value)">upload</button>
+        </div>
+    </form>
+</div>
+
+<div class="mt-5">
+    <h3>
+       upload Cover Image
+    </h3>
+    <form>
+        <div class="mb-3">
+            <label for="name" class="form-label">Category Name</label>
+            <select name="product" #CoverImageId class="form-control">
+                <option *ngFor="let category of Categories" value="category.id">{{category.value}}</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="file" class="form-label">Select File</label>
+            <input type="file" (change)="changeCoverFile($event.target.files)" class="from-control">
+        </div>
+
+        <div class="text-center">
+                <button class="btn btn-primary" (click)="uploadCoverImage(CoverImageId.value)">upload</button>
+        </div>
+    </form>
+</div>

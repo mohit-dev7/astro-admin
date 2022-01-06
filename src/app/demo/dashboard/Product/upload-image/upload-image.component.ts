@@ -15,7 +15,7 @@ export class UploadImageComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.authService.getRequest("/product/list").subscribe((res)=>{
+    this.authService.getRequest("/product/list-all").subscribe((res)=>{
       if(!res.status){
           console.log("error! something went wrong");
       }
@@ -28,7 +28,7 @@ export class UploadImageComponent implements OnInit {
     this.file = file[0];
   }
 
-  uploadImage(id){
+  uploadImage(id:any){
     let form = new FormData();
     form.append("file",this.file)
 

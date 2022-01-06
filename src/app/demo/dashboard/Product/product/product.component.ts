@@ -193,7 +193,7 @@ export class ProductComponent implements OnInit {
       "brand":this.brand,
       "description":this.description,
        "category":{"id":this.categoryId},
-      "status":this.status??0,
+      "status":this.status?1:0,
       "name":this.productName,
       "variants" :[{"id":this.variantId,"price":this.price,"quantity":this.quantity}]
   }
