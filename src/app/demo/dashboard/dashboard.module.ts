@@ -2,12 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { UsersComponent } from './users/users.component';
-import { AppoinmentsComponent } from './appoinments/appoinments.component';
 import { PendingAppoinmentsComponent } from './pending-appoinments/pending-appoinments.component';
 import { DataTablesModule } from 'angular-datatables';
 import { HttpClientModule} from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { ProductComponent } from './Product/product/product.component';
 
 @NgModule({
   imports: [
@@ -17,7 +16,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     DashboardRoutingModule,
     DataTablesModule.forRoot(),
   ],
-  declarations: [UsersComponent, AppoinmentsComponent, PendingAppoinmentsComponent],
+  declarations: [ PendingAppoinmentsComponent],
  
 })
 export class DashboardModule { }

@@ -1,0 +1,19 @@
+<div>
+    <form >
+        <div class="mb-3">
+            <label for="name" class="form-label">Product Name</label>
+            <select name="product" #imageProductId class="form-control">
+                <option *ngFor="let product of products"  value="{{product.id}}">{{product.name}}</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="file" class="form-label">Select File</label>
+            <input type="file" (change)="changeFile($event.target.files)" class="from-control">
+        </div>
+
+        <div class="text-center">
+                <button class="btn btn-primary" (click)="uploadImage(imageProductId.value)">upload</button>
+        </div>
+    </form>
+</div>

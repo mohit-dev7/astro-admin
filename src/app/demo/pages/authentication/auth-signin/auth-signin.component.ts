@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 
@@ -23,16 +24,18 @@ export class AuthSigninComponent implements OnInit {
   loginForm:FormGroup;
   error:boolean = false;
 
-message:any = '';
+  message:any = '';
 
   email = new FormControl("", [Validators.required]);
   password = new FormControl("", [Validators.required]);
+  
   constructor(private authservice:AuthService, private router:Router) {     
     
     this.loginForm = new FormGroup({
-      email: new FormControl(''),
-      password: new FormControl(''),
-    });}
+        email: new FormControl(''),
+        password: new FormControl(''),
+      });
+    }
 
   ngOnInit() {
   }
@@ -57,36 +60,28 @@ return false;
 
     }
     else{
-   
-
       const data ={
-        "userEmail":userEmail,
+        "username":userEmail,
         "password":userPassword
       }
+      this.authservice.postRequest("/login",data).subscribe(response=>{
+          console.log(response.httpStatus);
+          if(!response['token']){
+            this.error = true; 
+            this.message = 'Invalid email and password!';
+            return false;
+          }
+          localStorage.setItem('userID',response.token);
 
-   this.authservice.loginToDashboard(data).subscribe(response=>{
+          this.error = false; 
+          this.message = 'Authenticated!';
 
- if(response['message']=='login'){
-
-  localStorage.setItem('userID',response['userID']);
-
-  this.error = false; 
-    this.message = 'Authenticated!';
-
-    this.router.navigate(['/dashboard/default']);
-
- }
- else{
-  this.error = true; 
-  this.message = 'Invalid email and password!';
-  return false;
- }
-
-  
-
-   });
-   
-
+          this.router.navigate(['/dashboard/default']);
+        }),(err)=>{
+          this.error = true; 
+          this.message = 'Invalid email and password!';
+          return false;
+        };
     }
 
    

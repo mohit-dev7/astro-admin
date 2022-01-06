@@ -1,3 +1,4 @@
+import { OrderModule } from './demo/dashboard/Order/order.module';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
@@ -17,11 +18,6 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./demo/dashboard/dashboard.module').then(m => m.DashboardModule),
-        // canActivate:[AuthGuard]
-      },
-      {
-        path: 'basic',
-        loadChildren: () => import('./demo/ui-elements/ui-basic/ui-basic.module').then(m => m.UiBasicModule),
         // canActivate:[AuthGuard]
       },
       {

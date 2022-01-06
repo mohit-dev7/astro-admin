@@ -1,3 +1,4 @@
+import { OrderModule } from './Order/order.module';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -14,8 +15,17 @@ const routes: Routes = [
         loadChildren: () => import('./stats/stats.module').then(m => m.StatsModule)
       },
       {
-        path: 'appointments',
-        loadChildren: () => import('./appoinments/appoinments.module').then(m => m.AppoinmentsModule)
+        path:"users",
+        loadChildren:()=>import('./User/user.module').then(m => m.UserModule)
+      },
+      {
+          path: 'order',
+          loadChildren: () => import('./Order/order.module').then(m => m.OrderModule),
+          // canActivate:[AuthGuard]
+      },
+      {
+        path: 'product',
+        loadChildren: () => import('./Product/product.module').then(m => m.ProductModule)
       },
       {
         path: 'pending-appointments',

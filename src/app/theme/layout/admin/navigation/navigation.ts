@@ -49,76 +49,64 @@ const NavigationItems = [
         classes: 'nav-item',
       },
       {
-        id: 'master',
-        title: 'Master',
+        id: 'Order',
+        title: 'Order',
         type: 'collapse',
         icon: 'feather icon-box',
         children: [
           {
-            id: 'country',
-            title: 'Country',
+            id: 'Order',
+            title: 'order',
             type: 'item',
-            url: '/basic/button'
+            url: '/dashboard/order'
           },
           {
-            id: 'rate_list',
-            title: 'Rate List',
+            id: 'Cancel Order',
+            title: 'Cancel Order',
             type: 'item',
-            url: '/basic/badges'
-          },
-          {
-            id: 'time_slot',
-            title: 'Time Slot',
-            type: 'item',
-            url: '/basic/breadcrumb-paging'
-          },
-          {
-            id: 'holiday_list',
-            title: 'Holiday List',
-            type: 'item',
-            url: '/basic/collapse'
-          },
-          {
-            id: 'promo_code',
-            title: 'Promo Code',
-            type: 'item',
-            url: '/basic/tabs-pills'
+            url: '/dashboard/order/cancel'
           }
         ]
       },
       {
-        id: 'appointments',
-        title: 'Appointments',
+        id: 'Product',
+        title: 'Product',
         type: 'collapse',
         icon: 'feather icon-box',
         children: [
           {
-            id: 'search_appointments',
-            title: 'Appointments',
+            id: 'Product List',
+            title: 'Product List',
             type: 'item',
-            url: '/dashboard/appointments'
+            url: '/dashboard/product/list'
           },
           {
-            id: 'pending_appointments',
-            title: 'Pending Appointments',
+            id: 'Create Product',
+            title: 'Create Product',
+            type: 'item',
+            url: '/dashboard/product'
+          },
+          {
+            id: 'Upload Product Image',
+            title: 'Upload Product Image',
+            type: 'item',
+            url: '/dashboard/product/image-upload'
+          },
+          {
+            id: 'Delete Product',
+            title: 'Cancelled Appointments',
             type: 'item',
             url: '/dashboard/pending-appointments'
           },
           {
-            id: 'cancelled_appointments',
-            title: 'Cancelled Appointments',
-            type: 'item',
-            url: '/basic/breadcrumb-paging'
-          },
-          {
-            id: 'completed_appointments',
-            title: 'Completed Appointments',
+            id: 'Set highLighter',
+            title: 'Set HighLighter',
             type: 'item',
             url: '/basic/collapse'
           },
           {
-            id: 'refund',
-            title: 'Refund Appointments List',
+            id: 'Inventory update',
+            title: 'Inventory Update',
             type: 'item',
             url: '/basic/tabs-pills'
           }

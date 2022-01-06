@@ -1,3 +1,5 @@
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -22,7 +24,6 @@ import { NavSearchComponent } from './theme/layout/admin/nav-bar/nav-left/nav-se
 import { NavRightComponent } from './theme/layout/admin/nav-bar/nav-right/nav-right.component';
 import { ConfigurationComponent } from './theme/layout/admin/configuration/configuration.component';
 import { DataTablesModule } from 'angular-datatables';
-
 import { AngularEditorModule } from '@kolkov/angular-editor';
 @NgModule({
   declarations: [
@@ -41,7 +42,6 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     NavSearchComponent,
     NavRightComponent,
     ConfigurationComponent,
-
   ],
   imports: [
     HttpClientModule,
@@ -54,7 +54,9 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     DataTablesModule.forRoot(),
     NgbTooltipModule,
     NgbButtonsModule,
-    NgbTabsetModule
+    NgbTabsetModule,
+    FormsModule,
+    RouterModule
   ],
   providers: [NavigationItem],
   bootstrap: [AppComponent]

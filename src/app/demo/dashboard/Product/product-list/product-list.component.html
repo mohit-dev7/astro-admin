@@ -1,0 +1,96 @@
+<div class="container-fluid p-0">
+
+    <div class="table_data card p-3">
+        <div class="row">
+            <div class="col-3">
+                <h5>All Records</h5>
+            </div>
+            <div class="col-9">
+                <div class="row float-right mx-2">
+                    <div class="col-4">
+                        SortBy
+                    </div>
+                    <div class="col-8 pb-3">
+                        <select  type="text" #sortBy (change)="setSortBy(sortBy.value)" class="form-control">
+                            <option value="name">Name</option>
+                            <option value="category">category</option>
+                            <option value="brand">brand</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>brand</th>
+                    <th>total variant</th>
+                    <th>total stock</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Order id</th>
+                    <th>Category</th>
+                    <th>brand</th>
+                    <th>total variant</th>
+                    <th>total stock</th>
+                    <th>Action</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr *ngFor = "let product of products">
+                    <td>{{product.name}}</td>
+                    <td>{{product.category.name}}</td>
+                    <td>{{product.brand}}</td>
+                    <td>{{product.variants.length}}</td>
+                    <td>{{0}}</td>
+                    <td>
+                        <button class="border-0 mx-3 btn btn-primary text-center">
+                            <i class=" bi bi-card-checklist"></i>
+                        </button>
+                        <button class="btn btn-warning border-0 mx-3" data-toggle="modal" data-target="#deleteModal" (click)= "setDeleteId(product.id)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-right">
+            <button class="" (click)="prvPage(pageNo)" [disabled]="pageNo == 1">pre</button>
+            <input type="text" value="{{pageNo}}" disabled size="1">
+            <button class="" (click)="nextPage(pageNo)" [disabled]="totalPage == pageNo">next</button>
+        </div>
+        
+    
+    </div>
+</div>
+
+<!-- model -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+                <P>
+                    Do you want to delete this product?
+                </P> 
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-danger" (click)="deleteProduct(productId)">Delete Product</button>
+          </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,125 @@
+<div>
+    <form [formGroup]="product">
+      <div *ngIf="message!='' && error==true" class="alert alert-danger" role="alert">
+        {{message}}
+      </div>
+
+      <div *ngIf="message!='' && error!=true" class="alert alert-success" role="alert">
+        {{message}}
+      </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Product Name</label>
+            <input class="form-control" formControlName="productName" type="text"/>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input class="form-control" formControlName="description" type="text-area"/>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">brand</label>
+          <input class="form-control" formControlName="brand" type="text-area"/>
+      </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="Category" class="form-label">Category</label>
+                <span class="float-right btn btn-primary  rounded-circle font-weight-bold" data-toggle="modal" data-target="#exampleModal">+</span>
+                <select class="form-control" formControlName="categoryId">
+                    <option *ngFor="let category of categoryList" value="{{category.id}}">{{category.name}}</option>
+                </select>
+            </div>
+
+            <div class="col-md-6 ">
+                <label class="form-label" for="flexSwitchCheckDefault">HighLighter</label>  
+                <input class="form-control" formControlName="status" type="checkbox" id="">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="variants" class="form-label">Variants</label>
+            <span class="float-right btn btn-primary rounded-circle font-weight-bold" data-toggle="modal" data-target="#exampleModal2" >+</span>
+            <select class="form-control" formControlName="variantId">
+                <option *ngFor="let variant of variantList" value="{{variant.id}}">{{variant.name}}</option>
+            </select>
+        </div>
+
+        <div class="row md-3"> 
+            <div class="col-md-6">
+                        <label for="price">Price</label>
+                        <input class="form-control" formControlName="price" type="number">
+            </div>
+            
+            <div class="col-md-6">
+                    <label for="name" class="form-label">quantity</label>
+                    <input class="form-control" formControlName="quantity" type="number"/>
+            </div>
+        </div>
+
+        <div class="my-3 text-center">
+            
+            <button class="btn btn-primary" type="number" (click)="addProduct()">Create Product</button>
+        </div>
+        
+    </form>
+
+
+    
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form  [formGroup]="category">
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Category name</label>
+                    <input formControlName="name" type="text" class="form-control" />
+                </div>
+                <div class="mb-3">
+                  <label for="code" class="form-label">Category code</label>
+                  <input formControlName="code" type="text" class="form-control" />
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" (click)="addCategory()">Add Category</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Variant</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form [formGroup]="variant">
+              <div class="modal-body">
+                <div class="mb-3">
+                      <label for="name" class="form-label">Variant name</label>
+                      <input type="text" formControlName="name" class="form-control"/>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="addVariants()">Save changes</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+</div>
