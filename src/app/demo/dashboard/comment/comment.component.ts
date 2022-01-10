@@ -14,6 +14,8 @@ export class CommentComponent implements OnInit {
   loader:boolean=false
   error:boolean=false;
   message:any=""
+  replyOf:any=[]
+  commentOnData:any
 
   constructor( private route: ActivatedRoute,private http: HttpClient, private router: Router, private master: MasterService) { }
 
@@ -87,6 +89,15 @@ export class CommentComponent implements OnInit {
     }
     
 
+  }
+
+  viewAllComment(id,commentOn){
+    this.commentOnData=commentOn
+    this.master.getMethod("/getCommentReplies?id="+id).subscribe(data=>{
+
+      this.replyOf=data;
+      console.log(this.replyOf)
+    })
   }
 
 }

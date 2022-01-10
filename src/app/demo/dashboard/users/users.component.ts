@@ -18,7 +18,7 @@ userForm:FormGroup = new FormGroup({
   lastName:new FormControl("",[Validators.required]),
   email:new FormControl("",[Validators.required,Validators.email]),
   phone:new FormControl("",[Validators.required,Validators.pattern("/[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im")]),
-  countryCode:new FormControl("",[Validators.required])
+  countryCode:new FormControl("",[Validators.required]),
 })
 userData:any = [];
 self=this;
@@ -73,13 +73,16 @@ error:boolean = false;
     }
 
     onUpdate(){
-
+      debugger
+      
       var id = $('#userID').val();
+      alert(id)
       var firstName=this.userForm.get("firstName").value;
       var lastName=this.userForm.get("lastName").value;
       var email=this.userForm.get("email").value;
       var phone=this.userForm.get("phone").value;
-      var countryCode=this.userForm.get("countryCode").value;
+      var countryCode=$("#countryCode").val()
+      // var countryCode=this.userForm.get("countryCode").value;
       // if(this.userForm.invalid){
       //   console.log(this.userForm)
       //   return
@@ -105,6 +108,10 @@ error:boolean = false;
         this.error=true 
         this.message=" Mobile number can not be less than 10 digits "
         return false;
+      }else if(countryCode=="" || countryCode==null){
+        this.error=true 
+        this.message="please enter the country Code "
+        return false;
       }
       else{
         const data={
@@ -123,7 +130,7 @@ error:boolean = false;
           
         }
         console.log(data)
-        this.master.methodPost(data,"/saveProfile?userId="+id).subscribe(reponse=>{
+        this.master.methodPost(data,"/saveProfile").subscribe(reponse=>{
   
           if(reponse['name']!='')
           {  
@@ -157,6 +164,7 @@ error:boolean = false;
 
 
     editUser(id:any){
+      debugger
       alert(id)
       $(window).scrollTop(0);
       this.isForm=true;
