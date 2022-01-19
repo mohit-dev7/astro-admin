@@ -153,6 +153,7 @@ export class EnquireComponent implements OnInit {
    this.master.getMethod('/getAllEnquiries').subscribe(data=>{
 
     this.enquiredata = JSON.parse(JSON.stringify(data));
+    console.log(this.enquiredata)
     setTimeout(function(){
       $('#example').DataTable();
      }, 1000);

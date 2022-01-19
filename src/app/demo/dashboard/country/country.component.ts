@@ -270,7 +270,7 @@ export class CountryComponent implements OnInit {
   
       if(reponse['name']!='')
       {    
-        alert("Record deleted successfully.");
+        this.toaster.success("Record deleted successfully.");
         location.reload();
   
       }else{

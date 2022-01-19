@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 declare const AmCharts: any;
 declare var $: any;
@@ -35,7 +36,8 @@ export class DefaultComponent implements OnInit {
   typeCunsultation = ["Kundali/Birth Chart Consultation", "Gemstone Consultation", "Match Making Consultation", "Vastu"];
   
   constructor(private master: MasterService,
-    private router:Router
+    private router:Router,
+    private toaster:ToastrService
     ) {
     this.getUserCount();
     // this.TokenExpired(this.token);
@@ -91,7 +93,7 @@ this.master.getMethod('/getAllEnquiries').subscribe((response:any)=>{
         // location.reload();
       }
     }, (error => {
-      alert('Session is expired please login again!');
+      this.toaster.success('Session is expired please login again!');
       localStorage.removeItem('userID');
       location.reload();
 

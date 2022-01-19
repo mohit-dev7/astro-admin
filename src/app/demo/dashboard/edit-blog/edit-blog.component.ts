@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { MasterService } from 'src/app/services/master.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-blog',
@@ -68,7 +69,7 @@ blogId :any = '';
   imgSlt:boolean = false;
   loader:boolean = false;
   userImage: any;
-  constructor(private master:MasterService, private router:Router, private route:ActivatedRoute) {
+  constructor(private master:MasterService, private router:Router, private route:ActivatedRoute,private toaster:ToastrService) {
 
     this.blogId =  this.route.params['_value']['id'];
 
@@ -127,7 +128,7 @@ this.imgSlt = true;
     console.log(value)
 
     if(blogTitle==''){
-      alert('Please add blog title');
+      this.toaster.error('Please add blog title');
       this.loader=false
       return false;
 
@@ -135,21 +136,21 @@ this.imgSlt = true;
 
     else if(blogSubtitle==''){
       this.loader=false
-      alert('Please add blog subtitle');
+      this.toaster.error('Please add blog subtitle');
       return false;
 
     }
 
     else if(content==''){
       this.loader=false
-      alert('Please write something in blog.');
+      this.toaster.error('Please write something in blog.');
       return false;
 
     }
 
     else if(keyword==''){
       this.loader=false
-      alert('Please write some keywords in blog.');
+      this.toaster.error('Please write some keywords in blog.');
       return false;
 
     }
@@ -176,7 +177,7 @@ this.imgSlt = true;
       console.log(response['id']);
 
       this.loader = false;
-      alert('Blog Added seuucess fully.');
+      this.toaster.success('Blog Added seuucess fully.');
           this.router.navigate(['/dashboard/allblogs']);
       
      
@@ -233,7 +234,7 @@ this.imgSlt = true;
 console.log(res);
        this.router.navigate(['/dashboard/allblogs']);
        this.loader = false;
-       alert('Blog Added successfully.');
+       this.toaster.success('Blog Added successfully.');
     });
   }
 

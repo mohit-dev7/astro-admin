@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { MasterService } from 'src/app/services/master.service';
+import { ToastrService } from 'ngx-toastr';
 
 declare var $:any;
 
@@ -66,7 +67,7 @@ export class BlogComponent implements OnInit {
   error:boolean=false
   message:string=""
 
-  constructor(private master:MasterService, private router:Router) { }
+  constructor(private master:MasterService, private router:Router,private toaster:ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -186,7 +187,7 @@ this.simg = event.target.files[0];
 console.log(res);
        this.router.navigate(['/dashboard/allblogs']);
 
-       alert('Blog Added successfully.');
+       this.toaster.success('Blog Added successfully.');
     });
   }
 
