@@ -45,8 +45,8 @@
         </thead>
        
     <tbody>
-        <tr *ngFor="let data of feedData">
-            <td>{{data.sno}}</td>
+        <tr *ngFor="let data of feedData;let index=index">
+            <td>{{index+1}}</td>
             <td>{{data.firstName}} {{data.lastName}}</td>
             <td>{{data.email}}</td>
             <td>{{data.subject}}</td>

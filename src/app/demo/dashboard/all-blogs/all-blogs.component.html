@@ -28,8 +28,8 @@
         <tbody>
            
           
-            <tr *ngFor="let data of getBlogs">
-                <td>{{data.id}}</td>
+            <tr *ngFor="let data of getBlogs;let index=index">
+                <td>{{index+1}}</td>
                
                 <td><img  src="{{imgURL}}{{data.image}}/{{data.id}}" style="width:50px; height: 50px; border-radius: 10px;; object-fit: cover;"/></td>
                 <td>{{data.title}}</td>
