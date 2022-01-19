@@ -5,6 +5,7 @@ import { MasterService } from 'src/app/services/master.service';
 import { FormControl,  Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 declare var $: any;
 
 // piyush
@@ -35,7 +36,7 @@ export class EnquireComponent implements OnInit {
   loader:boolean=true
   cancel:boolean
 
-  constructor( private master:MasterService ,private authservice:AuthService, private router:Router) {
+  constructor( private master:MasterService ,private authservice:AuthService, private router:Router,private toaster:ToastrService) {
 
 
     
@@ -195,7 +196,8 @@ export class EnquireComponent implements OnInit {
   
      
      },(error=>{
-      alert("failed to update status something went wrong");
+      
+      this.toaster.error("failed to update status something went wrong");
      }));
    }
    
@@ -223,15 +225,15 @@ onDelete(id){
     this.master.deleteMethod("/deleteEnquiry/"+id).subscribe(data=>{
       if(data["name"]!=""){
         this.error=true
-        alert("this data is deleted successfully")
+        this.toaster.success("this data is deleted successfully")
         this.getEnquire()
       }else{
         this.error=true
-        alert("failed to delete Enquiry")
+        this.toaster.error("failed to delete Enquiry")
         
       }
     },(error=>{
-      alert("something went wrong please check carefully")
+      this.toaster.error("something went wrong please check carefully")
     }))
   }
 }

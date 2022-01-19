@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { BlogRoutingModule } from './blog-routing.module';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -12,7 +14,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     BlogRoutingModule,
     AngularEditorModule,
-    FormsModule
+    FormsModule,
+ 
   ]
 })
 export class BlogModule { }

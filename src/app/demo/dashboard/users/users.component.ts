@@ -6,6 +6,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { MasterService } from 'src/app/services/master.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs-compat/operator/first';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-users',
@@ -32,7 +33,7 @@ singleUser:any
 message:any = '';
 error:boolean = false;
 
-  constructor(private http: HttpClient, private master:MasterService) { }
+  constructor(private http: HttpClient, private master:MasterService,private toater:ToastrService) { }
 
     ngOnInit(): void {
       // this.userForm = 
@@ -73,12 +74,11 @@ error:boolean = false;
     }
 
     onUpdate(){
-      debugger
+     
       
       var id = $('#userID').val();
       var id2=$('#userID2').val();
-      alert(id)
-      alert(id2)
+     
       var firstName=this.userForm.get("firstName").value;
       var lastName=this.userForm.get("lastName").value;
       var email=this.userForm.get("email").value;
@@ -152,7 +152,7 @@ error:boolean = false;
           }
       
         },(error=>{
-          alert("failed to update user something went wrong");
+          this.toater.error("failed to update user something went wrong");
         }))
   
       }
@@ -167,8 +167,8 @@ error:boolean = false;
 
 
     editUser(id:any,id2:any){
-      debugger
-      alert(id)
+    
+  
       $(window).scrollTop(0);
       this.isForm=true;
       this.loader=true;
@@ -202,7 +202,7 @@ error:boolean = false;
         this.master.deleteMethod("/deleteUser/"+id).subscribe(data=>{
           if(data['name']!='')
           { 
-            alert("Record deleted successfully.");
+            this.toater.success("Record deleted successfully.");
             location.reload();
       
           }else{
@@ -211,7 +211,7 @@ error:boolean = false;
             return false;
           }
         },(error=>{
-          alert("failed to delete data something wrong please check carefully ")
+          this.toater.error("failed to delete data something went wrong please check carefully ")
         }))
       }
     

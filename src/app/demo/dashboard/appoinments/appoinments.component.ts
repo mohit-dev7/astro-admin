@@ -6,6 +6,8 @@ import { DataTableDirective } from 'angular-datatables';
 import { MasterService } from 'src/app/services/master.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { ToastrService } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -67,10 +69,8 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
     ]
   };
 
-  appointmentForm:FormGroup;
-  type=new FormControl("")
-  name1=new FormControl("");
-  date=new FormControl("");
+  appointmentForm:any;
+  
   public allAppointment:any=[];
   loader:boolean=false;
 
@@ -88,7 +88,7 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
   onEdit1:boolean=false
   onEdit2:boolean=true
   remedy:any
-  constructor(private http: HttpClient,private master:MasterService) {
+  constructor(private http: HttpClient,private master:MasterService,private toaster:ToastrService,private datepip:DatePipe) {
     this.TokenExpired(this.token);
 
    }
@@ -98,11 +98,11 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.appointmentForm= new FormGroup({
-      type:new FormControl(""),
+      newType:new FormControl(""),
       name:new FormControl(""),
       date:new FormControl("")
 
-    })
+    });
 
   
 
@@ -118,7 +118,8 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
         location.reload();
       }
     },(error=>{
-     alert('Session is expired please login again!');
+     
+     this.toaster.show('Session is expired please login again!');
       localStorage.removeItem('userID');
       location.reload();
 
@@ -199,11 +200,13 @@ editAppointment(id){
   this.master.getMethod("/getAppointmentDetail?id="+this.id).subscribe(data=>{
     this.singleUserDetail=JSON.parse(JSON.stringify(data));
     console.log(this.singleUserDetail)
-    this.dateFormat=this.datepipe.transform(this.singleUserDetail.appointDate, 'dd/MM/yyyy')
+    this.dateFormat=this.datepip.transform(this.singleUserDetail.appointDate, 'dd/MM/yyyy')
     console.log(this.dateFormat)
+    // this.appointmentForm.patchValue({["name"]: this.singleUserDetail.name});
     this.appointmentForm=new FormGroup({
-      name:new FormControl(this.singleUserDetail.userProfile.firstName +" "+ this.singleUserDetail.userProfile.lastName),
-      date:new FormControl(this.singleUserDetail.appointDate )
+      name:new FormControl(this.singleUserDetail.name ),
+      date:new FormControl(this.dateFormat ),
+      newType:new FormControl("")
   
     })
   })
@@ -213,8 +216,9 @@ editAppointment(id){
 }
 
     updateStatus(){
+      debugger
       this.loader=true
-    var type=this.appointmentForm.get("type").value;
+   var type=this.appointmentForm.get("newType").value;
     $('#userId').val(this.id);
     this.master.getMethod("/changeAppointmentStatus?id="+this.id+"&status="+type).subscribe(reponse=>{
         if(reponse['name']!='')
@@ -235,7 +239,7 @@ editAppointment(id){
         return false;
       }
     },(error=>{
-      alert("failed to Status update  something went wrong");
+  this.toaster.error("failed to Status update  something went wrong");
      }))
   }
 
@@ -299,7 +303,7 @@ editAppointment(id){
         return false;
       }
     },(error=>{
-      alert("failed to add remedie  something went wrong");
+      this.toaster.error("failed to add remedie  something went wrong");
      }))
 
       

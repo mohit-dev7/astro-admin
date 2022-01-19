@@ -4,6 +4,7 @@ declare var $: any;
 import {Subject} from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { MasterService } from 'src/app/services/master.service';
+import { ToastNoAnimation, ToastrService } from 'ngx-toastr';
 declare var require: any
 
 @Component({
@@ -17,7 +18,7 @@ export class FeedbackComponent implements OnInit {
   message:any=""
   
 
-  constructor(private master:MasterService) { }
+  constructor(private master:MasterService,private toaster:ToastrService) { }
 
   ngOnInit(): void {
     this.getFeedbackData();
@@ -48,7 +49,7 @@ export class FeedbackComponent implements OnInit {
   filterFeedbacks(){
     var personName = <HTMLInputElement>document.getElementById('personName');
 
-    alert(personName.value);
+   
 
   }
 
@@ -89,15 +90,15 @@ export class FeedbackComponent implements OnInit {
      this.master.deleteMethod("/deleteFeedback/"+id).subscribe(data=>{
        if(data["name"]!=""){
          this.error=true
-         alert("this data is deleted successfully")
+         this.toaster.success("this data is deleted successfully")
          this.getFeedbackData()
        }else{
          this.error=true
-         alert("failed to delete feedback")
+         this.toaster.error("failed to delete feedback")
          
        }
      },(error=>{
-       alert("something went wrong please check carefully")
+       this.toaster.error("something went wrong please check carefully")
      }))
    }
  }

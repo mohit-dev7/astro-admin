@@ -115,7 +115,7 @@ this.imgSlt = true;
   postNewBlog(){
     this.loader = true;
  
-debugger;
+
     var blogTitle = $('#blog_title').val();
     var blogSubtitle = $('#blogSubtilte').val();
     var blog_ftr = $('#blog_ftr').val();
@@ -223,7 +223,7 @@ debugger;
 
 
   uploadBlogImage(id){
-    debugger;
+  
     var formData = new FormData();
     formData.append('file', this.simg);
 

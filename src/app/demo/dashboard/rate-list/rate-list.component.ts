@@ -5,6 +5,7 @@ import { MasterService } from 'src/app/services/master.service';
 import { FormControl,  Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Data, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 declare var $: any;
 
 // piyush
@@ -38,7 +39,7 @@ export class RateListComponent implements OnInit{
   destroy: number = 0;
   ischecked:boolean
 
-  constructor( private master:MasterService ,private authservice:AuthService, private router:Router) {
+  constructor( private master:MasterService ,private authservice:AuthService, private router:Router,private toaster:ToastrService) {
 
 
     
@@ -74,7 +75,7 @@ export class RateListComponent implements OnInit{
   }
 
   AddRateList(){
-    debugger;
+  
     var Country=this.ratelistform.get("country").value;
     var Ctype=this.ratelistform.get("ctype").value;
     var Rate=this.ratelistform.get("rateofvalue").value;
@@ -127,7 +128,7 @@ export class RateListComponent implements OnInit{
 
      
      },(error=>{
-      alert("failed to add new country something went wrong");
+      this.toaster.error("failed to add new country something went wrong");
      }));
 
     }
@@ -291,7 +292,7 @@ export class RateListComponent implements OnInit{
 
    
    },(error=>{
-    alert("failed to update ratelist something went wrong");
+    this.toaster.error("failed to update ratelist something went wrong");
    }));
 
   }
@@ -322,7 +323,7 @@ export class RateListComponent implements OnInit{
  
      if(reponse['name']!='')
      { 
-       alert("Record deleted successfully.");
+       this.toaster.success("Record deleted successfully.");
        location.reload();
  
      }else{
@@ -333,7 +334,7 @@ export class RateListComponent implements OnInit{
  
     
     },(error=>{
-     alert("failed to delete ratelist something went wrong");
+     this.toaster.error("failed to delete ratelist something went wrong");
     }));
  
   }else{

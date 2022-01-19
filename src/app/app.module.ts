@@ -27,6 +27,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MasterService } from './services/master.service';
 import { MyInterceptor } from './services/myinterceptor.service';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,9 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
     NgbTooltipModule,
     NgbButtonsModule,
     NgbTabsetModule,
-    NgxIntlTelInputModule
+    NgxIntlTelInputModule,
+    ToastrModule.forRoot()
+    
   ],
   providers: [NavigationItem, {provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true}],
   bootstrap: [AppComponent]

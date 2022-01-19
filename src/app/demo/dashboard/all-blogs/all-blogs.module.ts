@@ -8,6 +8,8 @@ import { HttpClientModule} from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { AllBlogsRoutingModule } from './all-blogs-routing.module';
 import { DataTablesModule } from 'angular-datatables';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { DataTablesModule } from 'angular-datatables';
     FormsModule,
 AllBlogsRoutingModule,
     SharedModule,
-    DataTablesModule
+    DataTablesModule,
+  
+    
   ],
   exports:[
     DataTablesModule

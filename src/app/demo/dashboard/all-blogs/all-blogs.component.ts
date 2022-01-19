@@ -5,6 +5,8 @@ import {Subject} from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { MasterService } from 'src/app/services/master.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 @Component({
@@ -35,7 +37,7 @@ export class AllBlogsComponent implements OnInit {
 
 imgURL = this.apURL+"/getBlogPic"+"/";
 
-  constructor(private http: HttpClient,private master:MasterService) {
+  constructor(private http: HttpClient,private master:MasterService,private toaster:ToastrService) {
 
 
    }
@@ -94,11 +96,11 @@ if(confirm("Are you sure want to delete this blog?")){
 
 this.master.deleteMethod('/deleteBlog/'+id).subscribe(res=>{
 
-  alert('Your blog deleted success fully!');
+  this.toaster.success('Your blog deleted success fully!');
   this.getAllAppointment();
 
 },error=>{
-  alert('something went wrong try again letter!');
+  this.toaster.error('','something went wrong try again letter!');
 });
   }
 

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { MasterService } from 'src/app/services/master.service';
 
+declare var $:any;
+
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
@@ -61,6 +63,8 @@ export class BlogComponent implements OnInit {
   };
   simg: any;
   loader:boolean = false;
+  error:boolean=false
+  message:string=""
 
   constructor(private master:MasterService, private router:Router) { }
 
@@ -86,10 +90,10 @@ this.simg = event.target.files[0];
 
 
   postNewBlog(){
-
+    $(window).scrollTop(0);
     this.loader = true;
  
-debugger;
+
     var blogTitle = $('#blog_title').val();
     var blogSubtitle = $('#blogSubtilte').val();
     var blog_ftr = $('#blog_ftr').val();
@@ -101,25 +105,29 @@ debugger;
     console.log(value)
 
     if(blogTitle==''){
-      alert('Please add blog title');
+      this.error=true
+      this.message='Please add blog title';
       return false;
 
     }
 
     else if(blogSubtitle==''){
-      alert('Please add blog subtitle');
+      this.error=true
+      this.message='Please add blog subtitle';
       return false;
 
     }
 
     else if(content==''){
-      alert('Please write something in blog.');
+      this.error=true
+      this.message='Please write something in blog.'
       return false;
 
     }
 
     else if(keyword==''){
-      alert('Please write some keywords in blog.');
+      this.error=true
+      this.message='Please write some keywords in blog.'
       return false;
 
     }
@@ -146,7 +154,7 @@ debugger;
 
           if(this.urlDt != '../../../../assets/images/placeholder.png' && this.urlDt!='' ){
             this.loader = false;
-          alert('Blog Added seuucess fully.');
+          this.message='Blog Added seuucess fully.';
               this.router.navigate(['/dashboard/allblogs']);
           }
           else{
@@ -168,7 +176,7 @@ debugger;
 
 
   uploadBlogImage(id){
-    debugger;
+    
     var formData = new FormData();
     formData.append('file', this.simg);
 

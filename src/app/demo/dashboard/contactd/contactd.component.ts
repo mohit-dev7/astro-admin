@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MasterService } from 'src/app/services/master.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contactd',
@@ -11,7 +12,7 @@ export class ContactdComponent implements OnInit {
   token=localStorage.getItem("userID")
 
   contactForm: FormGroup;
-  constructor(private master:MasterService) { 
+  constructor(private master:MasterService,private toaster:ToastrService) { 
     this.TokenExpired(this.token);
   }
 
@@ -39,10 +40,10 @@ export class ContactdComponent implements OnInit {
 
   addContact() {
     
-      debugger;
+     
       this.master.contactPost(this.contactForm.value).subscribe(response => {
       this.contactForm.patchValue(response);
-      alert("contact saved");
+      this.toaster.success("contact saved");
       });
     }
 
@@ -70,7 +71,7 @@ export class ContactdComponent implements OnInit {
         location.reload();
       }
     },(error=>{
-     alert('Session is expired please login again!');
+     this.toaster.success('Session is expired please login again!');
       localStorage.removeItem('userID');
       location.reload();
 

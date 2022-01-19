@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MasterService } from 'src/app/services/master.service';
+import { ToastrService } from 'ngx-toastr';
 declare var $: any;
 
 @Component({
@@ -39,7 +40,7 @@ export class PromocodeComponent implements OnInit {
 
   
 
-  constructor(private master:MasterService) {
+  constructor(private master:MasterService,private toaster:ToastrService) {
  
    }
 
@@ -62,6 +63,7 @@ export class PromocodeComponent implements OnInit {
     this.master.getMethod('/getPromo').subscribe(data=>{
  
      this.promocode = JSON.parse(JSON.stringify(data));
+     console.log(data)
     //  for (let i=0;i<this.promocode.length ; i++){
     //   if (this.promocode[i].status!="DELETED"){
     //       this.filterDeletedData.push(this.promocode[i])
@@ -91,7 +93,7 @@ export class PromocodeComponent implements OnInit {
   }
 
   addNewPromoCode(){
-    debugger
+
     var procode=this.promoForm.get('promcode').value;
     var percentAmount=this.promoForm.get('percentAmount').value;
     var effective=this.promoForm.get("effective").value;
@@ -143,7 +145,7 @@ export class PromocodeComponent implements OnInit {
           }
   
       },(error=>{
-        alert("failed to add new promocode something went wrong");
+        this.toaster.error("failed to add new promocode something went wrong");
       }));
 
       
@@ -253,7 +255,7 @@ export class PromocodeComponent implements OnInit {
         return false;
       }
     },(error=>{
-      alert("failed to update Promocode something went wrong");
+       this.toaster.error("failed to update Promocode something went wrong");
      }));
 
 
@@ -284,7 +286,7 @@ export class PromocodeComponent implements OnInit {
     
         if(reponse['name']!='')
         { 
-          alert("Record deleted successfully.");
+          this.toaster.success("Record deleted successfully.");
           location.reload();
     
         }else{
@@ -295,7 +297,7 @@ export class PromocodeComponent implements OnInit {
     
        
        },(error=>{
-        alert("failed to delete country something went wrong");
+        this.toaster.error("failed to delete country something went wrong");
        }));
     
      }else{

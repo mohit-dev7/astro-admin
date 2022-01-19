@@ -5,6 +5,7 @@ import { MasterService } from 'src/app/services/master.service';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import {  Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 declare var $: any;
 
 @Component({
@@ -33,7 +34,7 @@ export class CountryComponent implements OnInit {
   filterDeletedData:any=[]
   ischecked:boolean=false
   
-  constructor( private master:MasterService ,private authservice:AuthService, private router:Router ) {
+  constructor( private master:MasterService ,private authservice:AuthService, private router:Router,private toaster:ToastrService ) {
 
 
     
@@ -66,7 +67,7 @@ export class CountryComponent implements OnInit {
   }
 
   addNewCountry(){
-    debugger;
+ 
     var Country=this.countryForm.get("country").value;
     var Code=this.countryForm.get("code").value;
     var action=this.checkbox;
@@ -112,7 +113,7 @@ export class CountryComponent implements OnInit {
 
      
      },(error=>{
-      alert("failed to add new country something went wrong");
+      this.toaster.error("failed to add new country something went wrong");
      }));
 
     }
@@ -236,7 +237,7 @@ export class CountryComponent implements OnInit {
 
    
    },(error=>{
-    alert("failed to update country something went wrong");
+    this.toaster.error("failed to update country something went wrong");
    }));
 
   }
@@ -246,7 +247,7 @@ export class CountryComponent implements OnInit {
 }
 
  OnDelete(id, name, code){
-   debugger
+
 
    if(confirm("Are you sure want to delete this record?")){
  
@@ -280,7 +281,7 @@ export class CountryComponent implements OnInit {
   
      
      },(error=>{
-      alert("failed to delete country something went wrong");
+      this.toaster.error("failed to delete country something went wrong");
      }));
   
    }else{

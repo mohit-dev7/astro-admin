@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { MasterService } from 'src/app/services/master.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-holiday',
@@ -31,7 +32,7 @@ export class HolidayComponent implements OnInit {
 
 
 
-  constructor(private master: MasterService, private authservice: AuthService, private router: Router) {
+  constructor(private master: MasterService, private authservice: AuthService, private router: Router,private toaster:ToastrService) {
 
 
 
@@ -225,7 +226,7 @@ export class HolidayComponent implements OnInit {
       this.master.deleteMethod("/deleteHoliday/"+id).subscribe(data=>{
         if(data['name']!='')
         { 
-          alert("Record deleted successfully.");
+          this.toaster.success("Record deleted successfully.");
           location.reload();
     
         }else{
@@ -234,7 +235,7 @@ export class HolidayComponent implements OnInit {
           return false;
         }
       },(error=>{
-        alert("failed to delete data something wrong please check carefully ")
+        this.toaster.error("failed to delete data something wrong please check carefully ")
       }))
     }
   

@@ -59,7 +59,8 @@ export class CommentComponent implements OnInit {
   
      
      },(error=>{
-      alert("failed to approved comment something went wrong");
+       this.error=true
+      this.message="failed to approved comment something went wrong";
      }))
   
 
@@ -84,7 +85,8 @@ export class CommentComponent implements OnInit {
     
        
        },(error=>{
-        alert("failed to delete comment something went wrong");
+         this.error=true
+        this.message="failed to delete comment something went wrong";
        }))
     }
     

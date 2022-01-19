@@ -20,25 +20,25 @@
                 </div>
             <form action="" [formGroup]="appointmentForm">
 
-              
+               
                 <div class="row col-lg-12" *ngIf="onEdit1">
-                    <form  action="" [formGroup]="appointmentForm"></form>
-                    <div class="form-group col-lg-2">
+                   
+                    <div class="form-group col-lg-2 w-100">
                         <label for="">Name:</label>
-                        <input class="form-control" type="text" formControlName="name1" readonly >
+                        <input class="form-control" type="text" formControlName="name" readonly >
                     </div>
                     <div class="form-group col-lg-3">
                         <label for="">App Date:</label>
-                        <input class="form-control" type="text" formControlName="date" readonly>
+                        <input class="form-control" type="text" formControlName="date" readonly >
                     </div>
                   
                         
                         <div class="form-group col-lg-3">
                             <label>Select Type:</label>
-                            <select class="form-control" formControlName="type">
+                            <select class="form-control" formControlName="newType">
                                 <option value="">select</option>
                                 <option value="Pending">Pending</option>
-                                <option value="Canceled">Canceled</option>
+                                <option value="Cancelled">Canceled</option>
                                 <option value="Completed">Completed</option>
                             </select>
                         </div>
@@ -51,9 +51,10 @@
                           
                         </div>
                        
-                
+                   
                   
                 </div>
+               
                 <input type="hidden" id="userId">
                 <div class="text-editor col-lg-12" *ngIf="edit">
                     <div class="form-group ">
