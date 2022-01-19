@@ -87,6 +87,7 @@
           <thead>
               <tr>
                   <th>S.No</th>
+                  <th>Country</th>
                   <th>Appointment Date</th>
                   <th>Time Slot</th>
                   <th>Name</th>
@@ -106,6 +107,7 @@
             
               <tr *ngFor="let data of allAppointment;let index=index;">
                   <td>{{index+1}}</td>
+                  <td>{{data.country}}</td>
                   <td>{{data.appointDate | date:'d/M/y' }}</td>
                   <td *ngIf="data.timeSlot!=null">{{data.timeSlot.timeSlotName}}</td>
                   <td *ngIf="data.timeSlot==null">null</td>

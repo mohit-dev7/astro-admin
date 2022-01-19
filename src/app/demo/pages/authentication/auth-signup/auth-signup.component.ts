@@ -26,6 +26,7 @@ export class AuthSignupComponent implements OnInit {
 	phoneForm = new FormGroup({
 		phone: new FormControl(undefined, [Validators.required])
 	});
+  
 signupForm: FormGroup;
   error: boolean = false;
 
@@ -89,7 +90,7 @@ debugger;
       this.message = 'Please enter your valid email address';
       return false;
     }
-    else if(mobile='' || !this.validateMobile(mobile) || mobile.length < 10 || mobile.length > 10){
+    else if(mobile='' || !this.validateMobile(mobile) || mobile.length < 11 || mobile.length > 10){
       this.error = true;
       this.message = 'Please enter your valid mobile number';
       return false;

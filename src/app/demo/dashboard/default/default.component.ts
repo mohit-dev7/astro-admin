@@ -178,7 +178,7 @@ this.master.getMethod('/getAllEnquiries').subscribe((response:any)=>{
 
     setTimeout(function () {
       $('#example').DataTable();
-    }, 2500);
+    }, 3000);
     this.loader=false
   }
 

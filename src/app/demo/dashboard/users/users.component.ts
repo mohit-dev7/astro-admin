@@ -76,12 +76,14 @@ error:boolean = false;
       debugger
       
       var id = $('#userID').val();
+      var id2=$('#userID2').val();
       alert(id)
+      alert(id2)
       var firstName=this.userForm.get("firstName").value;
       var lastName=this.userForm.get("lastName").value;
       var email=this.userForm.get("email").value;
       var phone=this.userForm.get("phone").value;
-      var countryCode=$("#countryCode").val()
+      var countryCode=this.userForm.get("countryCode").value;
       // var countryCode=this.userForm.get("countryCode").value;
       // if(this.userForm.invalid){
       //   console.log(this.userForm)
@@ -117,11 +119,12 @@ error:boolean = false;
         const data={
           "aboutMe": this.singleUser.aboutMe,
           "country": this.singleUser.country,
+          "countryCode":countryCode,
           "dob": this.singleUser.dob,
           "email": email,
           "firstName": firstName,
           "gender": this.singleUser.gender,
-          "id": id,
+          "id": id2,
           "lastName": lastName,
           "phone": phone,
           "placeOfBirth": this.singleUser.placeOfBirth,
@@ -130,7 +133,7 @@ error:boolean = false;
           
         }
         console.log(data)
-        this.master.methodPost(data,"/saveProfile").subscribe(reponse=>{
+        this.master.methodPost(data,"/saveProfile?userId="+id).subscribe(reponse=>{
   
           if(reponse['name']!='')
           {  
@@ -163,7 +166,7 @@ error:boolean = false;
 
 
 
-    editUser(id:any){
+    editUser(id:any,id2:any){
       debugger
       alert(id)
       $(window).scrollTop(0);
@@ -181,6 +184,8 @@ error:boolean = false;
       })
       this.loader=false;
       $('#userID').val(id);
+      $('#userID2').val(id);
+
       });
      
       
