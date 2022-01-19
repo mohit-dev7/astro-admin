@@ -90,7 +90,7 @@ debugger;
       this.message = 'Please enter your valid email address';
       return false;
     }
-    else if(mobile='' || !this.validateMobile(mobile) || mobile.length < 11 || mobile.length > 10){
+    else if(mobile=='' || !this.validateMobile(mobile)){
       this.error = true;
       this.message = 'Please enter your valid mobile number';
       return false;
