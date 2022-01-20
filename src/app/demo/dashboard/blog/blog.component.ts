@@ -79,7 +79,8 @@ export class BlogComponent implements OnInit {
       var reader = new FileReader();
 
       reader.readAsDataURL(event.target.files[0]); // read file as data url
-this.simg = event.target.files[0];
+      this.simg = event.target.files[0];
+      console.log(this.simg)
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.urlDt = event.target.result;
       }
@@ -107,6 +108,7 @@ this.simg = event.target.files[0];
 
     if(blogTitle==''){
       this.error=true
+      this.loader=false
       this.message='Please add blog title';
       return false;
 
@@ -114,6 +116,7 @@ this.simg = event.target.files[0];
 
     else if(blogSubtitle==''){
       this.error=true
+      this.loader=false
       this.message='Please add blog subtitle';
       return false;
 
@@ -121,6 +124,7 @@ this.simg = event.target.files[0];
 
     else if(content==''){
       this.error=true
+      this.loader=false
       this.message='Please write something in blog.'
       return false;
 
@@ -128,6 +132,7 @@ this.simg = event.target.files[0];
 
     else if(keyword==''){
       this.error=true
+      this.loader=false
       this.message='Please write some keywords in blog.'
       return false;
 
@@ -139,9 +144,8 @@ this.simg = event.target.files[0];
       "title":blogTitle,
       "subtitle":blogSubtitle,
       "content":content,
-      "image":"test.jpg",
       "status":"Active",
-
+       "image":this.simg.name,
       "description":description,
       "keywords":keyword,
       "slug":value1
@@ -150,9 +154,9 @@ this.simg = event.target.files[0];
        this.master.methodPost(data,'/addBlog').subscribe((response:any)=>{
 
           console.log(response['id']);
-
-        
-
+          let imgData = new FormData()
+          imgData.append("file",this.simg)
+         this.master.methodPostMulti(imgData,`/uploadBlogPic?blogId=${response.id}`).subscribe((res)=>{
           if(this.urlDt != '../../../../assets/images/placeholder.png' && this.urlDt!='' ){
             this.loader = false;
           this.message='Blog Added seuucess fully.';
@@ -161,6 +165,9 @@ this.simg = event.target.files[0];
           else{
             this.uploadBlogImage(response['id']);
           }
+         })
+
+          
         
 
        });
