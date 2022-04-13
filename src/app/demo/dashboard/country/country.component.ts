@@ -44,7 +44,7 @@ export class CountryComponent implements OnInit {
  
     this.countryForm= new FormGroup({
       country: new FormControl(""),
-      code: new FormControl("")
+      code: new FormControl("",[Validators.required,Validators.pattern("[ +()0-9]+")])
     });
   
     this.getAllCountry();

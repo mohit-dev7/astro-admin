@@ -51,7 +51,8 @@ export class HolidayComponent implements OnInit {
     };
     this.holidayForm = new FormGroup({
       id: new FormControl(""),
-      holidayDate: new FormControl("")
+      holidayDate: new FormControl(""),
+      toHolidayDate:new FormControl("")
     });
 
     this.getAllHolidays();

@@ -4,3 +4,7 @@
     color: white;}
 .cancel{   color: white;
     background-color:#151349 ;}
+
+    ::ng-deep .multiselect-item-checkbox + div[_ngcontent-jbk-c157]{
+        text-transform: capitalize !important;
+    }

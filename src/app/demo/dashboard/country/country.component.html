@@ -36,7 +36,13 @@
                     <div class="col-md-2 ">
                         <div class="form-group">
                             <label>Code</label>
-                            <input class="form-control" formControlName="code" placeholder="Code" />
+                            <input class="form-control" formControlName="code" placeholder="Code"  required/>
+                            <small *ngIf="countryForm.controls.code?.invalid && countryForm.controls.code?.touched" class="alert text-danger">
+                                Please fill the  country code
+                            </small>
+                            <small *ngIf="countryForm.controls.code.errors?.pattern">
+                                Please fill valid country code
+                            </small>
                         </div>
 
 
@@ -55,7 +61,7 @@
 
                     <div class="col-md-2 ">
                         <button *ngIf="ifUpdate==false" class="btn add  pull-left w-100"
-                            style="float: left; margin-top: 28px;" (click)="addNewCountry()">Add</button>
+                            style="float: left; margin-top: 28px;" (click)="addNewCountry()" [disabled]="countryForm.invalid" >Add</button>
 
                         <button *ngIf="ifUpdate==true" class="btn update pull-left w-100" (click)="updateCountry()"
                             style="float: left; margin-top: 28px;">Update</button>
