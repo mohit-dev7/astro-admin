@@ -10,6 +10,7 @@ import { DataTablesModule } from 'angular-datatables';
   imports: [
     CommonModule,
     CommentRoutingModule
+    
   ],
   exports: [
     DataTablesModule

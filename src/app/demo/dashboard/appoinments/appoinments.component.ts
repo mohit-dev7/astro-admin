@@ -60,6 +60,7 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
     },
     ],
     uploadUrl: 'v1/image',
+   
     uploadWithCredentials: false,
     sanitize: true,
     toolbarPosition: 'top',

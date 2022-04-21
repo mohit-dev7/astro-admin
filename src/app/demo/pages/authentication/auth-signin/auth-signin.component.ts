@@ -76,13 +76,8 @@ export class AuthSigninComponent implements OnInit {
 
           this.error = false;
           this.message = 'Authenticated!';
-
-         
-            this.loading = false;
-            this.router.navigate(['/dashboard/default']);
-       
-
-
+          this.loading = false;
+          this.router.navigate(['/dashboard/default']);
 
         }
         else {
@@ -95,9 +90,23 @@ export class AuthSigninComponent implements OnInit {
 
       },(error=>{
 
-        this.loading = false;
-        this.error = true;
-        this.message = 'Invalid username and password!';
+        if(error['status']==401){
+
+          this.loading = false;
+          this.error = true;
+          this.message = 'Invalid username and password!';
+          return;
+        }
+        if(error['status']==500){
+
+        
+          this.loading = false;
+          this.error = true;
+          this.message = error['error']['message'];
+          return;
+        }
+
+      
       }));
 
 

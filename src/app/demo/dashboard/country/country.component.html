@@ -36,7 +36,10 @@
                     <div class="col-md-2 ">
                         <div class="form-group">
                             <label>Code</label>
-                            <input class="form-control" formControlName="code" placeholder="Code"  required/>
+                           
+                            <div class="dsdk4">
+                                <input class="form-control  pl-5" maxlength="3" minlength="1" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1').replace(/^0[^.]/, '0');" formControlName="code" placeholder="Code"  required/>
+                            </div>
                             <small *ngIf="countryForm.controls.code?.invalid && countryForm.controls.code?.touched" class="alert text-danger">
                                 Please fill the  country code
                             </small>
