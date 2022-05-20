@@ -12,9 +12,9 @@ declare var $:any;
   styleUrls: ['./blog.component.scss']
 })
 export class BlogComponent implements OnInit {
-
+  htmlContent:any;
   name = 'Angular 4';
-  urlDt:any = '../../../../assets/images/placeholder.png';
+  urlDt:any = '../..//assets/images/placeholder.png';
 
 
   editorConfig: AngularEditorConfig = {
@@ -157,7 +157,7 @@ export class BlogComponent implements OnInit {
           let imgData = new FormData()
           imgData.append("file",this.simg)
          this.master.methodPostMulti(imgData,`/uploadBlogPic?blogId=${response.id}`).subscribe((res)=>{
-          if(this.urlDt != '../../../../assets/images/placeholder.png' && this.urlDt!='' ){
+          if(this.urlDt != '../..//assets/images/placeholder.png' && this.urlDt!='' ){
             this.loader = false;
           this.message='Blog Added seuucess fully.';
               this.router.navigate(['/dashboard/allblogs']);

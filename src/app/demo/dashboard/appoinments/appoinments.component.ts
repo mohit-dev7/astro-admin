@@ -19,7 +19,7 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
  
   singleData:any = [];
   name = 'Angular 4';
-  urlDt:any = '../../../../assets/images/placeholder.png';
+  urlDt:any = '../..//assets/images/placeholder.png';
   typeCunsultant:any=["Kundali/Birth Chart Consultation","Gemstone Consultation","Match Making Consultation","Vastu"]
 
 

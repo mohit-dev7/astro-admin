@@ -13,7 +13,7 @@ export class EditBlogComponent implements OnInit {
 
   singleData:any = [];
   name = 'Angular 4';
-  urlDt:any = '../../../../assets/images/placeholder.png';
+  urlDt:any = '../..//assets/images/placeholder.png';
   apURL = 'http://18.219.65.148:8080';
 
 imgURL = this.apURL+"/getBlogPic"+"/";

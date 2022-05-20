@@ -5,15 +5,15 @@ declare const AmCharts: any;
 declare var $: any;
 declare var require: any
 
-import '../../../../assets/charts/amchart/amcharts.js';
-import '../../../../assets/charts/amchart/gauge.js';
-import '../../../../assets/charts/amchart/serial.js';
-import '../../../../assets/charts/amchart/light.js';
-import '../../../../assets/charts/amchart/pie.min.js';
-import '../../../../assets/charts/amchart/ammap.min.js';
-import '../../../../assets/charts/amchart/usaLow.js';
-import '../../../../assets/charts/amchart/radar.js';
-import '../../../../assets/charts/amchart/worldLow.js';
+// import '../..//assets/charts/amchart/amcharts.js';
+// import '../..//assets/charts/amchart/gauge.js';
+// import '../..//assets/charts/amchart/serial.js';
+// import '../..//assets/charts/amchart/light.js';
+// import '../..//assets/charts/amchart/pie.min.js';
+// import '../..//assets/charts/amchart/ammap.min.js';
+// import '../..//assets/charts/amchart/usaLow.js';
+// import '../..//assets/charts/amchart/radar.js';
+// import '../..//assets/charts/amchart/worldLow.js';
 import { PromocodeRoutingModule } from '../promocode/promocode-routing.module.js';
 import { MasterService } from 'src/app/services/master.service.js';
 import { Router } from '@angular/router';
