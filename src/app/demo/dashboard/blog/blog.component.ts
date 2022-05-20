@@ -66,8 +66,14 @@ export class BlogComponent implements OnInit {
   loader:boolean = false;
   error:boolean=false
   message:string=""
+  allMediaFiles: Object;
+  imload: boolean;
 
-  constructor(private master:MasterService, private router:Router,private toaster:ToastrService) { }
+  constructor(private master:MasterService, private router:Router,private toaster:ToastrService) {
+
+this.getAllMedia();
+
+   }
 
   ngOnInit(): void {
   }
@@ -87,6 +93,18 @@ export class BlogComponent implements OnInit {
     }
   }
 
+
+  appendImg(src){
+    let img = '<img src="'+src+'" />'
+    $('#editor1 .angular-editor-textarea').append(img);
+
+    $('#editor1 .angular-editor-textarea img').css({
+      width:'50%'
+    })
+
+    $('#mediapop').modal('toggle');
+
+  }
  
 
 
@@ -179,8 +197,69 @@ export class BlogComponent implements OnInit {
 
 
 
+  getAllMedia(){
+
+this.master.getMethod('/common/all').subscribe(res=>{
+
+this.allMediaFiles = res;
+
+});
+
+  }
 
 
+
+  removeMedia(id){
+    this.imload = true;
+
+    if(confirm('Are sure want to delete this media?')){
+
+      this.master.deleteMethod('/common/delete/'+id).subscribe(res=>{
+     
+        this.getAllMedia()
+       this.toaster.success('Image deleted success fully!')
+       this.imload = false;
+      });
+
+    }
+
+  }
+
+  addMoreImage(event){
+
+    this.imload = true;
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+      this.simg = event.target.files[0];
+  
+    let formDataN = new FormData;
+    formDataN.append('file',this.simg) 
+
+
+    this.master.methodPostMulti(formDataN,'/common/uploadPic').subscribe(res=>{
+
+      this.getAllMedia()
+      this.imload = false;
+      if(res[0].id!==''){
+        this.toaster.success('Image Added successfully.');
+        this.getAllMedia()
+        this.imload = false;
+      }
+      else{
+        this.toaster.error('Image Added failed.');
+        this.getAllMedia()
+      }
+
+    },err=>{
+      this.toaster.success('Image Added successfully.');
+    })
+
+
+    }
+
+  }
 
 
   uploadBlogImage(id){

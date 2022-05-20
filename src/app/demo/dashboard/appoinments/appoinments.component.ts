@@ -89,8 +89,13 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
   onEdit1:boolean=false
   onEdit2:boolean=true
   remedy:any
+  simg: string | Blob;
+  imload: boolean;
+  allMediaFiles: Object;
   constructor(private http: HttpClient,private master:MasterService,private toaster:ToastrService,private datepip:DatePipe) {
     this.TokenExpired(this.token);
+
+    this.getAllMedia()
 
    }
 
@@ -285,7 +290,12 @@ editAppointment(id){
       
       var content = $('#editor1 .angular-editor-textarea').html();
 
-      this.master.getMethod("/addRemedyAppointment?id="+id1+"&remedy="+content).subscribe(data=>{
+      var data = {
+        "id":id1,
+        "remedy":content
+      };
+
+      this.master.methodPost(data,"/addRemedyAppointment").subscribe(data=>{
         if(data['name']!='')
         {  
         
@@ -326,4 +336,89 @@ editAppointment(id){
      
       table.clear()
     }
+
+
+
+
+
+    appendImg(src){
+      let img = '<img src="'+src+'" />'
+      $('#editor1 .angular-editor-textarea').append(img);
+  
+      $('#editor1 .angular-editor-textarea img').css({
+        width:'50%'
+      })
+  
+      $('#mediapop').modal('toggle');
+  
+    }
+
+
+    
+  getAllMedia(){
+
+    this.master.getMethod('/common/all').subscribe(res=>{
+    
+    this.allMediaFiles = res;
+    
+    });
+    
+      }
+    
+    
+    
+      removeMedia(id){
+        this.imload = true;
+    
+        if(confirm('Are sure want to delete this media?')){
+    
+          this.master.deleteMethod('/common/delete/'+id).subscribe(res=>{
+         
+            this.getAllMedia()
+           this.toaster.success('Image deleted success fully!')
+           this.imload = false;
+          });
+    
+        }
+    
+      }
+    
+      addMoreImage(event){
+    
+        this.imload = true;
+        if (event.target.files && event.target.files[0]) {
+          var reader = new FileReader();
+    
+          reader.readAsDataURL(event.target.files[0]); // read file as data url
+          this.simg = event.target.files[0];
+      
+        let formDataN = new FormData;
+        formDataN.append('file',this.simg) 
+    
+    
+        this.master.methodPostMulti(formDataN,'/common/uploadPic').subscribe(res=>{
+    
+          this.getAllMedia()
+          this.imload = false;
+          if(res[0].id!==''){
+            this.toaster.success('Image Added successfully.');
+            this.getAllMedia()
+            this.imload = false;
+          }
+          else{
+            this.toaster.error('Image Added failed.');
+            this.getAllMedia()
+          }
+    
+        },err=>{
+          this.toaster.success('Image Added successfully.');
+        })
+    
+    
+        }
+    
+      }
+    
+    
+   
 }
