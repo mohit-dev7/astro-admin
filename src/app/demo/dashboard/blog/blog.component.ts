@@ -71,11 +71,12 @@ export class BlogComponent implements OnInit {
 
   constructor(private master:MasterService, private router:Router,private toaster:ToastrService) {
 
-this.getAllMedia();
+
 
    }
 
   ngOnInit(): void {
+    this.getAllMedia();
   }
 
 

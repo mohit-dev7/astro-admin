@@ -8,6 +8,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -92,11 +93,34 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
   simg: string | Blob;
   imload: boolean;
   allMediaFiles: Object;
-  constructor(private http: HttpClient,private master:MasterService,private toaster:ToastrService,private datepip:DatePipe) {
+  status: string;
+  gtData: any;
+  constructor(private http: HttpClient, private router:Router, private master:MasterService,private toaster:ToastrService,private datepip:DatePipe, private route:ActivatedRoute) {
     this.TokenExpired(this.token);
 
     this.getAllMedia()
+    this.status = this.route.snapshot.paramMap.get('status');
 
+
+    if(this.status=='all'){
+      this.gtData = 'all'
+    }
+    else if(this.status=='pending'){
+        this.gtData = 'PENDING';
+    }
+    else if(this.status=='cancelled'){
+      this.gtData = 'CANCELLED';
+  }
+  else if(this.status=='completed'){
+    this.gtData = 'COMPLETED';
+}
+else if(this.status=='refund'){
+  this.gtData = 'REFUNDING';
+}
+
+else if(this.status=='payment'){
+  this.gtData = 'PAYMENT_PAID';
+}
    }
 
 
@@ -134,6 +158,10 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
   }
 
 
+
+  rediRectStatus(){
+    location.href='/dashboard/appointments/'+this.DiffAppointment;
+  }
   
 
 
@@ -145,16 +173,45 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
 
   async getAllAppointment(){
     this.loader=true
-    await this.master.getMethod("/allAppointments").subscribe(data=>{
+
+    if(this.gtData=='all'){
+      await this.master.getMethod("/allAppointments").subscribe(data=>{
+        this.allAppointment=JSON.parse(JSON.stringify(data));
+        console.log(this.allAppointment)
+        for(let x of this.allAppointment){
+          x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
+        }
+        
+   setTimeout(() => {
+ 
+     $('#example').DataTable();
+  
+       }, 2000);
+        this.loader=false
+  
+      })
+    }
+    else{
+
+      await this.master.getMethod("/getAppointment/"+this.status).subscribe(data=>{
+        console.log(data)
+        
       this.allAppointment=JSON.parse(JSON.stringify(data));
       console.log(this.allAppointment)
       for(let x of this.allAppointment){
         x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
       }
-      
-      this.loader=false
+  
+   setTimeout(() => {
+     
+      $('#example').DataTable();
+   
+        }, 2000);
+        this.loader=false;
+      });
 
-    })
+    }
+    
 
     this.loadDataTable()
   }
@@ -167,31 +224,39 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
   }
 
   
-  async getDiffAppointment(){
-  this.loader=true
-  await this.clearDataTable()
+//   async getDiffAppointment(){
+//   this.loader=true
+//   await this.clearDataTable()
  
-  if(this.DiffAppointment=="All"){
-    await this.getAllAppointment();
-  }else if (this.DiffAppointment!="All"){
-    this.appointmentlike=this.DiffAppointment;
-    this.loader=true;
-    await this.master.getMethod("/getAppointment/"+this.DiffAppointment).subscribe(data=>{
-      console.log(data)
+//   if(this.DiffAppointment=="All"){
+//     await this.getAllAppointment();
+
+//   }else if (this.DiffAppointment!="All"){
+//     this.appointmentlike=this.DiffAppointment;
+//     this.loader=true;
+//     await this.master.getMethod("/getAppointment/"+this.DiffAppointment).subscribe(data=>{
+//       console.log(data)
       
-    this.allAppointment=JSON.parse(JSON.stringify(data));
-    console.log(this.allAppointment)
-    for(let x of this.allAppointment){
-      x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
-    }
+//     this.allAppointment=JSON.parse(JSON.stringify(data));
+//     console.log(this.allAppointment)
+//     for(let x of this.allAppointment){
+//       x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
+//     }
 
-      this.loader=false;
-    });
-  }
+//  setTimeout(() => {
+//    $(document).ready(function(){
+//     $('#example').DataTable();
+//    })
+    
+        
+//       }, 2000);
+//       this.loader=false;
+//     });
+//   }
 
-  await  this.loadDataTable()
+//   await  this.loadDataTable()
 
-}
+// }
 
 editAppointment(id){
 

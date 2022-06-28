@@ -102,6 +102,7 @@ this.master.getMethod('/getAllEnquiries').subscribe((response:any)=>{
   }
 
   OnClick(event) {
+    this.loader=true
     var value1=event.target.value
     this.appointment = value1;
     console.log(value1,this.appointment)
@@ -117,11 +118,14 @@ this.master.getMethod('/getAllEnquiries').subscribe((response:any)=>{
       this.master.getAppointmentsByCriteria(data).subscribe(data => {
         this.allAppointment = JSON.parse(JSON.stringify(data));
         console.log(this.allAppointment)
+        this.loader=false
+        setTimeout(function () {
+          $('#example').DataTable();
+  
+        }, 2000);
 
       });
-      setTimeout(function () {
-        $('#example').DataTable();
-      }, 2500);
+   
     } else if (value1 === "Todays") {
       const today = new Date();
       let data = {
@@ -131,12 +135,14 @@ this.master.getMethod('/getAllEnquiries').subscribe((response:any)=>{
       this.master.getAppointmentsByCriteria(data).subscribe(data => {
         this.allAppointment = JSON.parse(JSON.stringify(data));
         console.log(this.allAppointment)
-
+        this.loader=false
+        setTimeout(function () {
+          $('#example').DataTable();
+        
+        }, 2000);
 
       });
-      setTimeout(function () {
-        $('#example').DataTable();
-      }, 2500);
+   
     } else if (value1 === "Upcoming") {
       const today = new Date();
       const tomorrow = new Date(today.setDate(today.getDate() + 1000));
@@ -147,12 +153,13 @@ this.master.getMethod('/getAllEnquiries').subscribe((response:any)=>{
       this.master.getAppointmentsByCriteria(data).subscribe(data => {
         this.allAppointment = JSON.parse(JSON.stringify(data));
         console.log(this.allAppointment)
-
-
+        this.loader=false
+        setTimeout(function () {
+          $('#example').DataTable();
+    
+        }, 2000);
       });
-      setTimeout(function () {
-        $('#example').DataTable();
-      }, 2500);
+   
     }
   }
 
@@ -175,13 +182,10 @@ this.master.getMethod('/getAllEnquiries').subscribe((response:any)=>{
             this.allAppointment[i].consultationType = this.typeCunsultation[Number(data[i].consultationType)-1]
         }
         console.log(this.allAppointment)
-
+      this.loader = false;
       });
 
-    setTimeout(function () {
-      $('#example').DataTable();
-    }, 3000);
-    this.loader=false
+
   }
 
   totalUser(){
@@ -193,7 +197,7 @@ this.master.getMethod('/getAllEnquiries').subscribe((response:any)=>{
     this.router.navigate(["/dashboard/enquire"])
   }
   totalAppoint(){
-    this.router.navigate(["/dashboard/appointments"])
+    this.router.navigate(["/dashboard/appointments/all"])
     
   }
 totalBlogs(){

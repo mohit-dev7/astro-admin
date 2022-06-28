@@ -20,7 +20,7 @@ const routes: Routes = [
         loadChildren: () => import('./stats/stats.module').then(m => m.StatsModule)
       },
       {
-        path: 'appointments',
+        path: 'appointments/:status',
         loadChildren: () => import('./appoinments/appoinments.module').then(m => m.AppoinmentsModule)
       },
       {
