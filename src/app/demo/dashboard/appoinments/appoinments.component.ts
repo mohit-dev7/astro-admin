@@ -8,6 +8,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
  
   singleData:any = [];
   name = 'Angular 4';
-  urlDt:any = '../../../../assets/images/placeholder.png';
+  urlDt:any = '../..//assets/images/placeholder.png';
   typeCunsultant:any=["Kundali/Birth Chart Consultation","Gemstone Consultation","Match Making Consultation","Vastu"]
 
 
@@ -60,6 +61,7 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
     },
     ],
     uploadUrl: 'v1/image',
+   
     uploadWithCredentials: false,
     sanitize: true,
     toolbarPosition: 'top',
@@ -88,9 +90,37 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
   onEdit1:boolean=false
   onEdit2:boolean=true
   remedy:any
-  constructor(private http: HttpClient,private master:MasterService,private toaster:ToastrService,private datepip:DatePipe) {
+  simg: string | Blob;
+  imload: boolean;
+  allMediaFiles: Object;
+  status: string;
+  gtData: any;
+  constructor(private http: HttpClient, private router:Router, private master:MasterService,private toaster:ToastrService,private datepip:DatePipe, private route:ActivatedRoute) {
     this.TokenExpired(this.token);
 
+    this.getAllMedia()
+    this.status = this.route.snapshot.paramMap.get('status');
+
+
+    if(this.status=='all'){
+      this.gtData = 'all'
+    }
+    else if(this.status=='pending'){
+        this.gtData = 'PENDING';
+    }
+    else if(this.status=='cancelled'){
+      this.gtData = 'CANCELLED';
+  }
+  else if(this.status=='completed'){
+    this.gtData = 'COMPLETED';
+}
+else if(this.status=='refund'){
+  this.gtData = 'REFUNDING';
+}
+
+else if(this.status=='payment'){
+  this.gtData = 'PAYMENT_PAID';
+}
    }
 
 
@@ -128,6 +158,10 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
   }
 
 
+
+  rediRectStatus(){
+    location.href='/dashboard/appointments/'+this.DiffAppointment;
+  }
   
 
 
@@ -139,16 +173,45 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
 
   async getAllAppointment(){
     this.loader=true
-    await this.master.getMethod("/allAppointments").subscribe(data=>{
+
+    if(this.gtData=='all'){
+      await this.master.getMethod("/allAppointments").subscribe(data=>{
+        this.allAppointment=JSON.parse(JSON.stringify(data));
+        console.log(this.allAppointment)
+        for(let x of this.allAppointment){
+          x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
+        }
+        
+   setTimeout(() => {
+ 
+     $('#example').DataTable();
+  
+       }, 2000);
+        this.loader=false
+  
+      })
+    }
+    else{
+
+      await this.master.getMethod("/getAppointment/"+this.status).subscribe(data=>{
+        console.log(data)
+        
       this.allAppointment=JSON.parse(JSON.stringify(data));
       console.log(this.allAppointment)
       for(let x of this.allAppointment){
         x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
       }
-      
-      this.loader=false
+  
+   setTimeout(() => {
+     
+      $('#example').DataTable();
+   
+        }, 2000);
+        this.loader=false;
+      });
 
-    })
+    }
+    
 
     this.loadDataTable()
   }
@@ -161,31 +224,39 @@ export class AppoinmentsComponent implements OnInit, AfterViewInit {
   }
 
   
-  async getDiffAppointment(){
-  this.loader=true
-  await this.clearDataTable()
+//   async getDiffAppointment(){
+//   this.loader=true
+//   await this.clearDataTable()
  
-  if(this.DiffAppointment=="All"){
-    await this.getAllAppointment();
-  }else if (this.DiffAppointment!="All"){
-    this.appointmentlike=this.DiffAppointment;
-    this.loader=true;
-    await this.master.getMethod("/getAppointment/"+this.DiffAppointment).subscribe(data=>{
-      console.log(data)
+//   if(this.DiffAppointment=="All"){
+//     await this.getAllAppointment();
+
+//   }else if (this.DiffAppointment!="All"){
+//     this.appointmentlike=this.DiffAppointment;
+//     this.loader=true;
+//     await this.master.getMethod("/getAppointment/"+this.DiffAppointment).subscribe(data=>{
+//       console.log(data)
       
-    this.allAppointment=JSON.parse(JSON.stringify(data));
-    console.log(this.allAppointment)
-    for(let x of this.allAppointment){
-      x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
-    }
+//     this.allAppointment=JSON.parse(JSON.stringify(data));
+//     console.log(this.allAppointment)
+//     for(let x of this.allAppointment){
+//       x.consultationType = this.typeCunsultant[Number(x.consultationType)-1]
+//     }
 
-      this.loader=false;
-    });
-  }
+//  setTimeout(() => {
+//    $(document).ready(function(){
+//     $('#example').DataTable();
+//    })
+    
+        
+//       }, 2000);
+//       this.loader=false;
+//     });
+//   }
 
-  await  this.loadDataTable()
+//   await  this.loadDataTable()
 
-}
+// }
 
 editAppointment(id){
 
@@ -284,7 +355,12 @@ editAppointment(id){
       
       var content = $('#editor1 .angular-editor-textarea').html();
 
-      this.master.getMethod("/addRemedyAppointment?id="+id1+"&remedy="+content).subscribe(data=>{
+      var data = {
+        "id":id1,
+        "remedy":content
+      };
+
+      this.master.methodPost(data,"/addRemedyAppointment").subscribe(data=>{
         if(data['name']!='')
         {  
         
@@ -325,4 +401,89 @@ editAppointment(id){
      
       table.clear()
     }
+
+
+
+
+
+    appendImg(src){
+      let img = '<img src="'+src+'" />'
+      $('#editor1 .angular-editor-textarea').append(img);
+  
+      $('#editor1 .angular-editor-textarea img').css({
+        width:'50%'
+      })
+  
+      $('#mediapop').modal('toggle');
+  
+    }
+
+
+    
+  getAllMedia(){
+
+    this.master.getMethod('/common/all').subscribe(res=>{
+    
+    this.allMediaFiles = res;
+    
+    });
+    
+      }
+    
+    
+    
+      removeMedia(id){
+        this.imload = true;
+    
+        if(confirm('Are sure want to delete this media?')){
+    
+          this.master.deleteMethod('/common/delete/'+id).subscribe(res=>{
+         
+            this.getAllMedia()
+           this.toaster.success('Image deleted success fully!')
+           this.imload = false;
+          });
+    
+        }
+    
+      }
+    
+      addMoreImage(event){
+    
+        this.imload = true;
+        if (event.target.files && event.target.files[0]) {
+          var reader = new FileReader();
+    
+          reader.readAsDataURL(event.target.files[0]); // read file as data url
+          this.simg = event.target.files[0];
+      
+        let formDataN = new FormData;
+        formDataN.append('file',this.simg) 
+    
+    
+        this.master.methodPostMulti(formDataN,'/common/uploadPic').subscribe(res=>{
+    
+          this.getAllMedia()
+          this.imload = false;
+          if(res[0].id!==''){
+            this.toaster.success('Image Added successfully.');
+            this.getAllMedia()
+            this.imload = false;
+          }
+          else{
+            this.toaster.error('Image Added failed.');
+            this.getAllMedia()
+          }
+    
+        },err=>{
+          this.toaster.success('Image Added successfully.');
+        })
+    
+    
+        }
+    
+      }
+    
+    
+   
 }

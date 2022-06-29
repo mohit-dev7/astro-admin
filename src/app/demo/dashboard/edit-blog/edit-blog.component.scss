@@ -41,3 +41,41 @@ height: auto;
 }
 
 
+.image_bx img{
+    width: 100%;
+    height: auto;
+    }
+    
+    ::ng-deep #insertImage-editor1, ::ng-deep #insertVideo-editor1{
+        display: none !important;
+    }
+    
+    ::ng-deep .ae-font .ae-picker-label{
+        background: #08002c !important;
+    }
+    
+    ::ng-deep .ae-font .ae-picker-options .ae-picker-item{
+        background: #08002c !important;
+    }
+    
+    .dsjds{
+        border:1px solid grey;
+        padding: 2px;
+        height: 150px;
+        width: 100%;
+        object-fit: cover;
+    
+    }
+    
+    .remOp{
+        background: rgb(123, 17, 17);
+         color: #fff;
+         width: 22px;
+         position: absolute;
+         top:0;
+         right: 0;
+         line-height: 20px;
+         text-align: center;
+         height: 22px;
+         border-radius: 50%;
+    }

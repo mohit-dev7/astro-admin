@@ -6,6 +6,7 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { AuthService } from 'src/app/services/auth.service';
 import {  Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CountryISO, PhoneNumberFormat, SearchCountryField } from 'ngx-intl-tel-input';
 declare var $: any;
 
 @Component({
@@ -15,6 +16,15 @@ declare var $: any;
 })
 export class CountryComponent implements OnInit {
  
+
+  separateDialCode = false;
+	SearchCountryField = SearchCountryField;
+	CountryISO = CountryISO;
+  PhoneNumberFormat = PhoneNumberFormat;
+	preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
+	phoneForm = new FormGroup({
+		phone: new FormControl(undefined, [Validators.required])
+	});
 
   countryForm:FormGroup;
   indexData = 1;
@@ -52,7 +62,9 @@ export class CountryComponent implements OnInit {
  
   }
   
- 
+  changePreferredCountries() {
+		this.preferredCountries = [CountryISO.India, CountryISO.Canada];
+	}
 
   checkCheckBoxvalue(event){
    
@@ -92,7 +104,7 @@ export class CountryComponent implements OnInit {
          
     const data ={
       "name":Country,
-      "code":Code,
+      "code":'+'+Code,
       "status":action
     }
     this.master.methodPost(data, '/AddCountry').subscribe(reponse=>{

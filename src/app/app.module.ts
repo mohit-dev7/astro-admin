@@ -28,7 +28,7 @@ import { MasterService } from './services/master.service';
 import { MyInterceptor } from './services/myinterceptor.service';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { ToastrModule } from 'ngx-toastr';
-
+import { NgxTextEditorModule } from 'ngx-text-editor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +57,7 @@ import { ToastrModule } from 'ngx-toastr';
     AppRoutingModule,
     SharedModule,
     NgbDropdownModule,
+    NgxTextEditorModule,
     DataTablesModule.forRoot(),
     NgbTooltipModule,
     NgbButtonsModule,

@@ -6,6 +6,8 @@ import { DataTablesModule } from 'angular-datatables';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -14,7 +16,8 @@ import { BrowserModule } from '@angular/platform-browser';
   imports: [
     CommonModule,
     CountryRoutingModule,
-    
+    NgxIntlTelInputModule,
+    // BrowserAnimationsModule,
     DataTablesModule,
     FormsModule,ReactiveFormsModule
 

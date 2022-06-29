@@ -5,7 +5,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { NgxTextEditorModule } from 'ngx-text-editor';
 
 
 @NgModule({
@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BlogRoutingModule,
     AngularEditorModule,
     FormsModule,
+    NgxTextEditorModule
  
   ]
 })

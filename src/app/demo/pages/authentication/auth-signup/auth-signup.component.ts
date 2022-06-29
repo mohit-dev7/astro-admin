@@ -158,10 +158,23 @@ signupForm: FormGroup;
 
       },
       (error=>{
-        this.loading = false;
-        this.error = true;
-        this.message = 'Failed to create account something went wrong! ';
-        return false;
+
+        if(error['status']==500){
+
+        
+          this.loading = false;
+          this.error = true;
+          this.message = error['error']['message'];
+          return;
+        }
+        else{
+          this.loading = false;
+          this.error = true;
+          this.message = 'Failed to create account something went wrong! ';
+          return false;
+        }
+
+       
       }))
 
     }

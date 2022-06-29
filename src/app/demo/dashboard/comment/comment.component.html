@@ -2,7 +2,7 @@
 <div class="container-fluid mt-5" style="position: relative;">
 
     <div class="loader" *ngIf="loader">
-        <img src="../../../../assets/images/loading.gif" />
+        <img src="../..//assets/images/loading.gif" />
     </div>
 
 <div class="table_data card p-3">
@@ -56,6 +56,7 @@
                 <td>{{data.content}}</td>
                 <td>{{data.commentedOn}}</td>
                 <td *ngIf="data.status=='Approved'" style="color: green; font-weight: bold;">{{data.status}}</td>
+                <td *ngIf="data.status!='Approved'" style="color: red; font-weight: bold;">Unapproved</td>
                 <td *ngIf="data.status=='Inactive'" style="color:red; font-weight: bold;">{{data.status}}</td>
                 <td><button class="btn btn-primary " style="font-size: 10px;"  data-toggle="modal" data-target="#exampleModal" (click)="viewAllComment(data.id,data.content)"> View All comment</button></td>
                 

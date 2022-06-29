@@ -128,7 +128,7 @@ const NavigationItems = [
         id: 'appointment',
         title: 'Appointment',
         type: 'item',
-        url: '/dashboard/appointments',
+        url: '/dashboard/appointments/all',
         icon: 'feather icon-calendar',
         classes: 'nav-item',
       },

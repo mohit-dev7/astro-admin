@@ -4,7 +4,7 @@
     <section class="blog_section">
 
         <div class="loader" *ngIf="loader">
-            <img src="../../../../assets/images/loading.gif" />
+            <img src="../..//assets/images/loading.gif" />
         </div>
         <form action="">
         <div class="col-md-12 col-lg-12">
@@ -42,7 +42,12 @@
                                 
                                     <div class="col-12">
                                 <div class="form-group mt-3">
-                                    <label>Write content here</label>
+                                    <div class="d-block mb-3 ">
+                                        <label>Write content here</label>
+                                        <span class="AddImg btn btn-light pull-right" data-toggle="modal" data-target="#mediapop">
+                                            <i class="fa fa-image"></i> Insert Image
+                                        </span>
+                                    </div>
                                     <angular-editor id="editor1" [config]="editorConfig"></angular-editor>
                                 </div>
                                 </div>
@@ -82,3 +87,43 @@
         </form>
     </section>
 </div>
+
+
+
+<div class="modal fade" id="mediapop" tabindex="-1" role="dialog" aria-labelledby="mediapop" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 80%">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="mediapopTitle">Your Media Collection</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="min-height: 300px; max-height:400px; overflow:hidden; overflow-y:auto;">
+            <div class="col-12 text-center pt-3" *ngIf="imload == true">
+                <img class="w-55 mr-auto ml-auto " src="../../../../assets/loader.gif"/>
+            </div>
+       <div class="col-12" *ngIf="imload != true">
+            <div class="row">
+               
+                <div class="col-2" *ngFor="let data of allMediaFiles" style="position: relative">
+                        <img src="{{data.image}}" (click)="appendImg(data.image)" class="w-100 dsjds bordered" style="cursor: pointer;"/>
+
+                        <span class="remOp" (click)="removeMedia(data.id)"><i class="fa fa-times"></i></span>
+                </div>
+            </div>
+       </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel Upload</button>
+
+        
+          <label type="button" for="moreFile"  class="btn btn-primary">Upload A New Image
+              <input type="file" id="moreFile" (change)="addMoreImage($event)" style="display: none;" accept='image/*' >
+          </label>
+
+          
+        </div>
+      </div>
+    </div>
+  </div>

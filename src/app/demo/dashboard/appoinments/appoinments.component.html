@@ -1,10 +1,10 @@
 
 <div class="container-fluid p-0">
-
+    <div class="loader" *ngIf="loader">
+        <img src="../..//assets/images/loading.gif" />
+    </div>
     <div class="appointment_data card p-3">
-        <div class="loader" *ngIf="loader">
-            <img src="../../../../assets/images/loading.gif" />
-        </div>
+  
 
         <div class="col-lg-12 pl-0">
             <div class="row">
@@ -38,7 +38,7 @@
                             <select class="form-control" formControlName="newType">
                                 <option value="">select</option>
                                 <option value="Pending">Pending</option>
-                                <option value="Cancelled">Canceled</option>
+                                <option value="Cancelled">Cancelled</option>
                                 <option value="Completed">Completed</option>
                             </select>
                         </div>
@@ -58,7 +58,13 @@
                 <input type="hidden" id="userId">
                 <div class="text-editor col-lg-12" *ngIf="edit">
                     <div class="form-group ">
-                        <label class="remedies">Write Your Remedies Here</label>
+                        <div class="d-block">
+                            <label class="remedies">Write Your Remedies Here</label>
+                            <span class="AddImg btn btn-light pull-right" style="margin: 0;" data-toggle="modal" data-target="#mediapop">
+                                <i class="fa fa-image"></i> Insert Image
+                            </span>
+                        </div>
+             
                         <angular-editor id="editor1" [config]="editorConfig"></angular-editor>
                     </div>
                     <div class="form-group text-center center  ">
@@ -74,26 +80,26 @@
                 <div class="col-md-3" *ngIf="onEdit">
                     <div class="form-group">
                         <label>Select Type:</label>
-                       <select class="form-control" (change)="getAppointment($event.target.value)" >
+                       <select class="form-control" value="{{status}}" (change)="getAppointment($event.target.value)" >
                         <option value="">
                             Select
                            </option>
-                           <option value="All">
+                           <option value="all">
                             All  List
                            </option>
-                           <option value="PENDING">
+                           <option value="pending">
                             Pending  List
                            </option>
-                           <option value="CANCELLED">
+                           <option value="cancelled">
                             Cancelled  List
                            </option>
-                           <option value="COMPLETED">
+                           <option value="completed">
                             Completed  List
                            </option>
-                           <option value="REFUNDING">
+                           <option value="refund">
                             Refund List
                            </option>
-                           <option value="PAYMENT_PAID">
+                           <option value="payment">
                             Payment paid List
                            </option>
                        </select>
@@ -101,7 +107,7 @@
                </div>
 
             <div class="col-md-2 " *ngIf="onEdit2">
-              <button class="btn btn-primarry pull-left w-100" style="float: left; margin-top: 34px;" (click)="getDiffAppointment()">Search</button>
+              <button class="btn btn-primarry pull-left w-100" style="float: left; margin-top: 34px;" (click)="rediRectStatus()">Search</button>
              </div>
 
        
@@ -117,7 +123,9 @@
     scroll-collapse="false">
         <thead>
             <tr>
+          
                 <th>S.No</th>
+                <th>Status</th>
                 <th>Appointment Date</th>
                 <th>Time Slot</th>
                 <th>Name</th>
@@ -127,15 +135,22 @@
                 <th>Consultation Type</th>
                 <th>Meeting Mode</th>
                 <th>Skype/Whatsapp/Phone</th>
-                <th>Appointment Status</th>
+               
                 <th>Remedy</th>
                 <th>Action</th>
             </tr>
         </thead>
       
-        <tbody>
+        <tbody >
             <tr *ngFor="let data of allAppointment ;let index=index">
+               
                 <td>{{index+1}}</td>
+                <td><span class="badge badge-warning" *ngIf="data.status=='pending'">Pending</span>
+                    <span class="badge badge-danger" *ngIf="data.status=='canceled' || data.status=='Cancelled'">Cancelled</span>
+                    <span class="badge badge-success" *ngIf="data.status=='Completed'">Completed</span>
+                    <span class="badge badge-primary" *ngIf="data.status=='PAYMENT_PAID'">Payment Paid</span>
+                    <span class="badge badge-secondary" *ngIf="data.status!='PAYMENT_PAID' && data.status!='pending' && data.status!='Completed' && data.status!='canceled' && data.status!='Cancelled' ">{{data.status}}</span>
+                    </td>
                 <td>{{data.appointDate | date:'d/M/y' }}</td>
                 <td *ngIf='data.timeSlot!=null'>{{data.timeSlot.timeSlotName}}</td>
                 <td *ngIf='data.timeSlot==null'>null</td>
@@ -146,7 +161,7 @@
                 <td>{{data.consultationType}}</td>
                 <td>{{data.meetingType}}</td>
                 <td>{{data.skypeId}}</td>
-                <td>{{data.status}}</td>
+                
                 <td *ngIf="data.remedy!=null" class="text-primary">Remedy Added</td>
                 <td *ngIf="data.remedy==null " class="text-danger">Remedy Not Added</td>
                 <td style="display: flex;">
@@ -155,8 +170,50 @@
                 </td>
             </tr>
         </tbody>
+
+         
     </table>
     
 
 </div>
 </div>
+
+
+
+<div class="modal fade" id="mediapop" tabindex="-1" role="dialog" aria-labelledby="mediapop" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 80%">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="mediapopTitle">Your Media Collection</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="min-height: 300px; max-height:400px; overflow:hidden; overflow-y:auto;">
+            <div class="col-12 text-center pt-3" *ngIf="imload == true">
+                <img class="w-55 mr-auto ml-auto " src="../../../../assets/loader.gif"/>
+            </div>
+       <div class="col-12" *ngIf="imload != true">
+            <div class="row">
+               
+                <div class="col-2" *ngFor="let data of allMediaFiles" style="position: relative">
+                        <img src="{{data.image}}" (click)="appendImg(data.image)" class="w-100 dsjds bordered" style="cursor: pointer;"/>
+
+                        <span class="remOp" (click)="removeMedia(data.id)"><i class="fa fa-times"></i></span>
+                </div>
+            </div>
+       </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel Upload</button>
+
+        
+          <label type="button" for="moreFile"  class="btn btn-primary">Upload A New Image
+              <input type="file" id="moreFile" (change)="addMoreImage($event)" style="display: none;" accept='image/*' >
+          </label>
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
