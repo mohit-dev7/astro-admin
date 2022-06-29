@@ -95,6 +95,7 @@ export class HolidayComponent implements OnInit {
   addNewHoliday() {
     
     var holidayDate = this.holidayForm.get("holidayDate").value;
+    var fromHoliday=this.holidayForm.get("toHolidayDate").value;
     var action = this.checkbox;
 
     if (holidayDate == '') {
