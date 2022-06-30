@@ -124,7 +124,7 @@ export class MasterService {
   }
 
   daysData(){
-    return this.http.get('http://18.219.65.148:8080/getDays', this.httpOptions)
+    return this.http.get('http://18.219.65.148:8080/ s', this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
