@@ -11,7 +11,7 @@
 
     <div class="card" style="position: relative;">
       <div class="loader" *ngIf="loading==true">
-        <img src="../../..//assets/images/loading.gif" />
+        <img src="../../../assets/images/loading.gif" />
       </div>
       <form  [formGroup]="loginForm">
         <div class="card-body text-center">
@@ -42,7 +42,7 @@
             </div>
           </div>
           <button class="btn them_btn mb-4 w-100" (click)="loginSubmit()">Login</button>
-          <p class="mb-2 text-muted">Forgot password? <a [routerLink]="['/auth/reset-password']">Reset</a></p>
+          <p class="mb-2 text-muted"><a [routerLink]="['/auth/reset-password']">Forgot password</a></p>
           <p class="mb-0 text-muted">Don’t have an account? <a [routerLink]="['/auth/signup']">Sign up</a></p>
         </div>
       </form>
