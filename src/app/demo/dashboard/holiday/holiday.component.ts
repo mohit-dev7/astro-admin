@@ -118,7 +118,8 @@ export class HolidayComponent implements OnInit {
       const data = {
         "id": this.holidayForm.get("id").value,
         "holidayDate": holidayDate,
-        "timeSlots": timeSlotsArray
+        "timeSlots": timeSlotsArray,
+        "toDate":fromHoliday
       }
       if (!this.edit) { 
       this.master.holidayDataPost(data).subscribe(response => {
