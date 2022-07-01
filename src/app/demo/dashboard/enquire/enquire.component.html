@@ -61,7 +61,8 @@
                 <th>Mobile</th>
                 <th>Status</th>
                 <th>Action</th>
-                <th> <button class="btn">Delete All</button> </th>
+                <th>Delete All</th>
+               
 
             </tr>
         </thead>
@@ -78,7 +79,9 @@
                  <td>  <button class="btn btn-success btn-sm"(click)=OnEdit(data.sno,data.name,data.email,data.mobile)><i class="ng-tns-c22-2 feather icon-edit"></i></button><button class="btn btn-danger btn-sm"(click)="onDelete(data.sno)"><i class="ng-tns-c22-2 feather icon-trash"></i></button>
                     
                  </td>
+                 <td><button class="btn btn-danger btn-sm" (click)=deleteAll()>Delete All</button></td>
             </tr>
+            
            
         </tbody>
     </table>

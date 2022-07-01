@@ -46,6 +46,7 @@ import { NgxTextEditorModule } from 'ngx-text-editor';
     NavSearchComponent,
     NavRightComponent,
     ConfigurationComponent,
+   
     
 
   ],

@@ -24,10 +24,8 @@ export class ForgetPasswordComponent implements OnInit {
   }
   onClick(){
     var email=this.resetForm.get("email").value;
-    const data={
-      "email":email
-    }
-    this.master.methodPost1("/user/resetPassword?email="+email).subscribe(data=>{
+  
+    this.master.getMethod("/user/ForgotPassword?email="+email).subscribe(data=>{
     if(data['name']!='')
     {  
     

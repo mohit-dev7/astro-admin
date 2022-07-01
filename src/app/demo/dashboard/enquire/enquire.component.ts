@@ -243,5 +243,23 @@ onCancel(){
   this.cancel=false
 }
 
+deleteAll(){
+  if(confirm("Are Sure you want to delete All this data")){
+    this.master.deleteAllEnquiries().subscribe(data=>{
+      console.log(data);
+      if(data["name"]!=""){
+        this.error=true
+        this.toaster.success("this data is deleted successfully")
+     
+      }else{
+        this.error=true
+        this.toaster.error("failed to delete Enquiry")
+        
+      }
+    },(error=>{
+      this.toaster.error("something went wrong please check carefully")
+    }))
+  }
+}
 
 }

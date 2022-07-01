@@ -22,6 +22,11 @@ const routes: Routes = [
       {
         path: 'changePassword',
         loadChildren: () => import('./reset-password/reset-password.module').then(m => m.ResetPasswordModule)
+      },
+      {
+        path: 'emailVerify',
+        loadChildren: () => import('./email-varify/email-verify.module').then(m => m.EmailVerifyModule),
+        
       }
     ]
   }

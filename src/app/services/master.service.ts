@@ -12,13 +12,16 @@ export class MasterService {
     throw new Error('Method not implemented.');
   }
   userToken=localStorage.getItem('userID');
+ 
   //  userToken="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbnVyYWdwdW5kaXI2MjFAZ21haWwuY29tIiwiZXhwIjoxNjM4NDQ1MTAzLCJpYXQiOjE2Mzg0MjcxMDN9.1La4ssoQtwGZ7ksz3H9ORrn0j47aOYkYti1Zbb6jx3eWJCAW_Jv0nPDqG-SYAcz2qLYyQhN0xqV7dw-hQC2ZVQ";
   // all apis=============//
 
 
   apURL = 'http://18.219.65.148:8080';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    console.log("usertoken",this.userToken)
+  }
 
 
 
@@ -36,6 +39,12 @@ export class MasterService {
     })
   }  
 
+  httpOptions1 = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.userToken}`
+    })
+  }
   // httpOptions = {
   //   headers: new HttpHeaders({
   //     'Content-Type': 'application/json',
@@ -64,6 +73,13 @@ export class MasterService {
   // api functions==================//
 
   getMethod(dataApi){
+    return this.http.get(this.apURL+dataApi, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+  getMethodEmailVerification(dataApi){
     return this.http.get(this.apURL+dataApi, this.httpOptions)
     .pipe(
       retry(1),
@@ -214,4 +230,21 @@ export class MasterService {
     )
   } 
 
+  deleteAllEnquiries(){
+    return this.http.delete('http://18.219.65.148:8080/deleteAllEnquiries', this.httpOptions1)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+  saveEmailPassword(data, dataApi): Observable<UserData> {
+    return this.http.put<UserData>(this.apURL+dataApi, JSON.stringify(data), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
 }
+
+
