@@ -13,12 +13,12 @@
         <div class="loader" *ngIf="loading==true">
           <img src="../../../assets/images/loading.gif" />
         </div>
-        <form [formGroup]="emailVarify" >
+        <form [formGroup]="emailVarify">
           <div class="card-body text-center">
             <div class="mb-4">
              <img style="width: 25%;" src="../../../assets/images/astro-logo.png"/>
             </div>
-            <h3 class="mb-4">Change password</h3>
+            <h3 class="mb-4">Change Password</h3>
             <div *ngIf="message!='' && error==true" class="alert alert-danger" role="alert">
               {{message}}
             </div>
@@ -36,7 +36,10 @@
               <input type="password"  class="form-control" placeholder="Confirm Password"  formControlName="confirPassword1">
             </div>
            
-            <button class="btn them_btn mb-4 w-100" (click)=ChangePassword()  >Change Password</button>
+            <button type="button" class="btn them_btn mb-4 w-100" (click)=ChangePassword() >Change Password</button>
+            <div class="login_route" *ngIf="newValue">
+              <a routerLink='/auth/signin' routerLinkActive="router-link-active" >Login</a>
+            </div>
            
           </div>
         </form>

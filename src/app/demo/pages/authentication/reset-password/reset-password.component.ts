@@ -24,6 +24,7 @@ export class ResetPasswordComponent implements OnInit {
     })
   }
   onSubmit(){
+  
     var newPassword=this.changeForm.get("newPassword").value;
     var confirmPassword=this.changeForm.get("confirmPassword").value;
     if (newPassword==confirmPassword){
@@ -33,12 +34,8 @@ export class ResetPasswordComponent implements OnInit {
       this.master.methodPost(data,"savePassword").subscribe(data=>{
         if(data['name']!='')
         {  
-        
-     
           this.error = false;
           this.message = ' you have changed your password please login again';
-          // setTimeout(()=>{location.reload()},1000);
-          location.reload();
           return false;
     
         }else{

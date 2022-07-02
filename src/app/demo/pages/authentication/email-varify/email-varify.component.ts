@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Key } from 'protractor';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MasterService } from 'src/app/services/master.service';
 
 @Component({
@@ -15,8 +14,9 @@ export class EmailVarifyComponent implements OnInit {
   error:boolean=false
   emailVarify: FormGroup;
   key:any
+  newValue:boolean=false;
   paramsObject:any
-  constructor(private master:MasterService,private route: ActivatedRoute) { 
+  constructor(private master:MasterService,private route: ActivatedRoute,private routes:Router) { 
     this.emailVarify=new FormGroup({
       newPassword1:new FormControl(""),
       confirPassword1:new FormControl("")
@@ -49,21 +49,22 @@ export class EmailVarifyComponent implements OnInit {
         
      
           this.error = false;
-          this.message = ' you have changed your password please login again';
-          // setTimeout(()=>{location.reload()},1000);
-          location.reload();
+       
+          this.message = ' you have changed your password , Please login again'
+          setTimeout(()=>{this.routes.navigate(['/auth/signin'])} , 2000);
+         ;
           return false;
     
         }else{
           this.error = true;
-          this.message = 'Failed to change our password  check all details!';
+          this.message = 'Failed to change our password, Check all details!';
           return false;
         }
       },(error=>{
-        alert("something wrong please check you detail carefully ")
+        alert("something wrong please check you details carefully ")
       }))
     }else{
-      alert("you password didnt match Please try again")
+      alert("you password didnt match, Please try again")
     }
   }
 }
