@@ -11,7 +11,7 @@ export class AuthService {
 
   // all apis=============//
 
-  loginApi = 'http://18.219.65.148:8080';
+  loginApi = 'http://54.213.248.244:8080';
 
   constructor(private http: HttpClient) { }
 

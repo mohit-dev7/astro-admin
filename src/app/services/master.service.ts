@@ -17,7 +17,7 @@ export class MasterService {
   // all apis=============//
 
 
-  apURL = 'http://18.219.65.148:8080';
+  apURL = 'http://54.213.248.244:8080';
 
   constructor(private http: HttpClient) { 
     console.log("usertoken",this.userToken)
@@ -122,7 +122,7 @@ export class MasterService {
   } 
 
   timeslotDataPost(data): Observable<UserData> {
-    return this.http.post<UserData>('http://18.219.65.148:8080/saveTimeSlot', JSON.stringify(data), this.httpOptions)
+    return this.http.post<UserData>('http://54.213.248.244:8080/saveTimeSlot', JSON.stringify(data), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -132,7 +132,7 @@ export class MasterService {
  
 
   timeslotGetData(){
-    return this.http.get('http://18.219.65.148:8080/showSlots', this.httpOptions)
+    return this.http.get('http://54.213.248.244:8080/showSlots', this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -140,7 +140,7 @@ export class MasterService {
   }
 
   daysData(){
-    return this.http.get('http://18.219.65.148:8080/ s', this.httpOptions)
+    return this.http.get('http://54.213.248.244:8080/ s', this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -148,7 +148,7 @@ export class MasterService {
   }
 
   holidayDataPost(data): Observable<UserData> {
-    return this.http.post<UserData>('http://18.219.65.148:8080/saveHoliday', JSON.stringify(data), this.httpOptions)
+    return this.http.post<UserData>('http://54.213.248.244:8080/saveHoliday', JSON.stringify(data), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -157,7 +157,7 @@ export class MasterService {
   
   
   holidayDataEdit(data): Observable<UserData> {
-    return this.http.post<UserData>('http://18.219.65.148:8080/editHoliday', JSON.stringify(data), this.httpOptions)
+    return this.http.post<UserData>('http://54.213.248.244:8080/editHoliday', JSON.stringify(data), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -165,7 +165,7 @@ export class MasterService {
   }  
 
   getAppointmentsByCriteria(data): Observable<any> {  
-    return this.http.post('http://18.219.65.148:8080/getAppointmentsByCriteria', JSON.stringify(data), this.httpOptions)
+    return this.http.post('http://54.213.248.244:8080/getAppointmentsByCriteria', JSON.stringify(data), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -173,7 +173,7 @@ export class MasterService {
   }  
 
   holidayGetData(){
-    return this.http.get('http://18.219.65.148:8080/getHolidays', this.httpOptions)
+    return this.http.get('http://54.213.248.244:8080/getHolidays', this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -182,7 +182,7 @@ export class MasterService {
 
   
   holidayGetDetailData(id:any){
-    return this.http.get('http://18.219.65.148:8080/getHolidayDetail?id='+id, this.httpOptions)
+    return this.http.get('http://54.213.248.244:8080/getHolidayDetail?id='+id, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -190,7 +190,7 @@ export class MasterService {
   }
 
   timeSlotGetDetailData(id:any){
-    return this.http.get('http://18.219.65.148:8080/getTimeSlotDetail?id='+id, this.httpOptions)
+    return this.http.get('http://54.213.248.244:8080/getTimeSlotDetail?id='+id, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -215,7 +215,7 @@ export class MasterService {
   } 
   
   contactPost(data): Observable<UserData> {
-    return this.http.post<UserData>('http://18.219.65.148:8080/addContact', JSON.stringify(data), this.httpOptions)
+    return this.http.post<UserData>('http://54.213.248.244:8080/addContact', JSON.stringify(data), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -223,7 +223,7 @@ export class MasterService {
   } 
 
   contactGet(): Observable<UserData> {
-    return this.http.post<any>('http://18.219.65.148:8080/getContact', this.httpOptions)
+    return this.http.post<any>('http://54.213.248.244:8080/getContact', this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -231,7 +231,7 @@ export class MasterService {
   } 
 
   deleteAllEnquiries(){
-    return this.http.delete('http://18.219.65.148:8080/deleteAllEnquiries', this.httpOptions1)
+    return this.http.delete('http://54.213.248.244:8080/deleteAllEnquiries', this.httpOptions1)
     .pipe(
       retry(1),
       catchError(this.handleError)
