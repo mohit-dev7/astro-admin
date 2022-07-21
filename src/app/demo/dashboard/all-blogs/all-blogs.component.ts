@@ -33,7 +33,7 @@ export class AllBlogsComponent implements OnInit {
   singleUserDetail:any=[]
   dateFormat:any
   datepipe: any;
-  apURL = 'http://18.219.65.148:8080';
+  apURL:string = 'http://54.213.248.244:8080';
 
 imgURL = this.apURL+"/getBlogPic"+"/";
 
